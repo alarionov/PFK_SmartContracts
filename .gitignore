@@ -1,0 +1,6 @@
+ganache/*
+
+build/*
+**/artifacts/*.json
+
+contracts/___Testing.sol
