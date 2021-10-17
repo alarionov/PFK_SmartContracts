@@ -32,7 +32,7 @@ contract BaseContract is Permissions
     
     function random() internal returns (uint seed)
     {
-        RandomContract randomContract = RandomContract(RANDOM_CONTRACT_ADDRESS);
+        IRandomContract randomContract = IRandomContract(RANDOM_CONTRACT_ADDRESS);
         seed = randomContract.random();
     }
 }
