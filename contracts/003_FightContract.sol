@@ -5,9 +5,9 @@ pragma solidity 0.8.4;
 import "./abstract/Structures.sol";
 import "./abstract/Interfaces.sol";
 import "./abstract/BaseContract.sol";
-import "./abstract/SeedReader.sol";
+import "./libraries/SeedReader.sol";
 
-contract FightLogic is BaseContract, FightContract
+contract FightContract is BaseContract, IFightContract
 {
     using SeedReader for SeedReader.Seed;
     

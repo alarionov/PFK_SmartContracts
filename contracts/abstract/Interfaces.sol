@@ -11,20 +11,22 @@ interface IRandomContract
 
 interface IGMContract
 {
+    function fight(address mapContractAddress, uint index, address characterContractAddress, uint characterId) external;
 }
 
 interface ICharacterContract
 {
     function getCharacter(address contractaddress, uint _id) external returns (Character memory character);
-    function addExp(address player, address contractaddress, uint tokenId, uint exp) external;
+    function addExp(address contractaddress, uint tokenId, uint exp) external;
 }
 
 interface IFightContract
 {
-    //function conductFight(PlayerState memory state, bool[] memory buffs) external returns (Fight memory); 
+    function fight(Character memory player, Enemy[] memory enemies) external returns (Fight memory); 
 }
 
 interface IMapContract
 {
+    function hasAccess(Character memory character, uint index) external view returns(bool);
     function getEnemies(uint index) external view returns (Enemy[] memory enemies);
 }

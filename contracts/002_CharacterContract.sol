@@ -2,9 +2,7 @@
 
 pragma solidity 0.8.4;
 
-
 import "@openzeppelin/contracts/utils/Counters.sol";
-import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 import "./abstract/Structures.sol";
@@ -19,19 +17,10 @@ contract CharacterContract is BaseContract, ICharacterContract
     event NewStats(Stats newStats, uint remainigUpgrades);
     event LevelUp(uint level, uint exp, uint tnl, uint upgradesGiven, uint upgradesTotal);
     
-    mapping(address => bool) private _approvedContracts;
     mapping(address => mapping(uint => Character)) private _characters;
     
     uint[] private _tnl = [6, 9, 9, 12, 12, 15, 15, 18, 18, 18, 21, 21, 21, 21, 24, 24, 24, 24, 27, 27, 27, 27, 30, 30, 30, 30, 30, 33, 33, 33, 33, 33, 33, 36, 36, 36, 36, 36, 36, 39, 39, 39, 39, 39, 39, 42, 42, 42, 42, 42, 42, 42, 45, 45, 45, 45, 45, 45, 45, 45, 48, 48, 48, 48, 48, 48, 48, 48, 51, 51, 51, 51, 51, 51, 51, 51, 54, 54, 54, 54, 54, 54, 54, 54, 54, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 72, 72, 72, 72, 72, 72, 72, 72, 72, 72, 72, 72, 80];
 
-    modifier owns(address player, address contractAddress, uint tokenId)
-    {
-        require(_approvedContracts[contractAddress], "This contract is not supported");
-        require(IERC721(contractAddress).ownerOf(tokenId) == player, "Player should own the character");
-        
-        _;
-    }
-    
     modifier upgradable(address player, address contractAddress, uint tokenId)
     {
         Character memory character = _characters[contractAddress][tokenId];
@@ -67,7 +56,7 @@ contract CharacterContract is BaseContract, ICharacterContract
     
     /* Upgrades */
     function upgrade(address contractAddress, uint tokenId, StatType stat) external 
-        owns(msg.sender, contractAddress, tokenId)  
+        onlyGame
         upgradable(msg.sender, contractAddress, tokenId)
     {
         require(stat >= StatType.Strength && stat <= StatType.Constitution, "Invalid stat type");
@@ -138,9 +127,7 @@ contract CharacterContract is BaseContract, ICharacterContract
         }
     }
 
-    function createCharacter(address contractAddress, uint tokenId) external 
-        owns(msg.sender, contractAddress, tokenId)
-        returns (uint newTokenId)
+    function createCharacter(address contractAddress, uint tokenId) external onlyGame returns (uint newTokenId)
     {
         newTokenId = tokenId;
         
@@ -169,9 +156,7 @@ contract CharacterContract is BaseContract, ICharacterContract
         emit NewCharacter(_characters[contractAddress][newTokenId]);
     }
     
-    function addExp(address player, address contractAddress, uint tokenId, uint exp) external override(ICharacterContract)
-        onlyGame 
-        owns(player, contractAddress, tokenId)
+    function addExp(address contractAddress, uint tokenId, uint exp) external override(ICharacterContract) onlyGame 
     {
         require(exp >= 0, "Exp should be a positive number");
         
