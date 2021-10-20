@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity 0.8.4;
+pragma solidity 0.8.7;
+
+import "../libraries/ComputedStats.sol";
 
 enum StatType
 {
@@ -9,15 +11,6 @@ enum StatType
     Constitution,
     Luck,
     Armor
-}
-
-struct Stats
-{
-    uint strength;
-    uint dexterity;
-    uint constitution;
-    uint luck;
-    uint armor;
 }
 
 struct Equipment
@@ -38,7 +31,7 @@ struct Character
     uint exp;
     uint upgrades;
     
-    Stats stats;
+    ComputedStats.Stats stats;
     Equipment equipment;
 }
 
@@ -47,16 +40,16 @@ struct Fight
     uint id;
     bytes seed;
     
-    Stats stats;
+    ComputedStats.Stats stats;
     
-    bool[] buffs;
     bool victory;
+    uint exp;
 }
 
 struct Enemy
 {
     uint id;
-    Stats stats;
+    ComputedStats.Stats stats;
 }
 
 struct Level

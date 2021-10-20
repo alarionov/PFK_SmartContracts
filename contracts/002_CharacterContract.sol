@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity 0.8.4;
+pragma solidity 0.8.7;
 
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -10,11 +10,12 @@ import "./abstract/Interfaces.sol";
 import "./abstract/BaseContract.sol";
 
 import {GameMath} from "./libraries/GameMath.sol";
+import {ComputedStats} from "./libraries/ComputedStats.sol";
 
 contract CharacterContract is BaseContract, ICharacterContract
 {
     event NewCharacter(Character newCharacter);
-    event NewStats(Stats newStats, uint remainigUpgrades);
+    event NewStats(ComputedStats.Stats newStats, uint remainigUpgrades);
     event LevelUp(uint level, uint exp, uint tnl, uint upgradesGiven, uint upgradesTotal);
     
     mapping(address => mapping(uint => Character)) private _characters;
@@ -35,9 +36,29 @@ contract CharacterContract is BaseContract, ICharacterContract
         CHARACTER_CONTRACT_ADDRESS = address(this);
     }
     
+    function _defaultCharacter(address contractAddress, uint tokenId) private pure returns (Character memory character)
+    {
+        character = Character({
+            exists: true,
+            contractAddress: contractAddress,
+            tokenId: tokenId,
+            level: 1,
+            exp: 0,
+            upgrades: 0,
+            stats: ComputedStats.defaultStats(),
+            equipment: Equipment(0,0,0)
+        });
+    }
+    
+    function _getCharacter(address contractAddress, uint tokenId) private view returns (Character memory character)
+    {
+        Character memory storedCharacter = _characters[contractAddress][tokenId];
+        return storedCharacter.exists ? storedCharacter : _defaultCharacter(contractAddress, tokenId); 
+    }
+    
     function getCharacter(address contractAddress, uint tokenId) external view override(ICharacterContract) returns (Character memory character)
     {
-        character = _characters[contractAddress][tokenId];
+        return _getCharacter(contractAddress, tokenId);
     }
     
     function toNextLevel(uint level) public view returns(uint)
@@ -125,35 +146,6 @@ contract CharacterContract is BaseContract, ICharacterContract
         {
             character.stats.armor = GameMath.modify(character.stats.armor, value, sign);
         }
-    }
-
-    function createCharacter(address contractAddress, uint tokenId) external onlyGame returns (uint newTokenId)
-    {
-        newTokenId = tokenId;
-        
-        _characters[contractAddress][newTokenId] = 
-            Character({
-                contractAddress: contractAddress,
-                tokenId: tokenId,
-                exists: true,
-                level: 1,
-                exp: 0,
-                upgrades: 0,
-                stats: Stats({ 
-                    strength: 1, 
-                    dexterity: 1, 
-                    constitution: 3, 
-                    luck: 0, 
-                    armor: 0 
-                }),
-                equipment: Equipment({
-                    armorSetId: 0,
-                    weaponSetId: 0,
-                    shieldId: 0
-                })
-            }); 
-            
-        emit NewCharacter(_characters[contractAddress][newTokenId]);
     }
     
     function addExp(address contractAddress, uint tokenId, uint exp) external override(ICharacterContract) onlyGame 

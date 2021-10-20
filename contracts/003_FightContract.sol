@@ -1,15 +1,18 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity 0.8.4;
+pragma solidity 0.8.7;
 
 import "./abstract/Structures.sol";
 import "./abstract/Interfaces.sol";
 import "./abstract/BaseContract.sol";
-import "./libraries/SeedReader.sol";
+
+import {SeedReader} from "./libraries/SeedReader.sol";
+import {ComputedStats} from "./libraries/ComputedStats.sol";
 
 contract FightContract is BaseContract, IFightContract
 {
     using SeedReader for SeedReader.Seed;
+    using ComputedStats for ComputedStats.Stats;
     
     uint8 private MAX_FIGHT_ACTIONS = 10;
 
@@ -25,77 +28,58 @@ contract FightContract is BaseContract, IFightContract
         MAP_CONTRACT_ADDRESS = newAddress;
     } 
     
-    function conductFight(PlayerState memory state, bool[] memory buffs) external override(FightContract) onlyCore returns (Fight memory) 
+    function conductFight(Character memory character, Enemy[] memory enemies) external override(IFightContract) onlyGame returns (Fight memory fight) 
     {
-        Skeleton[] memory skeletons = _skeletonsByLevel(state.level, state.difficulty);
-        Character memory character = _getCharacter(state.tokenId);
-        
-        require(skeletons.length > 0, "Skeletons have not been found");
-        require(character.exists && character.alive, "Character should exist and be alive");
+        character.stats.init();
         
         SeedReader.Seed memory seed;
         seed.init([random(), random(), random(), random()]);
         
-        Fight memory fight = _newFight(seed, state, character.stats, buffs);
+        fight = Fight({
+            id: 0,
+            seed: seed.raw,
+            stats: character.stats,
+            victory: false,
+            exp: 0
+        });
         
-        _applyBuffs(character, buffs);
+        (fight.victory, fight.exp) = _fight(seed, character, enemies);
         
-        (fight.victory, fight.score) = _fight(seed, character, buffs, skeletons);
-        
-        if (fight.victory)
+        if (character.stats.getHealth() == 0)
         {
-            fight.newState = _increaseLevel(fight.oldState);
-        }
-        else if (character.stats.health == 0)
-        {
-            fight.score = fight.score >> 2;
-            
-            if (!buffs[uint(SpellType.Salvation)])
-            {
-                fight.died = true;
-                fight.newState = PlayerState(0, 0, 0);
-            }
+            fight.exp = fight.exp >> 2;
         }
         
         return fight;
     }
+
     
-    function _applyBuffs(Character memory character, bool[] memory buffs) private view
+    function _fight(SeedReader.Seed memory seed, Character memory character, Enemy[] memory enemies) private view returns (bool victory, uint exp)
     {
-        CharacterContract characterContract = CharacterContract(CHARACTER_CONTRACT_ADDRESS);
-        character.stats = characterContract.applyBuffs(character.stats, buffs);
-    }
-    
-    function _fight(SeedReader.Seed memory seed, Character memory character, bool[] memory buffs, Skeleton[] memory skeletons) private view returns (bool victory, uint score)
-    {
-        score = 0;
-        
-        bool[] memory skeletonBuffs = new bool[](buffs.length);
+        exp = 0;
         
         for (uint step = 0; step < MAX_FIGHT_ACTIONS; ++step)
         {
-            uint8 index = seed.read(uint8(skeletons.length));
+            uint8 index = seed.read(uint8(enemies.length));
             
-            require(index < skeletons.length, "Invalid target selected");
+            require(index < enemies.length, "Invalid target selected");
             
-            Skeleton memory target = skeletons[index];
+            Enemy memory target = enemies[index];
             
-            require(target.stats.health > 0, "Target should be alive");
+            require(target.stats.alive(), "Target should be alive");
             
-            score += _processAttack(seed, character.stats, buffs, target.stats, skeletonBuffs);
+            exp += _processAttack(seed, character.stats, target.stats);
             
-            skeletons = _recountSkeletons(skeletons);
+            enemies = _recountEnemies(enemies);
             
-            for (uint i = 0; i < skeletons.length; ++i)
+            if (enemies.length == 0) return (true, exp);
+            
+            for (uint i = 0; i < enemies.length; ++i)
             {
-                _processAttack(seed, skeletons[i].stats, skeletonBuffs, character.stats, buffs);
+                _processAttack(seed, enemies[i].stats, character.stats);
                 
-                if (character.stats.health == 0) return (false, 0);
+                if (!character.stats.alive()) return (false, 0);
             }
-            
-            skeletons = _recountSkeletons(skeletons);
-            
-            if (skeletons.length == 0) return (true, score);
         }
 
         victory = false;
@@ -103,143 +87,44 @@ contract FightContract is BaseContract, IFightContract
     
     function _processAttack(
         SeedReader.Seed memory seed, 
-        BaseStats memory attacker, 
-        bool[] memory attackerBuffs, 
-        BaseStats memory target,
-        bool[] memory targetBuffs
-    ) private pure returns (uint score)
+        ComputedStats.Stats memory attacker, 
+        ComputedStats.Stats memory target
+    ) private pure returns (uint exp)
     {
-        score = 0;
+        exp = 0;
         
-        uint hit;
-        uint crit;
+        bool hit;
+        bool crit;
         
-        hit = seed.read(2);
-        crit = seed.read(2);
+        hit = seed.read(2) > 0;
+        crit = seed.read(2) > 0;
         
-        if (attackerBuffs[uint(SpellType.CriticalStrike)])
-        {
-            crit = 1;
-        }
-        
-        if (hit > 0)
-        {
-            uint damage = attacker.attack;
-            
-            if  (crit == 0)
-            {
-                if (damage < target.armour)
-                { 
-                    damage = 0;
-                }
-                else
-                {
-                    damage -= target.armour;
-                }
-            }
-            
-            if (damage > 0)
-            {
-                if (target.health < damage)
-                {
-                    score += target.health;
-                    target.health = 0;
-                }
-                else
-                {
-                    score += damage;
-                    target.health -= damage;
-                }
-                
-                if (crit > 0 && attackerBuffs[uint(SpellType.Vampirism)])
-                {
-                    attacker.health += 1;
-                }
-                
-                if (targetBuffs[uint(SpellType.Reflect)])
-                {
-                    if (attacker.health > 0)
-                    {
-                        score += 1;
-                        attacker.health -= 1;
-                    }
-                }
-            }
-        }
+        if (hit) target.applyDamage(attacker.attack, crit);
+        if (!target.alive()) exp += target.health;
     }
     
-    function _recountSkeletons(Skeleton[] memory skeletons) private pure returns (Skeleton[] memory newSkeletons)
+    function _recountEnemies(Enemy[] memory enemies) private pure returns (Enemy[] memory newEnemies)
     {
         uint aliveCount = 0;
         
-        for (uint i = 0; i < skeletons.length; ++i)
+        for (uint i = 0; i < enemies.length; ++i)
         {
-            if (skeletons[i].stats.health > 0) aliveCount += 1;
+            if (enemies[i].stats.alive()) aliveCount += 1;
         }
         
-        newSkeletons = new Skeleton[](aliveCount);
+        newEnemies = new Enemy[](aliveCount);
         
         uint index = 0;
-        for (uint i = 0; i < skeletons.length; ++i)
+        for (uint i = 0; i < enemies.length; ++i)
         {
-            require(i < skeletons.length, "Index is out of scope: skeletons");
+            require(i < enemies.length, "Index is out of scope: enemies");
             
-            if (skeletons[i].stats.health > 0)
+            if (enemies[i].stats.alive())
             {
-                require(index < newSkeletons.length, "Index is out of scope: new skeletons");
-                newSkeletons[index] = skeletons[i];
+                require(index < newEnemies.length, "Index is out of scope: new enemies");
+                newEnemies[index] = enemies[i];
                 index += 1;
             }
         }
-    }
-    
-    function _getCharacter(uint tokenId) private returns (Character memory character)
-    {
-        CharacterContract characterContract = CharacterContract(CHARACTER_CONTRACT_ADDRESS);
-        character = characterContract.getCharacter(tokenId);
-    }
-    
-    function _skeletonsByLevel(uint level, uint difficulty) private view returns (Skeleton[] memory skeletons)
-    {
-       MapContract mapContract = MapContract(MAP_CONTRACT_ADDRESS);
-       skeletons = mapContract.getSkeletons(level, difficulty);
-    }
-    
-    function _increaseLevel(PlayerState memory oldState) private view returns (PlayerState memory newState)
-    {
-        MapContract mapContract = MapContract(MAP_CONTRACT_ADDRESS);
-        
-        newState.tokenId = oldState.tokenId;
-        (newState.level, newState.difficulty) = mapContract.getNextLevel(oldState.level, oldState.difficulty);
-    }
-    
-    function _newFight(SeedReader.Seed memory seed, PlayerState memory state, BaseStats memory stats, bool[] memory buffs) private view returns (Fight memory)
-    {
-        CoreContract coreContract = CoreContract(CORE_CONTRACT_ADDRESS);
-        uint season = coreContract.getCurrentSeason();
-        
-        return 
-            Fight({
-                id: 0,  // will be overriden by token contract 
-                season: season,
-                seed: seed.raw,
-                score: 0,
-                stats: BaseStats({
-                    attack: stats.attack,
-                    health: stats.health,
-                    armour: stats.armour
-                }),
-                oldState: PlayerState(
-                    state.tokenId,
-                    state.level,
-                    state.difficulty),
-                newState: PlayerState(
-                    state.tokenId,
-                    state.level,
-                    state.difficulty),
-                buffs: buffs,
-                victory: false,
-                died: false
-            });
     }
 }

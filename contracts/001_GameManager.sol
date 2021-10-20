@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity 0.8.4;
+pragma solidity 0.8.7;
 
 import "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
@@ -9,7 +9,7 @@ import "./abstract/Structures.sol";
 import "./abstract/Interfaces.sol";
 import "./abstract/BaseContract.sol";
 
-contract GameManager is BaseContract, IGMContract
+contract GameManager is BaseContract, IGameManagerContract
 {
     using EnumerableSet for EnumerableSet.UintSet;
     
@@ -29,7 +29,10 @@ contract GameManager is BaseContract, IGMContract
     }
     
     /* Character creation and modification */
-    function registerCharacter(address tokenContractAddress, uint tokenId) external auth(msg.sender, tokenContractAddress, tokenId)
+    function registerCharacter(address tokenContractAddress, uint tokenId) 
+        external 
+        auth(msg.sender, tokenContractAddress, tokenId)
+        override(IGameManagerContract)
     {
         address player = msg.sender;
     }
@@ -37,7 +40,7 @@ contract GameManager is BaseContract, IGMContract
     /* battle */
     function fight(address mapContractAddress, uint index, address characterContractAddress, uint characterId) 
         external
-        override(IGMContract)
+        override(IGameManagerContract)
         auth(msg.sender, characterContractAddress, characterId)
     {
         address player = msg.sender;

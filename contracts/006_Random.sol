@@ -1,24 +1,22 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity 0.8.4;
+pragma solidity 0.8.7;
 
-import "./openzeppelin-contracts/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
 
 import "./abstract/Interfaces.sol";
 import "./abstract/Permissions.sol";
 
-contract Random is Permissions, RandomContract
+contract RandomContract is Permissions, IRandomContract
 {
     using Counters for Counters.Counter;
     
     Counters.Counter internal _randomNonce;
     
     constructor() Permissions() 
-    {
-        
-    }
+    {}
     
-    function random() public onlyWB override(RandomContract) returns(uint seed)
+    function random() public onlyGame override(IRandomContract) returns(uint seed)
     {
         _randomNonce.increment();
         
