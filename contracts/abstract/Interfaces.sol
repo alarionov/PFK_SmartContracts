@@ -11,8 +11,7 @@ interface IRandomContract
 
 interface IGameManagerContract
 {
-    function registerCharacter(address contractaddress, uint tokenId) external;
-    function fight(address mapContractAddress, uint index, address characterContractAddress, uint characterId) external;
+    function conductFight(address mapContractAddress, uint index, address characterContractAddress, uint characterId) external;
 }
 
 interface ICharacterContract
@@ -23,11 +22,12 @@ interface ICharacterContract
 
 interface IFightContract
 {
-    function conductFight(Character memory player, Enemy[] memory enemies) external returns (Fight memory); 
+    function conductFight(Character memory character, Enemy[] memory enemies) external returns (Fight memory); 
 }
 
 interface IMapContract
 {
+    function getProgress(Character memory character) external view returns(uint);
     function hasAccess(Character memory character, uint index) external view returns(bool);
     function getEnemies(uint index) external view returns (Enemy[] memory enemies);
 }

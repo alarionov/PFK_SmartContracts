@@ -56,6 +56,11 @@ contract CharacterContract is BaseContract, ICharacterContract
         return storedCharacter.exists ? storedCharacter : _defaultCharacter(contractAddress, tokenId); 
     }
     
+    function _setCharacter(Character memory character) private
+    {
+        _characters[character.contractAddress][character.tokenId] = character;
+    }
+    
     function getCharacter(address contractAddress, uint tokenId) external view override(ICharacterContract) returns (Character memory character)
     {
         return _getCharacter(contractAddress, tokenId);
@@ -148,11 +153,14 @@ contract CharacterContract is BaseContract, ICharacterContract
         }
     }
     
-    function addExp(address contractAddress, uint tokenId, uint exp) external override(ICharacterContract) onlyGame 
+    function addExp(address contractAddress, uint tokenId, uint exp) 
+        external 
+        override(ICharacterContract) 
+        onlyGame 
     {
-        require(exp >= 0, "Exp should be a positive number");
+        if (exp == 0) return;
         
-        Character storage character = _characters[contractAddress][tokenId];
+        Character memory character = _getCharacter(contractAddress, tokenId);
         
         character.exp += exp;
         
@@ -169,5 +177,7 @@ contract CharacterContract is BaseContract, ICharacterContract
                 1,
                 character.upgrades);
         }
+        
+        _setCharacter(character);
     }
 }

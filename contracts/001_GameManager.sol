@@ -28,23 +28,12 @@ contract GameManager is BaseContract, IGameManagerContract
         GAME_MANAGER_CONTRACT_ADDRESS = address(this);
     }
     
-    /* Character creation and modification */
-    function registerCharacter(address tokenContractAddress, uint tokenId) 
-        external 
-        auth(msg.sender, tokenContractAddress, tokenId)
-        override(IGameManagerContract)
-    {
-        address player = msg.sender;
-    }
-    
     /* battle */
-    function fight(address mapContractAddress, uint index, address characterContractAddress, uint characterId) 
+    function conductFight(address mapContractAddress, uint index, address characterContractAddress, uint characterId) 
         external
         override(IGameManagerContract)
         auth(msg.sender, characterContractAddress, characterId)
     {
-        address player = msg.sender;
-        
         ICharacterContract characterContract = ICharacterContract(CHARACTER_CONTRACT_ADDRESS);
         IFightContract fightContract = IFightContract(FIGHT_CONTRACT_ADDRESS);
         IMapContract mapContract = IMapContract(mapContractAddress);
@@ -53,6 +42,10 @@ contract GameManager is BaseContract, IGameManagerContract
 
         require(mapContract.hasAccess(character, index));
     
-        //characterContract.addExp(player, fight.oldState.tokenId, fight.score);
+        Enemy[] memory enemies = mapContract.getEnemies(index);
+    
+        Fight memory fight = fightContract.conductFight(character, enemies);
+    
+        characterContract.addExp(characterContractAddress, characterId, fight.exp);
     }
 }
