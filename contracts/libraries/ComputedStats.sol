@@ -74,4 +74,18 @@ library ComputedStats
     {
         return getHealth(stats) > 0;
     }
+    
+    function hitChance(Stats memory one, Stats memory another) public pure returns(uint)
+    {
+        int top = int(another.dexterity) - int(one.dexterity);
+        int bottom = int(one.dexterity + another.dexterity);
+        return uint(64 + 64 * top / bottom);
+    }
+    
+    function critChance(Stats memory one, Stats memory another) public pure returns(uint)
+    {
+        int top = int(another.luck) - int(one.luck);
+        int bottom = int(one.luck + another.luck);
+        return uint(32 + 96 * top / bottom);
+    }
 }
