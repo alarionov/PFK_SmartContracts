@@ -30,8 +30,6 @@ contract FightContract is BaseContract, IFightContract
     
     function conductFight(Character memory character, Enemy[] memory enemies) external override(IFightContract) onlyGame returns (Fight memory fight) 
     {
-        character.stats.init();
-        
         SeedReader.Seed memory seed;
         seed.init([random(), random(), random(), random()]);
         
@@ -57,6 +55,13 @@ contract FightContract is BaseContract, IFightContract
     function _fight(SeedReader.Seed memory seed, Character memory character, Enemy[] memory enemies) private view returns (bool victory, uint exp)
     {
         exp = 0;
+     
+        character.stats.init();
+        
+        for (uint i = 0; i < enemies.length; ++i)
+        {
+            enemies[i].stats.init();
+        }
         
         for (uint step = 0; step < MAX_FIGHT_ACTIONS; ++step)
         {
@@ -96,8 +101,8 @@ contract FightContract is BaseContract, IFightContract
         bool hit;
         bool crit;
         
-        hit = seed.read(2) > 0;
-        crit = seed.read(2) > 0;
+        hit = seed.read(128) < target.hitChance(attacker);
+        crit = seed.read(128) < target.critChance(attacker);
         
         if (hit) target.applyDamage(attacker.attack, crit);
         if (!target.alive()) exp += target.health;

@@ -49,6 +49,7 @@ struct Fight
 struct Enemy
 {
     uint id;
+    bool present;
     ComputedStats.Stats stats;
 }
 
