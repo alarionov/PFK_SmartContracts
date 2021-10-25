@@ -81,7 +81,7 @@ library ComputedStats
     
     function computeHealth(Stats memory stats) public pure returns(uint health)
     {
-        health = stats.constitution * 3;
+        health = stats.constitution;
     }
     
     function getHealth(Stats memory stats) public pure returns(uint)
@@ -109,18 +109,24 @@ library ComputedStats
     
     function hitChance(Stats memory target, Stats memory attacker) public pure returns(uint)
     {
-        int top = int(attacker.dexterity) - int(target.dexterity);
-        int bottom = int(target.dexterity + attacker.dexterity);
-        return uint(64 + 64 * top / bottom);
+        return calculateChance(64, 64, int(attacker.dexterity), int(target.dexterity));
     }
     
     function critChance(Stats memory target, Stats memory attacker) public pure returns(uint)
     {
-        int top = int(attacker.luck) - int(target.luck);
-        int bottom = int(target.luck + attacker.luck);
-        int chance = 32 + 96 * top / bottom;
+        return calculateChance(32, 96, int(attacker.luck), int(target.luck));
+    }
+    
+    function calculateChance(int base, int bonus, int from, int to) public pure returns(uint)
+    {
+        int top = from - to;
+        int bottom = from + to;
         
-        if (chance < 0 ) chance = 0;
+        if (bottom == 0) return uint(base);
+        
+        int chance = base + bonus * top / bottom;
+        
+        if (chance < 0) chance = 0;
         
         return uint(chance);
     }

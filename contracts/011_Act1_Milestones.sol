@@ -4,14 +4,13 @@ pragma solidity 0.8.7;
 
 import "./abstract/Structures.sol";
 import "./abstract/Interfaces.sol";
+import "./abstract/MapContract.sol";
 
-contract Act1Milestones is IMapContract
+contract Act1Milestones is MapContract
 {
-    uint public MAX_LEVEL_INDEX = 7;
-    
     mapping(uint => uint) private _progressions;
     
-    constructor ()
+    constructor() MapContract(6)
     {
     }
     
@@ -35,9 +34,14 @@ contract Act1Milestones is IMapContract
         return _getProgress(character) == index;
     }
     
-    function getEnemies(uint levelIndex) public view override(IMapContract) returns (Enemy[] memory enemies)
+    function getEnemies(uint levelIndex) 
+        public 
+        view 
+        override(IMapContract)
+        validIndex(levelIndex)
+        returns (Enemy[] memory enemies)
     {
-        require(levelIndex < MAX_LEVEL_INDEX, "Invalid level index");
+        // uint strength, uint dexterity, uint constitution, uint luck, uint armor
         
         if (levelIndex == 0)
         {
@@ -51,21 +55,108 @@ contract Act1Milestones is IMapContract
         }
         else if (levelIndex == 1)
         {
+            enemies =  new Enemy[](3);
             
+            enemies[0] = Enemy({ 
+                id: 1, 
+                present: true, 
+                stats: ComputedStats.newStats(1, 1, 1, 0, 0) 
+            });
+            enemies[1] = Enemy({ 
+                id: 2, 
+                present: true, 
+                stats: ComputedStats.newStats(1, 1, 1, 0, 0) 
+            });
+            enemies[2] = Enemy({ 
+                id: 3, 
+                present: true, 
+                stats: ComputedStats.newStats(1, 1, 1, 0, 0) 
+            });
         }
         else if (levelIndex == 2)
         {
+            enemies =  new Enemy[](3);
             
+            enemies[0] = Enemy({ 
+                id: 1, 
+                present: true, 
+                stats: ComputedStats.newStats(1, 1, 1, 0, 0) 
+            });
+            enemies[1] = Enemy({ 
+                id: 2, 
+                present: true, 
+                stats: ComputedStats.newStats(2, 1, 3, 0, 1) 
+            });
+            enemies[2] = Enemy({ 
+                id: 3, 
+                present: true, 
+                stats: ComputedStats.newStats(1, 1, 1, 0, 0) 
+            });
         }
         else if (levelIndex == 3)
         {
+            enemies =  new Enemy[](3);
             
+            enemies[0] = Enemy({ 
+                id: 1, 
+                present: true, 
+                stats: ComputedStats.newStats(5, 1, 5, 0, 1) 
+            });
+            enemies[1] = Enemy({ 
+                id: 2, 
+                present: true, 
+                stats: ComputedStats.newStats(5, 1, 5, 0, 1) 
+            });
+            enemies[2] = Enemy({ 
+                id: 3, 
+                present: true, 
+                stats: ComputedStats.newStats(5, 1, 5, 0, 1) 
+            });
         }
         else if (levelIndex == 4)
-        {}
+        {
+            enemies =  new Enemy[](3);
+            
+            enemies[0] = Enemy({ 
+                id: 1, 
+                present: true, 
+                stats: ComputedStats.newStats(8, 1, 12, 0, 0) 
+            });
+            enemies[1] = Enemy({ 
+                id: 2, 
+                present: true, 
+                stats: ComputedStats.newStats(8, 1, 12, 0, 0) 
+            });
+            enemies[2] = Enemy({ 
+                id: 3, 
+                present: true, 
+                stats: ComputedStats.newStats(8, 1, 12, 0, 0) 
+            });
+        }
         else if (levelIndex == 5)
-        {}
+        {
+            enemies =  new Enemy[](2);
+            
+            enemies[0] = Enemy({ 
+                id: 1, 
+                present: true, 
+                stats: ComputedStats.newStats(18, 1, 12, 0, 2) 
+            });
+            enemies[1] = Enemy({ 
+                id: 2, 
+                present: true, 
+                stats: ComputedStats.newStats(15, 1, 15, 0, 5) 
+            });
+        }
         else if (levelIndex == 6)
-        {}
+        {
+            enemies =  new Enemy[](1);
+            
+            enemies[0] = Enemy({ 
+                id: 1, 
+                present: true, 
+                stats: ComputedStats.newStats(35, 1, 50, 0, 10) 
+            });
+        }
     }
 }
