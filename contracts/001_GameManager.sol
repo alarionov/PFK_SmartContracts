@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity 0.8.7;
+pragma solidity 0.8.9;
 
 import "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
@@ -46,6 +46,7 @@ contract GameManager is BaseContract, IGameManagerContract
     
         Fight memory fight = fightContract.conductFight(character, enemies);
     
+        mapContract.update(character, index, fight.victory);
         characterContract.addExp(characterContractAddress, characterId, fight.exp);
     }
 }

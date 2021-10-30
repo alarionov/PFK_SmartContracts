@@ -1,10 +1,12 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity 0.8.7;
+pragma solidity 0.8.9;
 
-import "./Interfaces.sol";
+import "./BaseContract.sol";
+import {IMapContract} from "./Interfaces.sol";
+import {Enemy} from "./Structures.sol";
 
-abstract contract MapContract is IMapContract
+abstract contract MapContract is IMapContract, BaseContract
 {
     uint public MAX_LEVEL_INDEX;
     

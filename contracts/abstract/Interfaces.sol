@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity 0.8.7;
+pragma solidity 0.8.9;
 
 import "./Structures.sol";
 
@@ -30,4 +30,5 @@ interface IMapContract
     function getProgress(Character memory character) external view returns(uint);
     function hasAccess(Character memory character, uint index) external view returns(bool);
     function getEnemies(uint index) external view returns (Enemy[] memory enemies);
+    function update(Character memory character, uint index, bool victory) external;
 }

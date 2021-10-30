@@ -1,32 +1,56 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity 0.8.7;
+pragma solidity 0.8.9;
 
 import "./abstract/Structures.sol";
 import "./abstract/Interfaces.sol";
 import "./abstract/MapContract.sol";
+import "./libraries/Utils.sol";
 
 contract Act1Sidequests is MapContract
 {
     address public ACT1_MILESTONES_CONTACT_ADDRESS;
     
+    uint[] private _cooldowns = [1,2,3,4,5,6];
+    mapping(uint => uint[]) private _activeAfter;
+    
     constructor() MapContract(5)
     {
     }
     
-    function setMainMapContract(address mainMapContract) public
+    function setMainMapContract(address mainMapContract) public onlyGame
     {
         ACT1_MILESTONES_CONTACT_ADDRESS = mainMapContract;
     }
     
-    function getProgress(Character memory character) public view override(IMapContract) returns(uint)
+    function setCooldowns(uint[] memory newCooldowns) public onlyGame
+    {
+        _cooldowns = newCooldowns;
+    }
+    
+    function getProgress(Character memory character) public pure override(IMapContract) returns(uint)
     {
         return 0;
     }
     
+    function getCooldowns(Character memory character) public view returns(uint[] memory cooldowns)
+    {
+        uint hash = Utils.getHash(character);
+        cooldowns = _activeAfter[hash];
+    }
+    
+    function update(Character memory character, uint index, bool victory) public onlyGame override(IMapContract)
+    {
+        uint hash = Utils.getHash(character);
+        _activeAfter[hash][index] = block.number + _cooldowns[index];
+    }
+    
     function hasAccess(Character memory character, uint index) public view override(IMapContract) returns(bool)
     {
-        return true;
+        uint hash = Utils.getHash(character);
+        bool unlocked = IMapContract(ACT1_MILESTONES_CONTACT_ADDRESS).getProgress(character) > index;
+        bool active = _activeAfter[hash][index] < block.number;
+        return unlocked && active;
     }
     
     function getEnemies(uint levelIndex) public view override(IMapContract) returns (Enemy[] memory enemies)

@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity 0.8.7;
+pragma solidity 0.8.9;
 
 import "./abstract/Structures.sol";
 import "./abstract/Interfaces.sol";
 import "./abstract/MapContract.sol";
+import "./libraries/Utils.sol";
 
 contract Act1Milestones is MapContract
 {
@@ -25,13 +26,22 @@ contract Act1Milestones is MapContract
     
     function _getProgress(Character memory character) private view returns(uint)
     {
-        uint hash = uint(keccak256(abi.encodePacked(character.contractAddress, character.tokenId)));
+        uint hash = Utils.getHash(character);
         return _progressions[hash];
     }
     
     function hasAccess(Character memory character, uint index) public view override(IMapContract) returns(bool)
     {
         return _getProgress(character) == index;
+    }
+    
+    function update(Character memory character, uint index, bool victory) public onlyGame override(IMapContract)
+    {
+        if (victory)
+        {
+            uint hash = Utils.getHash(character);
+            _progressions[hash] = index + 1;
+        }
     }
     
     function getEnemies(uint levelIndex) 
