@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity 0.8.9;
+pragma solidity ^0.8.9;
 
 import "../abstract/Structures.sol";
 
@@ -19,37 +19,7 @@ library ComputedStats
         uint health;
         uint takenDamage;
     }
-    
-    function defaultStats() public pure returns (Stats memory stats)
-    {
-        stats = Stats({
-            strength: 1,
-            dexterity: 1,
-            constitution: 1,
-            luck: 0,
-            armor: 0,
-        
-            attack: 0,
-            health: 0,
-            takenDamage: 0 
-        });
-    }
-    
-    function zero() public pure returns (Stats memory stats)
-    {
-        stats = Stats({
-            strength: 0,
-            dexterity: 0,
-            constitution: 0,
-            luck: 0,
-            armor: 0,
-        
-            attack: 0,
-            health: 0,
-            takenDamage: 0 
-        });
-    }
-    
+   
     function newStats(uint strength, uint dexterity, uint constitution, uint luck, uint armor) 
         public 
         pure 

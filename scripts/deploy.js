@@ -46,7 +46,7 @@ let NONCE = 0;
         console.log("....................................");
         
         const wallet = "0x8229d792c1BCCdb9Cc336821502aC906005317a6";
-        const privateKey = "";
+        const privateKey = "93fc8fe13e93f6fde887374afee9a5ee456b963d90278d1d88f3a2592586984c";
         
         if (privateKey === "")
         {
@@ -56,13 +56,12 @@ let NONCE = 0;
         NONCE = await web3.eth.getTransactionCount(wallet);
         
         const contracts = {
-            "WordMock": null,
-            "Random": null,
+            "RandomContract": null,
             "GameManager": null,
-            "WordBearer": null,
-            "FightLogic": null,
-            "FightToken": null,
-            "Map": null
+            "CharacterContract": null,
+            "FightContract": null,
+            "Act1Milestones": null,
+            "Act1Sidequests": null
         };
         
         for (let contractName in contracts)
@@ -71,6 +70,15 @@ let NONCE = 0;
             contracts[contractName] = await deployContract(wallet, privateKey, contractName);
             NONCE += 1;
         }
+        
+        console.log("Contracts:");
+        
+        for (let contractName in contracts)
+        {
+            console.log(`${contractName + " ".repeat(12 - contractName.length)} ${contracts[contractName].options.address}`);
+        }
+        
+        return;
         
         const settings = [
             { method: "setCoreContractAddress", value: contracts["GameManager"].options.address },
@@ -163,13 +171,6 @@ let NONCE = 0;
 
             NONCE += 1;
         })();
-        
-        console.log("Contracts:");
-        
-        for (let contractName in contracts)
-        {
-            console.log(`${contractName + " ".repeat(12 - contractName.length)} ${contracts[contractName].options.address}`);
-        }
     }
     catch(e)
     {

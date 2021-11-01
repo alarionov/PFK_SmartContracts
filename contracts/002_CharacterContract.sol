@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity 0.8.9;
+pragma solidity ^0.8.9;
 
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -9,8 +9,8 @@ import "./abstract/Structures.sol";
 import "./abstract/Interfaces.sol";
 import "./abstract/BaseContract.sol";
 
-import {GameMath} from "./libraries/GameMath.sol";
-import {ComputedStats} from "./libraries/ComputedStats.sol";
+import "./libraries/GameMath.sol";
+import "./libraries/ComputedStats.sol";
 
 contract CharacterContract is BaseContract, ICharacterContract
 {
@@ -38,6 +38,17 @@ contract CharacterContract is BaseContract, ICharacterContract
     
     function _defaultCharacter(address contractAddress, uint tokenId) private pure returns (Character memory character)
     {
+        ComputedStats.Stats memory stats = ComputedStats.Stats({
+            strength: 1,
+            dexterity: 1,
+            constitution: 1,
+            luck: 0,
+            armor: 0,
+            attack: 0,
+            health: 0,
+            takenDamage: 0 
+        });
+        
         character = Character({
             exists: true,
             contractAddress: contractAddress,
@@ -45,39 +56,41 @@ contract CharacterContract is BaseContract, ICharacterContract
             level: 1,
             exp: 0,
             upgrades: 0,
-            stats: ComputedStats.defaultStats(),
+            stats: stats,
             equipment: Equipment(0,0,0)
         });
     }
     
-    function _getCharacter(address contractAddress, uint tokenId) private view returns (Character memory character)
+    function _getStoredOrDefaultCharacter(address contractAddress, uint tokenId) private view returns (Character memory character)
     {
         Character memory storedCharacter = _characters[contractAddress][tokenId];
-        return storedCharacter.exists ? storedCharacter : _defaultCharacter(contractAddress, tokenId); 
+        
+        character = storedCharacter.exists ? storedCharacter : _defaultCharacter(contractAddress, tokenId);
     }
     
-    function _setCharacter(Character memory character) private
+    function _saveCharacter(Character memory character) private
     {
         _characters[character.contractAddress][character.tokenId] = character;
     }
     
-    function getCharacter(address contractAddress, uint tokenId) external view override(ICharacterContract) returns (Character memory character)
+    function getCharacter(address contractAddress, uint tokenId) public view override(ICharacterContract) returns (Character memory character)
     {
-        return _getCharacter(contractAddress, tokenId);
+        character = _getStoredOrDefaultCharacter(contractAddress, tokenId);
     }
     
-    function toNextLevel(uint level) public view returns(uint)
+    function toNextLevel(uint level) public view returns(uint amount)
     {
         require(level > 0, "Level should be greater than zero");
         
         if (level < _tnl.length)
         { 
-            return _tnl[level - 1];
+            amount = _tnl[level - 1];
+        }
+        else
+        {
+            amount = _tnl[_tnl.length - 1]  + 10 * (level - _tnl.length);    
         }
         
-        uint base_tnl = _tnl[_tnl.length - 1];
-        
-        return base_tnl + 10 * (level - _tnl.length);
     }
     
     /* Upgrades */
@@ -160,7 +173,7 @@ contract CharacterContract is BaseContract, ICharacterContract
     {
         if (exp == 0) return;
         
-        Character memory character = _getCharacter(contractAddress, tokenId);
+        Character memory character = _getStoredOrDefaultCharacter(contractAddress, tokenId);
         
         character.exp += exp;
         
@@ -178,6 +191,6 @@ contract CharacterContract is BaseContract, ICharacterContract
                 character.upgrades);
         }
         
-        _setCharacter(character);
+        _saveCharacter(character);
     }
 }
