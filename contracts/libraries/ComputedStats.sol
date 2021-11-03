@@ -2,8 +2,6 @@
 
 pragma solidity ^0.8.9;
 
-import "../abstract/Structures.sol";
-
 library ComputedStats 
 {
     struct Stats
@@ -34,6 +32,20 @@ library ComputedStats
             attack: 0,
             health: 0,
             takenDamage: 0
+        });
+    }
+    
+    function defaultStats() public pure returns(Stats memory)
+    {
+        return Stats({
+            strength: 1,
+            dexterity: 1,
+            constitution: 1,
+            luck: 0,
+            armor: 0,
+            attack: 0,
+            health: 0,
+            takenDamage: 0 
         });
     }
     

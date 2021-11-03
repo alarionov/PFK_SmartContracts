@@ -38,17 +38,6 @@ contract CharacterContract is BaseContract, ICharacterContract
     
     function _defaultCharacter(address contractAddress, uint tokenId) private pure returns (Character memory character)
     {
-        ComputedStats.Stats memory stats = ComputedStats.Stats({
-            strength: 1,
-            dexterity: 1,
-            constitution: 1,
-            luck: 0,
-            armor: 0,
-            attack: 0,
-            health: 0,
-            takenDamage: 0 
-        });
-        
         character = Character({
             exists: true,
             contractAddress: contractAddress,
@@ -56,7 +45,7 @@ contract CharacterContract is BaseContract, ICharacterContract
             level: 1,
             exp: 0,
             upgrades: 0,
-            stats: stats,
+            stats: ComputedStats.defaultStats(),
             equipment: Equipment(0,0,0)
         });
     }

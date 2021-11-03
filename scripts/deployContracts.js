@@ -1,4 +1,5 @@
-const getRawTx = async (wallet, data, to, value) => {
+async function getRawTx (wallet, data, to, value) 
+{
     const gasPrice = web3.utils.toWei('1', 'gwei');
     const gasAmount = 10000000;
     
@@ -21,24 +22,52 @@ const getRawTx = async (wallet, data, to, value) => {
     }
     
     return tx;
-};
+}
 
-const sendTransaction = async (rawTx, privateKey) => 
+async function sendTransaction(rawTx, privateKey) 
 {
     const signedTx = await web3.eth.accounts.signTransaction(rawTx, privateKey);
     const response = await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
     return response;
-};
+}
 
-const deployContract = async (wallet, privateKey, contractName) => {
-    const artifactsPath = `browser/contracts/artifacts/${contractName}.json`;
-    const metadata = JSON.parse(await remix.call('fileManager', 'getFile', artifactsPath));
+async function deployContract(wallet, privateKey, artifactsPath) 
+{
+    const metadataJson = JSON.parse(await remix.call('fileManager', 'getFile', artifactsPath));
+    const metadata = linkLibraries(metadataJson, LIBRARIES);
     const contract = new web3.eth.Contract(metadata.abi);
     const data = contract.deploy({data: "0x" + metadata.data.bytecode.object}).encodeABI();
     const rawTx = await getRawTx(wallet, data);
     const response = await sendTransaction(rawTx, privateKey);
-    return new web3.eth.Contract(metadata.abi, response.contractAddress);
+    return response.contractAddress;
+}
+
+const linkLibraries = (metadata, libraries) => {
+    for (libName in libraries)
+    {
+        const placeholder = web3.utils.soliditySha3(`contracts/libraries/${libName}.sol:${libName}`).substr(2, 34);
+        const address = libraries[libName].substr(2);
+        metadata.data.bytecode.object = metadata.data.bytecode.object.replaceAll("__$"+placeholder+"$__", address);
+    }
+
+    return metadata;
 };
+
+const LIBRARIES = {
+    "ComputedStats": "0xB06374F9De9e8F98341c4c3349a25dA229e20919",
+    "GameMath": "0xcc1e70c46E0F9A71f522862Da52765ca573FAD14",
+    "SeedReader": "0xbCfF6019C9B75748b85d58867306A9d7DA571c91",
+    "Utils": "0xB092Ba8eAF2B58617e1A6B227617162aa3804AF1"
+};
+
+/*
+RandomContract 0xe460a7Fc82bCfF0D663EA5F1552a0FEe0BCA53b6
+GameManager 0x9135D512E685b5Fb3c08dee49300F136AE4374c8
+CharacterContract 0x4F179eB786540014435783607edbFC70299DfD16
+FightContract 0x95e21E0D2118184fc7ebb0cCd42d4AeC8c0a3EE6
+Act1Milestones 0xE226bebE0413B0330AB023A0Ebd9414605257912
+Act1Sidequests 0xC6bD0a7a420303D5D495c1A4D7B7AF4969619D9e
+*/
 
 let NONCE = 0;
 (async () => {
@@ -46,7 +75,7 @@ let NONCE = 0;
         console.log("....................................");
         
         const wallet = "0x8229d792c1BCCdb9Cc336821502aC906005317a6";
-        const privateKey = "93fc8fe13e93f6fde887374afee9a5ee456b963d90278d1d88f3a2592586984c";
+        const privateKey = "";
         
         if (privateKey === "")
         {
@@ -63,11 +92,12 @@ let NONCE = 0;
             "Act1Milestones": null,
             "Act1Sidequests": null
         };
-        
+					
         for (let contractName in contracts)
         {
             console.log(`Deploying ${contractName}`);
-            contracts[contractName] = await deployContract(wallet, privateKey, contractName);
+            const artifactsPath = `browser/contracts/artifacts/${contractName}.json`;
+            contracts[contractName] = await deployContract(wallet, privateKey, artifactsPath);
             NONCE += 1;
         }
         
@@ -75,11 +105,12 @@ let NONCE = 0;
         
         for (let contractName in contracts)
         {
-            console.log(`${contractName + " ".repeat(12 - contractName.length)} ${contracts[contractName].options.address}`);
+            console.log(`${contractName} ${contracts[contractName]}`);
         }
         
         return;
         
+        /*
         const settings = [
             { method: "setCoreContractAddress", value: contracts["GameManager"].options.address },
             { method: "setCharacterContractAddress", value: contracts["WordBearer"].options.address },
@@ -171,6 +202,7 @@ let NONCE = 0;
 
             NONCE += 1;
         })();
+        */
     }
     catch(e)
     {

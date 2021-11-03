@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity 0.8.9;
+pragma solidity ^0.8.9;
 
 import "./abstract/Structures.sol";
 import "./abstract/Interfaces.sol";
 import "./abstract/BaseContract.sol";
 
-import {SeedReader} from "./libraries/SeedReader.sol";
-import {ComputedStats} from "./libraries/ComputedStats.sol";
+import "./libraries/SeedReader.sol";
+import "./libraries/ComputedStats.sol";
 
 contract FightContract is BaseContract, IFightContract
 {
@@ -43,7 +43,7 @@ contract FightContract is BaseContract, IFightContract
         
         (fight.victory, fight.exp) = _fight(seed, character, enemies);
         
-        if (character.stats.getHealth() == 0)
+        if (!character.stats.alive())
         {
             fight.exp = fight.exp >> 2;
         }
