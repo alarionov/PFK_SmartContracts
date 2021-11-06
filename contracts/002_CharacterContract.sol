@@ -2,9 +2,6 @@
 
 pragma solidity ^0.8.9;
 
-import "@openzeppelin/contracts/utils/Counters.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
-
 import "./abstract/Structures.sol";
 import "./abstract/Interfaces.sol";
 import "./abstract/BaseContract.sol";

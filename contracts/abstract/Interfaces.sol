@@ -3,6 +3,7 @@
 pragma solidity ^0.8.9;
 
 import "./Structures.sol";
+import "../libraries/ComputedStats.sol";
 
 interface IRandomContract
 {
@@ -31,4 +32,10 @@ interface IMapContract
     function hasAccess(Character memory character, uint index) external view returns(bool);
     function getEnemies(uint index) external view returns (Enemy[] memory enemies);
     function update(Character memory character, uint index, bool victory) external;
+}
+
+interface IEquipmentContract
+{
+    function getInventory(Equipment memory equipment) external view returns(ComputedStats.Stats memory bonusStats);
+    function getBonusStats(uint tokenId) external view returns(ComputedStats.Stats memory stats);
 }

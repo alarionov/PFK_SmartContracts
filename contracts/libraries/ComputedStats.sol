@@ -49,11 +49,34 @@ library ComputedStats
         });
     }
     
+    function zeroStats() public pure returns(Stats memory)
+    {
+        return Stats({
+            strength: 0,
+            dexterity: 0,
+            constitution: 0,
+            luck: 0,
+            armor: 0,
+            attack: 0,
+            health: 0,
+            takenDamage: 0 
+        });
+    }
+    
     function init(Stats memory stats) public pure
     {
         stats.attack = computeAttack(stats);
         stats.health = computeHealth(stats);
         stats.takenDamage = 0;
+    }
+    
+    function add(Stats memory one, Stats memory another) public pure
+    {
+        one.strength += another.strength;
+        one.dexterity += another.dexterity;
+        one.constitution += another.constitution;
+        one.luck += another.luck;
+        one.armor += another.armor;
     }
     
     function computeAttack(Stats memory stats) public pure returns(uint attack)
