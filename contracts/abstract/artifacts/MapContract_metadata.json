@@ -1,0 +1,709 @@
+{
+	"compiler": {
+		"version": "0.8.9+commit.e5eed63a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "CHARACTER_CONTRACT_ADDRESS",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "FIGHT_CONTRACT_ADDRESS",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "GAME_MANAGER_CONTRACT_ADDRESS",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "GAME_MASTER",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "MAX_LEVEL_INDEX",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "RANDOM_CONTRACT_ADDRESS",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "VAULT",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "index",
+						"type": "uint256"
+					}
+				],
+				"name": "getEnemies",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "id",
+								"type": "uint256"
+							},
+							{
+								"internalType": "bool",
+								"name": "present",
+								"type": "bool"
+							},
+							{
+								"components": [
+									{
+										"internalType": "uint256",
+										"name": "strength",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "dexterity",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "constitution",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "luck",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "armor",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "attack",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "health",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "takenDamage",
+										"type": "uint256"
+									}
+								],
+								"internalType": "struct ComputedStats.Stats",
+								"name": "stats",
+								"type": "tuple"
+							}
+						],
+						"internalType": "struct Enemy[]",
+						"name": "enemies",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "bool",
+								"name": "exists",
+								"type": "bool"
+							},
+							{
+								"internalType": "address",
+								"name": "contractAddress",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "tokenId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "level",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "exp",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "upgrades",
+								"type": "uint256"
+							},
+							{
+								"components": [
+									{
+										"internalType": "uint256",
+										"name": "strength",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "dexterity",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "constitution",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "luck",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "armor",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "attack",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "health",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "takenDamage",
+										"type": "uint256"
+									}
+								],
+								"internalType": "struct ComputedStats.Stats",
+								"name": "stats",
+								"type": "tuple"
+							},
+							{
+								"components": [
+									{
+										"internalType": "uint256",
+										"name": "armorSetId",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "weaponSetId",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "shieldId",
+										"type": "uint256"
+									}
+								],
+								"internalType": "struct Equipment",
+								"name": "equipment",
+								"type": "tuple"
+							}
+						],
+						"internalType": "struct Character",
+						"name": "character",
+						"type": "tuple"
+					}
+				],
+				"name": "getProgress",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "bool",
+								"name": "exists",
+								"type": "bool"
+							},
+							{
+								"internalType": "address",
+								"name": "contractAddress",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "tokenId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "level",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "exp",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "upgrades",
+								"type": "uint256"
+							},
+							{
+								"components": [
+									{
+										"internalType": "uint256",
+										"name": "strength",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "dexterity",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "constitution",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "luck",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "armor",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "attack",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "health",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "takenDamage",
+										"type": "uint256"
+									}
+								],
+								"internalType": "struct ComputedStats.Stats",
+								"name": "stats",
+								"type": "tuple"
+							},
+							{
+								"components": [
+									{
+										"internalType": "uint256",
+										"name": "armorSetId",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "weaponSetId",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "shieldId",
+										"type": "uint256"
+									}
+								],
+								"internalType": "struct Equipment",
+								"name": "equipment",
+								"type": "tuple"
+							}
+						],
+						"internalType": "struct Character",
+						"name": "character",
+						"type": "tuple"
+					},
+					{
+						"internalType": "uint256",
+						"name": "index",
+						"type": "uint256"
+					}
+				],
+				"name": "hasAccess",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_address",
+						"type": "address"
+					}
+				],
+				"name": "setCharacterContractAddress",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_address",
+						"type": "address"
+					}
+				],
+				"name": "setFightContractAddress",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_address",
+						"type": "address"
+					}
+				],
+				"name": "setGMContractAddress",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newGM",
+						"type": "address"
+					}
+				],
+				"name": "setGameMasterAddress",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newAddress",
+						"type": "address"
+					}
+				],
+				"name": "setRandomContractAddress",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_address",
+						"type": "address"
+					}
+				],
+				"name": "setVaultAddress",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "bool",
+								"name": "exists",
+								"type": "bool"
+							},
+							{
+								"internalType": "address",
+								"name": "contractAddress",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "tokenId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "level",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "exp",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "upgrades",
+								"type": "uint256"
+							},
+							{
+								"components": [
+									{
+										"internalType": "uint256",
+										"name": "strength",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "dexterity",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "constitution",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "luck",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "armor",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "attack",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "health",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "takenDamage",
+										"type": "uint256"
+									}
+								],
+								"internalType": "struct ComputedStats.Stats",
+								"name": "stats",
+								"type": "tuple"
+							},
+							{
+								"components": [
+									{
+										"internalType": "uint256",
+										"name": "armorSetId",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "weaponSetId",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "shieldId",
+										"type": "uint256"
+									}
+								],
+								"internalType": "struct Equipment",
+								"name": "equipment",
+								"type": "tuple"
+							}
+						],
+						"internalType": "struct Character",
+						"name": "character",
+						"type": "tuple"
+					},
+					{
+						"internalType": "uint256",
+						"name": "index",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "victory",
+						"type": "bool"
+					}
+				],
+				"name": "update",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "withdraw",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/abstract/MapContract.sol": "MapContract"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/abstract/BaseContract.sol": {
+			"keccak256": "0xfe535c78e7521bbeacea8378c5464fcf703d97dc31bd1c0484379ceb69dd5149",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://06513ffb3e31fbd331ca1f112390bb0472df6ff559b5ede7142ef98f7f20c36e",
+				"dweb:/ipfs/QmSSyCNFyWFjX1c1q8JrHbvEhned6MK4rhfN8bEJsQeX8K"
+			]
+		},
+		"contracts/abstract/Interfaces.sol": {
+			"keccak256": "0xee3a2e9253b8d2becf3424237a795136ed7f6b1c528ce8a2f502682b00da670e",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://55ff2735780bc8f4a3cb951a987a15f699ea47e8c3bc7f53498b76f1a5e0ccb3",
+				"dweb:/ipfs/Qme6HTdCFMqJS59Rp4avhiv8EgmtasYMBoD1pngrupnmKs"
+			]
+		},
+		"contracts/abstract/MapContract.sol": {
+			"keccak256": "0x71d01db96a40586d75ea5e1f4592b988f3aa722f170eda879e31b0f79e3321e7",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e465f155a14a1424ef3e8542aad3edc381f228b5adfdded3e3003236eea68bc8",
+				"dweb:/ipfs/QmYEWJp9NpbysLdhkeuV81dR1AdyBr862HAjGpe9YNmz3U"
+			]
+		},
+		"contracts/abstract/Permissions.sol": {
+			"keccak256": "0xd1d41285d1bdb04fe6c704fd40e24750a858a715f531126d51658fb292f7f6f3",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://41464094b60d7333b9be1b51343a5151f1865a2ac0c3497f8a7ff24ba285e872",
+				"dweb:/ipfs/QmXMsSgPUEzoehNoMUVHvdfcSUMkHucsMarAMkLd2xbzfR"
+			]
+		},
+		"contracts/abstract/Structures.sol": {
+			"keccak256": "0xf1f0af1ed1916eda5c4fa98f4b20e411fbe09dc4fb4cc8d44863d79ffc197b39",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ba2a0f5a8c410afd47c3b7431b9afb40e9f21262c716ce961d0b33874d5718f2",
+				"dweb:/ipfs/QmSTvcCBR8Ptggh2z15NUjajyQEWxb3AXbpnvEvrNvzq1M"
+			]
+		},
+		"contracts/libraries/ComputedStats.sol": {
+			"keccak256": "0x02b91ea6bf79a28122815146fb43794963a1baf0417a00691d6189317da3c1cf",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4731399973faa12372b0cfeb84bffa2a555faa5228513e9e9fe139afdba3a67c",
+				"dweb:/ipfs/QmWLdiAyrgnWqw6ebp2opApNtbD1mcLkgi5KbHrjstj5uQ"
+			]
+		}
+	},
+	"version": 1
+}

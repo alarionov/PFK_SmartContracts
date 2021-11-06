@@ -1,0 +1,45 @@
+{
+	"compiler": {
+		"version": "0.8.9+commit.e5eed63a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/libraries/SeedReader.sol": "SeedReader"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/libraries/SeedReader.sol": {
+			"keccak256": "0x0cb098e35131841c80909f1ea319fa197de10e7de9cef55dd1c1a61c02fabb1f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://91320c60a83e31d57ca55fe4168b3f1fe0583e5b75ffa01eb8011f8f16812d45",
+				"dweb:/ipfs/QmP2VU2ijFbmi3Prcx82cbBD5Rdr1oyprj86J4ikmuAmjo"
+			]
+		}
+	},
+	"version": 1
+}

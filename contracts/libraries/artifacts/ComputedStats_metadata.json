@@ -1,0 +1,953 @@
+{
+	"compiler": {
+		"version": "0.8.9+commit.e5eed63a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "strength",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "dexterity",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "constitution",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "luck",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "armor",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "attack",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "health",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "takenDamage",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct ComputedStats.Stats",
+						"name": "one",
+						"type": "tuple"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "strength",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "dexterity",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "constitution",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "luck",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "armor",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "attack",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "health",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "takenDamage",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct ComputedStats.Stats",
+						"name": "another",
+						"type": "tuple"
+					}
+				],
+				"name": "add",
+				"outputs": [],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "strength",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "dexterity",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "constitution",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "luck",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "armor",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "attack",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "health",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "takenDamage",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct ComputedStats.Stats",
+						"name": "stats",
+						"type": "tuple"
+					}
+				],
+				"name": "alive",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "strength",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "dexterity",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "constitution",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "luck",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "armor",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "attack",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "health",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "takenDamage",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct ComputedStats.Stats",
+						"name": "stats",
+						"type": "tuple"
+					},
+					{
+						"internalType": "uint256",
+						"name": "damage",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "crit",
+						"type": "bool"
+					}
+				],
+				"name": "applyDamage",
+				"outputs": [],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "int256",
+						"name": "base",
+						"type": "int256"
+					},
+					{
+						"internalType": "int256",
+						"name": "bonus",
+						"type": "int256"
+					},
+					{
+						"internalType": "int256",
+						"name": "from",
+						"type": "int256"
+					},
+					{
+						"internalType": "int256",
+						"name": "to",
+						"type": "int256"
+					}
+				],
+				"name": "calculateChance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "strength",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "dexterity",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "constitution",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "luck",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "armor",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "attack",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "health",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "takenDamage",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct ComputedStats.Stats",
+						"name": "stats",
+						"type": "tuple"
+					}
+				],
+				"name": "computeAttack",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "attack",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "strength",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "dexterity",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "constitution",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "luck",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "armor",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "attack",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "health",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "takenDamage",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct ComputedStats.Stats",
+						"name": "stats",
+						"type": "tuple"
+					}
+				],
+				"name": "computeHealth",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "health",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "strength",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "dexterity",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "constitution",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "luck",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "armor",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "attack",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "health",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "takenDamage",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct ComputedStats.Stats",
+						"name": "target",
+						"type": "tuple"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "strength",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "dexterity",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "constitution",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "luck",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "armor",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "attack",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "health",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "takenDamage",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct ComputedStats.Stats",
+						"name": "attacker",
+						"type": "tuple"
+					}
+				],
+				"name": "critChance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "defaultStats",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "strength",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "dexterity",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "constitution",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "luck",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "armor",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "attack",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "health",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "takenDamage",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct ComputedStats.Stats",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "strength",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "dexterity",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "constitution",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "luck",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "armor",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "attack",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "health",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "takenDamage",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct ComputedStats.Stats",
+						"name": "stats",
+						"type": "tuple"
+					}
+				],
+				"name": "getHealth",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "strength",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "dexterity",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "constitution",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "luck",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "armor",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "attack",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "health",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "takenDamage",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct ComputedStats.Stats",
+						"name": "target",
+						"type": "tuple"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "strength",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "dexterity",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "constitution",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "luck",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "armor",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "attack",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "health",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "takenDamage",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct ComputedStats.Stats",
+						"name": "attacker",
+						"type": "tuple"
+					}
+				],
+				"name": "hitChance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "strength",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "dexterity",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "constitution",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "luck",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "armor",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "attack",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "health",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "takenDamage",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct ComputedStats.Stats",
+						"name": "stats",
+						"type": "tuple"
+					}
+				],
+				"name": "init",
+				"outputs": [],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "strength",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "dexterity",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "constitution",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "luck",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "armor",
+						"type": "uint256"
+					}
+				],
+				"name": "newStats",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "strength",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "dexterity",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "constitution",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "luck",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "armor",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "attack",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "health",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "takenDamage",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct ComputedStats.Stats",
+						"name": "stats",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "zeroStats",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "strength",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "dexterity",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "constitution",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "luck",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "armor",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "attack",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "health",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "takenDamage",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct ComputedStats.Stats",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/libraries/ComputedStats.sol": "ComputedStats"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/libraries/ComputedStats.sol": {
+			"keccak256": "0x594078ed7d10c96a752b08c9f876c14d8ea3ffb197d8347c1ab5056fcd03070b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://d74c620123d005e257c4162a7e274b41868f254f15ffe4657b876694cf374fa9",
+				"dweb:/ipfs/QmYNFa6QprwJmCuYbXczNXjkhNYAJGNbncGeLU7Jnv8gQm"
+			]
+		}
+	},
+	"version": 1
+}

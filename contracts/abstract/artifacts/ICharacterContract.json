@@ -1,0 +1,206 @@
+{
+	"deploy": {
+		"VM:-": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"main:1": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"ropsten:3": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"rinkeby:4": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"kovan:42": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"görli:5": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"Custom": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		}
+	},
+	"data": {
+		"bytecode": {
+			"functionDebugData": {},
+			"generatedSources": [],
+			"linkReferences": {},
+			"object": "",
+			"opcodes": "",
+			"sourceMap": ""
+		},
+		"deployedBytecode": {
+			"functionDebugData": {},
+			"generatedSources": [],
+			"immutableReferences": {},
+			"linkReferences": {},
+			"object": "",
+			"opcodes": "",
+			"sourceMap": ""
+		},
+		"gasEstimates": null,
+		"methodIdentifiers": {
+			"addExp(address,uint256,uint256)": "ef56e063",
+			"getCharacter(address,uint256)": "e4cb30ad"
+		}
+	},
+	"abi": [
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "contractaddress",
+					"type": "address"
+				},
+				{
+					"internalType": "uint256",
+					"name": "tokenId",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "exp",
+					"type": "uint256"
+				}
+			],
+			"name": "addExp",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "contractaddress",
+					"type": "address"
+				},
+				{
+					"internalType": "uint256",
+					"name": "tokenId",
+					"type": "uint256"
+				}
+			],
+			"name": "getCharacter",
+			"outputs": [
+				{
+					"components": [
+						{
+							"internalType": "bool",
+							"name": "exists",
+							"type": "bool"
+						},
+						{
+							"internalType": "address",
+							"name": "contractAddress",
+							"type": "address"
+						},
+						{
+							"internalType": "uint256",
+							"name": "tokenId",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "level",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "exp",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "upgrades",
+							"type": "uint256"
+						},
+						{
+							"components": [
+								{
+									"internalType": "uint256",
+									"name": "strength",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256",
+									"name": "dexterity",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256",
+									"name": "constitution",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256",
+									"name": "luck",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256",
+									"name": "armor",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256",
+									"name": "attack",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256",
+									"name": "health",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256",
+									"name": "takenDamage",
+									"type": "uint256"
+								}
+							],
+							"internalType": "struct ComputedStats.Stats",
+							"name": "stats",
+							"type": "tuple"
+						},
+						{
+							"components": [
+								{
+									"internalType": "uint256",
+									"name": "armorSetId",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256",
+									"name": "weaponSetId",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256",
+									"name": "shieldId",
+									"type": "uint256"
+								}
+							],
+							"internalType": "struct Equipment",
+							"name": "equipment",
+							"type": "tuple"
+						}
+					],
+					"internalType": "struct Character",
+					"name": "character",
+					"type": "tuple"
+				}
+			],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		}
+	]
+}
