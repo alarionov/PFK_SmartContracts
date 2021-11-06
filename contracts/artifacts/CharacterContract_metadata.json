@@ -834,11 +834,11 @@
 			]
 		},
 		"contracts/004_Equipment.sol": {
-			"keccak256": "0x188905d0f3374bff515dd3f4328cbd4698c862933399cc87357f1f048237f75a",
+			"keccak256": "0x2331e7f7bf22110c46fcff5ab33466f5e582ffca0c895ab2ce18d41d69db6a2c",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://6d3137ff1d81834bbe4aabbcb818b6ae95a1d388b7a6d6cc1f3e5292d56d3401",
-				"dweb:/ipfs/QmefkuPXp8EnBntKm2TX1zF8J2eMr6Lfmc3MGzyHBjC4VS"
+				"bzz-raw://752747c6b7b56f5193607194783efbb93ba4a9fb95b8f096a937980dc124f9af",
+				"dweb:/ipfs/QmaSuNsRGtQeGnmStwNQKGmYwDqeWBTSU4Usq2FpAKyuQA"
 			]
 		},
 		"contracts/abstract/BaseContract.sol": {

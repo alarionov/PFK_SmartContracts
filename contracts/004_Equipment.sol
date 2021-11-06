@@ -27,7 +27,10 @@ contract CharacterContract is BaseContract, IEquipmentContract, ERC721
     mapping(uint => uint) _itemToType;
     
     constructor() ERC721("Equipment", "EQPMT")
-    {}
+    {
+        _itemTypes[0] = ItemType({ id: 0, name: "Empty", bonusStats: ComputedStats.zeroStats() });
+        _itemToType[0] = 0;
+    }
     
     function setItemParameters(
         uint id, 
