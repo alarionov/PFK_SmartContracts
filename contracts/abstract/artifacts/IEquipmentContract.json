@@ -49,72 +49,10 @@
 		},
 		"gasEstimates": null,
 		"methodIdentifiers": {
-			"getBonusStats(uint256)": "b7d671cb",
 			"getInventory((uint256,uint256,uint256))": "888f04f2"
 		}
 	},
 	"abi": [
-		{
-			"inputs": [
-				{
-					"internalType": "uint256",
-					"name": "tokenId",
-					"type": "uint256"
-				}
-			],
-			"name": "getBonusStats",
-			"outputs": [
-				{
-					"components": [
-						{
-							"internalType": "uint256",
-							"name": "strength",
-							"type": "uint256"
-						},
-						{
-							"internalType": "uint256",
-							"name": "dexterity",
-							"type": "uint256"
-						},
-						{
-							"internalType": "uint256",
-							"name": "constitution",
-							"type": "uint256"
-						},
-						{
-							"internalType": "uint256",
-							"name": "luck",
-							"type": "uint256"
-						},
-						{
-							"internalType": "uint256",
-							"name": "armor",
-							"type": "uint256"
-						},
-						{
-							"internalType": "uint256",
-							"name": "attack",
-							"type": "uint256"
-						},
-						{
-							"internalType": "uint256",
-							"name": "health",
-							"type": "uint256"
-						},
-						{
-							"internalType": "uint256",
-							"name": "takenDamage",
-							"type": "uint256"
-						}
-					],
-					"internalType": "struct ComputedStats.Stats",
-					"name": "stats",
-					"type": "tuple"
-				}
-			],
-			"stateMutability": "view",
-			"type": "function"
-		},
 		{
 			"inputs": [
 				{

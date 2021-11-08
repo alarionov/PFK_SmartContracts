@@ -39,6 +39,7 @@ contract CharacterContract is BaseContract, ICharacterContract
             exists: true,
             contractAddress: contractAddress,
             tokenId: tokenId,
+            owner: address(0x0),
             level: 1,
             exp: 0,
             upgrades: 0,

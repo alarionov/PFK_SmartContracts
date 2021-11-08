@@ -37,5 +37,5 @@ interface IMapContract
 interface IEquipmentContract
 {
     function getInventory(Equipment memory equipment) external view returns(ComputedStats.Stats memory bonusStats);
-    function getBonusStats(uint tokenId) external view returns(ComputedStats.Stats memory stats);
+    function mintByGame(address player, uint itemType) external returns(uint tokenId);
 }

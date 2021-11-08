@@ -11,6 +11,19 @@
 				"type": "constructor"
 			},
 			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "eventCode",
+						"type": "uint256"
+					}
+				],
+				"name": "PostFightEvent",
+				"type": "event"
+			},
+			{
 				"inputs": [],
 				"name": "ACT1_MILESTONES_CONTACT_ADDRESS",
 				"outputs": [
@@ -26,6 +39,19 @@
 			{
 				"inputs": [],
 				"name": "CHARACTER_CONTRACT_ADDRESS",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "EQUIPMENT_CONTRACT",
 				"outputs": [
 					{
 						"internalType": "address",
@@ -115,6 +141,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "WOODEN_SHIELD_ID",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"components": [
@@ -132,6 +171,11 @@
 								"internalType": "uint256",
 								"name": "tokenId",
 								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "owner",
+								"type": "address"
 							},
 							{
 								"internalType": "uint256",
@@ -332,6 +376,11 @@
 								"type": "uint256"
 							},
 							{
+								"internalType": "address",
+								"name": "owner",
+								"type": "address"
+							},
+							{
 								"internalType": "uint256",
 								"name": "level",
 								"type": "uint256"
@@ -450,6 +499,11 @@
 								"internalType": "uint256",
 								"name": "tokenId",
 								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "owner",
+								"type": "address"
 							},
 							{
 								"internalType": "uint256",
@@ -591,6 +645,19 @@
 						"type": "address"
 					}
 				],
+				"name": "setEquipmentContractAddress",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_address",
+						"type": "address"
+					}
+				],
 				"name": "setFightContractAddress",
 				"outputs": [],
 				"stateMutability": "nonpayable",
@@ -664,6 +731,19 @@
 			{
 				"inputs": [
 					{
+						"internalType": "uint256",
+						"name": "_itemTypeId",
+						"type": "uint256"
+					}
+				],
+				"name": "setWoodenShieldId",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"components": [
 							{
 								"internalType": "bool",
@@ -679,6 +759,11 @@
 								"internalType": "uint256",
 								"name": "tokenId",
 								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "owner",
+								"type": "address"
 							},
 							{
 								"internalType": "uint256",
@@ -814,18 +899,18 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
 		"contracts/012_Act1_Sidequests.sol": {
-			"keccak256": "0xb2356e1ba574916d3fe2310dfd2d39ebddbac0c70f9e182678d77150697f0167",
+			"keccak256": "0x76dafea9ef063343a1a939e3145dfaf491e2e1a891c793c8be8bd92788d5b105",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://c9f0aacd4e5eb3697be77ac1bb730361536e51017e706a11c057f8ef4e19c070",
-				"dweb:/ipfs/QmYVdAAj1hXjFc5UEDyMD1FLmufEjXRNDZHdynqaTbfDtR"
+				"bzz-raw://31e62007dc0c31f4bd9d9eeec6947b81efa9c669a9831e063786d5c3a81e9b48",
+				"dweb:/ipfs/QmPPoDPSziszinHptpajiP2WJKFZsR8o9c5GcBYqaHF6n1"
 			]
 		},
 		"contracts/abstract/BaseContract.sol": {
@@ -837,43 +922,43 @@
 			]
 		},
 		"contracts/abstract/Interfaces.sol": {
-			"keccak256": "0xdab1a690e2712402f469f268795c0b6b4b51100271e0ec77ba2b225d1cf884e6",
+			"keccak256": "0x910f94f9b7a38ffb168a84a90b88feef59c8101ea482c222839188948a7a6dcb",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://9ae134b2a53fdb47259d21ea9faf896ae1c4b9e1b4aa3726f4c36a333725bba5",
-				"dweb:/ipfs/QmRs8V629QATjySLNVpjz2DeCfnoHaJq5YaE1GzRMjoxgJ"
+				"bzz-raw://f533bc44f1b66ca7b157ae37ac5f5c5db1a14ce21addb040ce378e2e527918bb",
+				"dweb:/ipfs/QmNuQb9pU6gyvEbcPNE6WfciybCqjXxqo8N7rGULqBQA13"
 			]
 		},
 		"contracts/abstract/MapContract.sol": {
-			"keccak256": "0x71d01db96a40586d75ea5e1f4592b988f3aa722f170eda879e31b0f79e3321e7",
+			"keccak256": "0x4a786705cf5cf776fd82103d696f55be66c15ff3fa6cb0e7f4617d53353255cf",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e465f155a14a1424ef3e8542aad3edc381f228b5adfdded3e3003236eea68bc8",
-				"dweb:/ipfs/QmYEWJp9NpbysLdhkeuV81dR1AdyBr862HAjGpe9YNmz3U"
+				"bzz-raw://91d96435a7600aec2baa5ad3270aefbc94e3112e5363c9115ee5a7bc5235987d",
+				"dweb:/ipfs/QmYAEC11GTmsPJA9btfBKBB6Ca47ujFtX3BwpnJfDtwZzv"
 			]
 		},
 		"contracts/abstract/Permissions.sol": {
-			"keccak256": "0x1b78b6b2f05e83064aa9345825e2555f06f02761e7bc67b1115348fc1f9147ce",
+			"keccak256": "0x974cb85e1aabe089424e0a43e337a54d7aa1a7b7a3beba7f3bbff8c99b93108b",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://79a95801ec1eec19721ca6b1fe2e485d4df3e8543999202c9ee86a627c6d3e41",
-				"dweb:/ipfs/QmWf4VHcLDqTsxxsPq7prJbfFjfxrXsHD4VEZviTk7R3QS"
+				"bzz-raw://59ef5acfdbd411afeb3bad1b93c426ce0b3f6ae9c10c686df824362ba090e69e",
+				"dweb:/ipfs/QmPgD4xkW9VGn5cGxfFkU9Dd7YqWdqnvxJSWEoVgsZuQ9f"
 			]
 		},
 		"contracts/abstract/Structures.sol": {
-			"keccak256": "0x2a7d27547dd347dc8989edebae84911e28fa84dce4d1688d48f082009af1f773",
+			"keccak256": "0x728a77052b900215950c6dc4a40068e0cc638f0e4f8fa331cb5abb879f617095",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://25e6c08e5e64f418052858ad3e0ef072cfda26a984df9e721a6e68b513bfef10",
-				"dweb:/ipfs/QmTjQAtHVFWFoncKpDpUg3Jrg7jzB3yrnvLM6TWVDzsr2x"
+				"bzz-raw://795344f7426c7275a0586c610f9e95a7aa5ac610b7a0dcd5124bcc1597808846",
+				"dweb:/ipfs/QmT91Byf27K7QVLMGpWnhyXfJaDo1qAKEni4fm6cUPe8PM"
 			]
 		},
 		"contracts/libraries/ComputedStats.sol": {
-			"keccak256": "0xcc81ddcbf3fb1047990f243d8cd9e78c187af962e4eefc87ee08ba00a9c34ec0",
+			"keccak256": "0x594078ed7d10c96a752b08c9f876c14d8ea3ffb197d8347c1ab5056fcd03070b",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://75ccfbd45c8848abd6bcf2803f52889c69142213e87f8c74784a9ae5f6a4d72f",
-				"dweb:/ipfs/QmWBEtyBN4a1KwsUD3rPeMpV5XNGLE1YsoAmPR88hebMFp"
+				"bzz-raw://d74c620123d005e257c4162a7e274b41868f254f15ffe4657b876694cf374fa9",
+				"dweb:/ipfs/QmYNFa6QprwJmCuYbXczNXjkhNYAJGNbncGeLU7Jnv8gQm"
 			]
 		},
 		"contracts/libraries/Utils.sol": {

@@ -11,6 +11,9 @@ contract Permissions
     address public GAME_MANAGER_CONTRACT_ADDRESS = address(0x0);
     address public CHARACTER_CONTRACT_ADDRESS = address(0x0);
     address public FIGHT_CONTRACT_ADDRESS = address(0x0);
+    address public EQUIPMENT_CONTRACT = address(0x0);
+    
+    mapping(address => bool) public MAP_CONTRACTS;
     
     modifier onlyGM
     {
@@ -36,7 +39,8 @@ contract Permissions
             msg.sender == GAME_MASTER ||
             msg.sender == GAME_MANAGER_CONTRACT_ADDRESS ||
             msg.sender == CHARACTER_CONTRACT_ADDRESS ||
-            msg.sender == FIGHT_CONTRACT_ADDRESS,
+            msg.sender == FIGHT_CONTRACT_ADDRESS ||
+            MAP_CONTRACTS[msg.sender],
             "Only game contracts can call this method");
         _;
     }
@@ -66,4 +70,8 @@ contract Permissions
         CHARACTER_CONTRACT_ADDRESS = _address;
     } 
     
+    function setEquipmentContractAddress(address _address) public onlyGM
+    {
+        EQUIPMENT_CONTRACT = _address;
+    }
 }

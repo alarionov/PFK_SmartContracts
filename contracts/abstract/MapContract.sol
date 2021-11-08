@@ -10,6 +10,8 @@ abstract contract MapContract is IMapContract, BaseContract
 {
     uint public MAX_LEVEL_INDEX;
     
+    event PostFightEvent(uint eventCode);
+    
     modifier validIndex(uint index)
     {
         require(index <= MAX_LEVEL_INDEX, "Invalid level index");

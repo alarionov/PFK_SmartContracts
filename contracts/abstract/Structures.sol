@@ -26,6 +26,7 @@ struct Character
     
     address contractAddress;
     uint tokenId;
+    address owner;
     
     uint level;
     uint exp;

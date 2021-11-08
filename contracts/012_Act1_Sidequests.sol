@@ -9,7 +9,16 @@ import "./libraries/Utils.sol";
 
 contract Act1Sidequests is MapContract
 {
+    enum Events
+    {
+        SHIELD_REWARD
+    }
+    
     address public ACT1_MILESTONES_CONTACT_ADDRESS;
+    
+    uint public WOODEN_SHIELD_ID;
+    mapping(uint => bool) _woodenShieldClaimed;
+    
     
     uint[] private _cooldowns = [1,2,3,4,5,6];
     mapping(uint => uint[]) private _activeAfter;
@@ -28,6 +37,17 @@ contract Act1Sidequests is MapContract
         _cooldowns = newCooldowns;
     }
     
+    function setWoodenShieldId(uint _itemTypeId) public onlyGame
+    {
+        WOODEN_SHIELD_ID = _itemTypeId;
+    }
+    
+    function _rewardWoodenShield(address playerAddress) private
+    {
+        IEquipmentContract equipmentContract = IEquipmentContract(EQUIPMENT_CONTRACT);
+        emit PostFightEvent(uint(Events.SHIELD_REWARD));
+    }
+    
     function getProgress(Character memory character) public pure override(IMapContract) returns(uint)
     {
         return 0;
@@ -43,6 +63,12 @@ contract Act1Sidequests is MapContract
     {
         uint hash = Utils.getHash(character);
         _activeAfter[hash][index] = block.number + _cooldowns[index];
+        
+        if (!_woodenShieldClaimed[hash] && victory && WOODEN_SHIELD_ID > 0)
+        {
+            _rewardWoodenShield(character.owner);
+            _woodenShieldClaimed[hash] = true;
+        }
     }
     
     function hasAccess(Character memory character, uint index) public view override(IMapContract) returns(bool)
