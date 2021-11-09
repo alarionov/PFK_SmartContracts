@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.9+commit.e5eed63a"
+		"version": "0.8.10+commit.fc410830"
 	},
 	"language": "Solidity",
 	"output": {
@@ -335,130 +335,6 @@
 					}
 				],
 				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"components": [
-							{
-								"internalType": "bool",
-								"name": "exists",
-								"type": "bool"
-							},
-							{
-								"internalType": "address",
-								"name": "contractAddress",
-								"type": "address"
-							},
-							{
-								"internalType": "uint256",
-								"name": "tokenId",
-								"type": "uint256"
-							},
-							{
-								"internalType": "address",
-								"name": "owner",
-								"type": "address"
-							},
-							{
-								"internalType": "uint256",
-								"name": "level",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "exp",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "upgrades",
-								"type": "uint256"
-							},
-							{
-								"components": [
-									{
-										"internalType": "uint256",
-										"name": "strength",
-										"type": "uint256"
-									},
-									{
-										"internalType": "uint256",
-										"name": "dexterity",
-										"type": "uint256"
-									},
-									{
-										"internalType": "uint256",
-										"name": "constitution",
-										"type": "uint256"
-									},
-									{
-										"internalType": "uint256",
-										"name": "luck",
-										"type": "uint256"
-									},
-									{
-										"internalType": "uint256",
-										"name": "armor",
-										"type": "uint256"
-									},
-									{
-										"internalType": "uint256",
-										"name": "attack",
-										"type": "uint256"
-									},
-									{
-										"internalType": "uint256",
-										"name": "health",
-										"type": "uint256"
-									},
-									{
-										"internalType": "uint256",
-										"name": "takenDamage",
-										"type": "uint256"
-									}
-								],
-								"internalType": "struct ComputedStats.Stats",
-								"name": "stats",
-								"type": "tuple"
-							},
-							{
-								"components": [
-									{
-										"internalType": "uint256",
-										"name": "armorSetId",
-										"type": "uint256"
-									},
-									{
-										"internalType": "uint256",
-										"name": "weaponSetId",
-										"type": "uint256"
-									},
-									{
-										"internalType": "uint256",
-										"name": "shieldId",
-										"type": "uint256"
-									}
-								],
-								"internalType": "struct Equipment",
-								"name": "equipment",
-								"type": "tuple"
-							}
-						],
-						"internalType": "struct Character",
-						"name": "character",
-						"type": "tuple"
-					},
-					{
-						"internalType": "uint256",
-						"name": "exp",
-						"type": "uint256"
-					}
-				],
-				"name": "addExp",
-				"outputs": [],
-				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -832,25 +708,6 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
-						"name": "level",
-						"type": "uint256"
-					}
-				],
-				"name": "toNextLevel",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "amount",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
 						"internalType": "address",
 						"name": "contractAddress",
 						"type": "address"
@@ -907,11 +764,11 @@
 	},
 	"sources": {
 		"contracts/002_CharacterContract.sol": {
-			"keccak256": "0xef108c5a2172bcd7486f0d9f52aa309cb04da0e1402ac371ecd85c815ae04baf",
+			"keccak256": "0x8522774aee3e9387280993d14709d649f2aec816528c60cc4fdf7635ef219b90",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://d192b0d52d719a0399e65ff9e350af7d508ec160b84092210559dd528c84c2a0",
-				"dweb:/ipfs/QmWkSXre6r2BTXMtJYNz585b5fSnsP7rmNwzqN4ctoq2kE"
+				"bzz-raw://9c2cb0e2bdcf0d598b95539f27ee2f050bfca8a57b3fb95677408a0d058a6d9c",
+				"dweb:/ipfs/QmP9pq9xwVoQtnJFzhnDpNeWDHQPWmQMyypFy3Z1Jg8dVd"
 			]
 		},
 		"contracts/abstract/BaseContract.sol": {
@@ -923,11 +780,11 @@
 			]
 		},
 		"contracts/abstract/Interfaces.sol": {
-			"keccak256": "0x32a0766dbedfdbfd3abfe6036f3d6599e3ddd2c68c3913c9746e3004de5a82d3",
+			"keccak256": "0x429852a523073ee703846b96f57442518ca878b6dd06470a688a13bf3ecfe8ad",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://5d2d44238fb936c244284edf590689d286071e49ee801e99da7a14b4e533803a",
-				"dweb:/ipfs/QmSpGbr2ZNHTUi8HSUnnPMedKwguSJEY8xLLJU4vF21gzF"
+				"bzz-raw://42727b5895d3b49e8c1e9b3590d2e5b18c4eedcc0e50cf9de27627a417c253f7",
+				"dweb:/ipfs/QmcTwhJKtyCLoi6JAdK6hK6h8rgEMM5b4cFXkpubY2MnLb"
 			]
 		},
 		"contracts/abstract/Permissions.sol": {

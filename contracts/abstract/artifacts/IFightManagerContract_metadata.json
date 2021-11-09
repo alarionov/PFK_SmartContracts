@@ -6,15 +6,30 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [],
-				"name": "random",
-				"outputs": [
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "mapContractAddress",
+						"type": "address"
+					},
 					{
 						"internalType": "uint256",
-						"name": "seed",
+						"name": "index",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "characterContractAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "characterId",
 						"type": "uint256"
 					}
 				],
+				"name": "conductFight",
+				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			}
@@ -32,7 +47,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/abstract/Interfaces.sol": "IRandomContract"
+			"contracts/abstract/Interfaces.sol": "IFightManagerContract"
 		},
 		"evmVersion": "london",
 		"libraries": {},

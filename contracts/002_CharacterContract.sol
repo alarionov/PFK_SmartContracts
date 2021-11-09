@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.10;
 
 import "./abstract/Structures.sol";
 import "./abstract/Interfaces.sol";
@@ -17,8 +17,6 @@ contract CharacterContract is BaseContract, ICharacterContract
     
     mapping(address => mapping(uint => Character)) private _characters;
     
-    uint[] private _tnl = [6, 9, 9, 12, 12, 15, 15, 18, 18, 18, 21, 21, 21, 21, 24, 24, 24, 24, 27, 27, 27, 27, 30, 30, 30, 30, 30, 33, 33, 33, 33, 33, 33, 36, 36, 36, 36, 36, 36, 39, 39, 39, 39, 39, 39, 42, 42, 42, 42, 42, 42, 42, 45, 45, 45, 45, 45, 45, 45, 45, 48, 48, 48, 48, 48, 48, 48, 48, 51, 51, 51, 51, 51, 51, 51, 51, 54, 54, 54, 54, 54, 54, 54, 54, 54, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 72, 72, 72, 72, 72, 72, 72, 72, 72, 72, 72, 72, 80];
-
     modifier upgradable(address player, address contractAddress, uint tokenId)
     {
         Character memory character = _characters[contractAddress][tokenId];
@@ -63,21 +61,6 @@ contract CharacterContract is BaseContract, ICharacterContract
     function getCharacter(address contractAddress, uint tokenId) public view override(ICharacterContract) returns (Character memory character)
     {
         character = _getStoredOrDefaultCharacter(contractAddress, tokenId);
-    }
-    
-    function toNextLevel(uint level) public view returns(uint amount)
-    {
-        require(level > 0, "Level should be greater than zero");
-        
-        if (level < _tnl.length)
-        { 
-            amount = _tnl[level - 1];
-        }
-        else
-        {
-            amount = _tnl[_tnl.length - 1]  + 10 * (level - _tnl.length);    
-        }
-        
     }
     
     /* Upgrades */
@@ -151,29 +134,6 @@ contract CharacterContract is BaseContract, ICharacterContract
         {
             character.stats.armor = GameMath.modify(character.stats.armor, value, sign);
         }
-    }
-    
-    function addExp(Character memory character, uint exp) public override(ICharacterContract) onlyGame 
-    {
-        if (exp == 0) return;
-        
-        character.exp += exp;
-        
-        while (character.exp >= toNextLevel(character.level))
-        {
-            character.exp -= toNextLevel(character.level);
-            character.level += 1;
-            character.upgrades += 1;
-            
-            emit LevelUp(
-                character.level, 
-                character.exp,
-                toNextLevel(character.level),
-                1,
-                character.upgrades);
-        }
-        
-        _saveCharacter(character);
     }
     
     function save(Character memory character) public override(ICharacterContract) onlyGame

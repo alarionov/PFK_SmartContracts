@@ -86,9 +86,11 @@ let NONCE = 0;
         
         const contracts = {
             "RandomContract": null,
-            "GameManager": null,
             "CharacterContract": null,
             "FightContract": null,
+            "FightManagerContract": null,
+            "EquipmentContract": null,
+            "EquipmentManagerContract": null,
             "Act1Milestones": null,
             "Act1Sidequests": null
         };

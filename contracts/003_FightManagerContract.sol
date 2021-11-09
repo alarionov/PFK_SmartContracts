@@ -9,10 +9,13 @@ import "./abstract/Structures.sol";
 import "./abstract/Interfaces.sol";
 import "./abstract/BaseContract.sol";
 
-contract GameManager is BaseContract, IGameManagerContract
+import "./libraries/Experience.sol";
+
+contract FightManagerContract is BaseContract, IFightManagerContract
 {
     using EnumerableSet for EnumerableSet.UintSet;
     using ComputedStats for ComputedStats.Stats;
+    using Experience for Character;
     
     mapping(address => bool) private _approvedCharacterContracts;
     
@@ -32,7 +35,7 @@ contract GameManager is BaseContract, IGameManagerContract
     /* battle */
     function conductFight(address mapContractAddress, uint index, address characterContractAddress, uint characterId) 
         public
-        override(IGameManagerContract)
+        override(IFightManagerContract)
         auth(msg.sender, characterContractAddress, characterId)
     {
         ICharacterContract characterContract = ICharacterContract(CHARACTER_CONTRACT_ADDRESS);
@@ -48,8 +51,9 @@ contract GameManager is BaseContract, IGameManagerContract
     
         Fight memory fight = fightContract.conductFight(character, enemies);
     
-        characterContract.addExp(characterContractAddress, characterId, fight.exp);
+        character.addExp(fight.exp);
         
+        characterContract.save(character);
         mapContract.update(character, index, fight.victory);
     }
     

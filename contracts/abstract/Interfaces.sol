@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.10;
 
 import "./Structures.sol";
 import "../libraries/ComputedStats.sol";
@@ -10,21 +10,20 @@ interface IRandomContract
      function random() external returns(uint seed);
 }
 
-interface IGameManagerContract
-{
-    function conductFight(address mapContractAddress, uint index, address characterContractAddress, uint characterId) external;
-}
-
 interface ICharacterContract
 {
     function getCharacter(address contractaddress, uint tokenId) external returns (Character memory character);
-    function addExp(Character memory character, uint exp) external;
     function save(Character memory character) external;
 }
 
 interface IFightContract
 {
     function conductFight(Character memory character, Enemy[] memory enemies) external returns (Fight memory); 
+}
+
+interface IFightManagerContract
+{
+    function conductFight(address mapContractAddress, uint index, address characterContractAddress, uint characterId) external;
 }
 
 interface IMapContract
