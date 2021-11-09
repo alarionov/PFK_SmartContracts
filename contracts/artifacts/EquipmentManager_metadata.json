@@ -6,6 +6,116 @@
 	"output": {
 		"abi": [
 			{
+				"inputs": [],
+				"name": "CHARACTER_CONTRACT_ADDRESS",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "EQUIPMENT_CONTRACT",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "FIGHT_CONTRACT_ADDRESS",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "GAME_MANAGER_CONTRACT_ADDRESS",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "GAME_MASTER",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "MAP_CONTRACTS",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "RANDOM_CONTRACT_ADDRESS",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "VAULT",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"components": [
@@ -119,12 +229,17 @@
 						"type": "tuple"
 					},
 					{
+						"internalType": "enum ItemSlot",
+						"name": "slot",
+						"type": "uint8"
+					},
+					{
 						"internalType": "uint256",
-						"name": "exp",
+						"name": "itemId",
 						"type": "uint256"
 					}
 				],
-				"name": "addExp",
+				"name": "equip",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -133,129 +248,90 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "contractaddress",
+						"name": "_address",
 						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "tokenId",
-						"type": "uint256"
 					}
 				],
-				"name": "getCharacter",
-				"outputs": [
+				"name": "setCharacterContractAddress",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
 					{
-						"components": [
-							{
-								"internalType": "bool",
-								"name": "exists",
-								"type": "bool"
-							},
-							{
-								"internalType": "address",
-								"name": "contractAddress",
-								"type": "address"
-							},
-							{
-								"internalType": "uint256",
-								"name": "tokenId",
-								"type": "uint256"
-							},
-							{
-								"internalType": "address",
-								"name": "owner",
-								"type": "address"
-							},
-							{
-								"internalType": "uint256",
-								"name": "level",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "exp",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "upgrades",
-								"type": "uint256"
-							},
-							{
-								"components": [
-									{
-										"internalType": "uint256",
-										"name": "strength",
-										"type": "uint256"
-									},
-									{
-										"internalType": "uint256",
-										"name": "dexterity",
-										"type": "uint256"
-									},
-									{
-										"internalType": "uint256",
-										"name": "constitution",
-										"type": "uint256"
-									},
-									{
-										"internalType": "uint256",
-										"name": "luck",
-										"type": "uint256"
-									},
-									{
-										"internalType": "uint256",
-										"name": "armor",
-										"type": "uint256"
-									},
-									{
-										"internalType": "uint256",
-										"name": "attack",
-										"type": "uint256"
-									},
-									{
-										"internalType": "uint256",
-										"name": "health",
-										"type": "uint256"
-									},
-									{
-										"internalType": "uint256",
-										"name": "takenDamage",
-										"type": "uint256"
-									}
-								],
-								"internalType": "struct ComputedStats.Stats",
-								"name": "stats",
-								"type": "tuple"
-							},
-							{
-								"components": [
-									{
-										"internalType": "uint256",
-										"name": "armorSetId",
-										"type": "uint256"
-									},
-									{
-										"internalType": "uint256",
-										"name": "weaponSetId",
-										"type": "uint256"
-									},
-									{
-										"internalType": "uint256",
-										"name": "shieldId",
-										"type": "uint256"
-									}
-								],
-								"internalType": "struct Equipment",
-								"name": "equipment",
-								"type": "tuple"
-							}
-						],
-						"internalType": "struct Character",
-						"name": "character",
-						"type": "tuple"
+						"internalType": "address",
+						"name": "_address",
+						"type": "address"
 					}
 				],
+				"name": "setEquipmentContractAddress",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_address",
+						"type": "address"
+					}
+				],
+				"name": "setFightContractAddress",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_address",
+						"type": "address"
+					}
+				],
+				"name": "setGMContractAddress",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newGM",
+						"type": "address"
+					}
+				],
+				"name": "setGameMasterAddress",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newAddress",
+						"type": "address"
+					}
+				],
+				"name": "setRandomContractAddress",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_address",
+						"type": "address"
+					}
+				],
+				"name": "setVaultAddress",
+				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
@@ -371,9 +447,21 @@
 						"internalType": "struct Character",
 						"name": "character",
 						"type": "tuple"
+					},
+					{
+						"internalType": "enum ItemSlot",
+						"name": "slot",
+						"type": "uint8"
 					}
 				],
-				"name": "save",
+				"name": "uneqip",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "withdraw",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -392,7 +480,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/abstract/Interfaces.sol": "ICharacterContract"
+			"contracts/005_EquipmentManagerContract.sol": "EquipmentManager"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -406,12 +494,36 @@
 		"remappings": []
 	},
 	"sources": {
+		"contracts/005_EquipmentManagerContract.sol": {
+			"keccak256": "0xb40daff0be32f625a4f41c881262ef549c0a14b965010a1266cb1423d65181e9",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://a40d42b27fa8dc31c38631c14d901d8404d62078bb3361eec35edd4c17674b3d",
+				"dweb:/ipfs/QmWZqMTZtY94QmMYY9ympM4Jta8Wu2dhnX8WPpzQTJzGAY"
+			]
+		},
+		"contracts/abstract/BaseContract.sol": {
+			"keccak256": "0xfe535c78e7521bbeacea8378c5464fcf703d97dc31bd1c0484379ceb69dd5149",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://06513ffb3e31fbd331ca1f112390bb0472df6ff559b5ede7142ef98f7f20c36e",
+				"dweb:/ipfs/QmSSyCNFyWFjX1c1q8JrHbvEhned6MK4rhfN8bEJsQeX8K"
+			]
+		},
 		"contracts/abstract/Interfaces.sol": {
 			"keccak256": "0x6adfdd0ce972c39af1864662edaf609ad8937062bf0df0ac287f28f257df32bb",
 			"license": "MIT",
 			"urls": [
 				"bzz-raw://4b120609d0b0242857af39ba0a3b3cdc731ca444f500f57fe6271ca29ef42794",
 				"dweb:/ipfs/QmaZZgir1y5kv7cRavVv7BBeVk3CLMakFZBZqNExMKHQYB"
+			]
+		},
+		"contracts/abstract/Permissions.sol": {
+			"keccak256": "0x8a9577c8dc727d6f5cd1118a9f773e0f9b36bde8ff51e933e84e61504a9a4af2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://777e65897adac2c59bf6a3a694e5da3d3b516444d9ebc0003dad7c49fed984ca",
+				"dweb:/ipfs/QmVpHVWavDEVfrvWVV5oss1WrQX1jJJiv3vhtVruCc2V9a"
 			]
 		},
 		"contracts/abstract/Structures.sol": {

@@ -50,9 +50,9 @@
 		"gasEstimates": null,
 		"methodIdentifiers": {
 			"getEnemies(uint256)": "2f2ddf54",
-			"getProgress((bool,address,uint256,uint256,uint256,uint256,(uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256),(uint256,uint256,uint256)))": "fae2c19b",
-			"hasAccess((bool,address,uint256,uint256,uint256,uint256,(uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256),(uint256,uint256,uint256)),uint256)": "14e8cd99",
-			"update((bool,address,uint256,uint256,uint256,uint256,(uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256),(uint256,uint256,uint256)),uint256,bool)": "3ee52721"
+			"getProgress((bool,address,uint256,address,uint256,uint256,uint256,(uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256),(uint256,uint256,uint256)))": "edd5c519",
+			"hasAccess((bool,address,uint256,address,uint256,uint256,uint256,(uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256),(uint256,uint256,uint256)),uint256)": "5d9c7467",
+			"update((bool,address,uint256,address,uint256,uint256,uint256,(uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256),(uint256,uint256,uint256)),uint256,bool)": "45e4394e"
 		}
 	},
 	"abi": [
@@ -152,6 +152,11 @@
 							"internalType": "uint256",
 							"name": "tokenId",
 							"type": "uint256"
+						},
+						{
+							"internalType": "address",
+							"name": "owner",
+							"type": "address"
 						},
 						{
 							"internalType": "uint256",
@@ -272,6 +277,11 @@
 							"internalType": "uint256",
 							"name": "tokenId",
 							"type": "uint256"
+						},
+						{
+							"internalType": "address",
+							"name": "owner",
+							"type": "address"
 						},
 						{
 							"internalType": "uint256",
@@ -397,6 +407,11 @@
 							"internalType": "uint256",
 							"name": "tokenId",
 							"type": "uint256"
+						},
+						{
+							"internalType": "address",
+							"name": "owner",
+							"type": "address"
 						},
 						{
 							"internalType": "uint256",

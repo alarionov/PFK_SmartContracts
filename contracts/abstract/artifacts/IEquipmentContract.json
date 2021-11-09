@@ -49,10 +49,35 @@
 		},
 		"gasEstimates": null,
 		"methodIdentifiers": {
-			"getInventory((uint256,uint256,uint256))": "888f04f2"
+			"forcedTransfer(address,address,uint256)": "9fc1d0e7",
+			"getInventory((uint256,uint256,uint256))": "888f04f2",
+			"mintByGame(address,uint256)": "3a181ed3"
 		}
 	},
 	"abi": [
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "from",
+					"type": "address"
+				},
+				{
+					"internalType": "address",
+					"name": "to",
+					"type": "address"
+				},
+				{
+					"internalType": "uint256",
+					"name": "itemId",
+					"type": "uint256"
+				}
+			],
+			"name": "forcedTransfer",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
 		{
 			"inputs": [
 				{
@@ -129,6 +154,30 @@
 				}
 			],
 			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "player",
+					"type": "address"
+				},
+				{
+					"internalType": "uint256",
+					"name": "itemType",
+					"type": "uint256"
+				}
+			],
+			"name": "mintByGame",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "tokenId",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "nonpayable",
 			"type": "function"
 		}
 	]

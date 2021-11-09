@@ -153,14 +153,9 @@ contract CharacterContract is BaseContract, ICharacterContract
         }
     }
     
-    function addExp(address contractAddress, uint tokenId, uint exp) 
-        external 
-        override(ICharacterContract) 
-        onlyGame 
+    function addExp(Character memory character, uint exp) public override(ICharacterContract) onlyGame 
     {
         if (exp == 0) return;
-        
-        Character memory character = _getStoredOrDefaultCharacter(contractAddress, tokenId);
         
         character.exp += exp;
         
@@ -178,6 +173,11 @@ contract CharacterContract is BaseContract, ICharacterContract
                 character.upgrades);
         }
         
+        _saveCharacter(character);
+    }
+    
+    function save(Character memory character) public override(ICharacterContract) onlyGame
+    {
         _saveCharacter(character);
     }
 }

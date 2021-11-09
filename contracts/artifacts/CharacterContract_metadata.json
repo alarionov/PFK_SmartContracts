@@ -14,75 +14,217 @@
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "owner",
-						"type": "address"
-					},
-					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "approved",
-						"type": "address"
-					},
-					{
-						"indexed": true,
+						"indexed": false,
 						"internalType": "uint256",
-						"name": "tokenId",
+						"name": "level",
 						"type": "uint256"
-					}
-				],
-				"name": "Approval",
-				"type": "event"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "owner",
-						"type": "address"
-					},
-					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "operator",
-						"type": "address"
 					},
 					{
 						"indexed": false,
-						"internalType": "bool",
-						"name": "approved",
-						"type": "bool"
+						"internalType": "uint256",
+						"name": "exp",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "tnl",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "upgradesGiven",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "upgradesTotal",
+						"type": "uint256"
 					}
 				],
-				"name": "ApprovalForAll",
+				"name": "LevelUp",
 				"type": "event"
 			},
 			{
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "from",
-						"type": "address"
+						"components": [
+							{
+								"internalType": "bool",
+								"name": "exists",
+								"type": "bool"
+							},
+							{
+								"internalType": "address",
+								"name": "contractAddress",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "tokenId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "owner",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "level",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "exp",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "upgrades",
+								"type": "uint256"
+							},
+							{
+								"components": [
+									{
+										"internalType": "uint256",
+										"name": "strength",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "dexterity",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "constitution",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "luck",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "armor",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "attack",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "health",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "takenDamage",
+										"type": "uint256"
+									}
+								],
+								"internalType": "struct ComputedStats.Stats",
+								"name": "stats",
+								"type": "tuple"
+							},
+							{
+								"components": [
+									{
+										"internalType": "uint256",
+										"name": "armorSetId",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "weaponSetId",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "shieldId",
+										"type": "uint256"
+									}
+								],
+								"internalType": "struct Equipment",
+								"name": "equipment",
+								"type": "tuple"
+							}
+						],
+						"indexed": false,
+						"internalType": "struct Character",
+						"name": "newCharacter",
+						"type": "tuple"
+					}
+				],
+				"name": "NewCharacter",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "strength",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "dexterity",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "constitution",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "luck",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "armor",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "attack",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "health",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "takenDamage",
+								"type": "uint256"
+							}
+						],
+						"indexed": false,
+						"internalType": "struct ComputedStats.Stats",
+						"name": "newStats",
+						"type": "tuple"
 					},
 					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "to",
-						"type": "address"
-					},
-					{
-						"indexed": true,
+						"indexed": false,
 						"internalType": "uint256",
-						"name": "tokenId",
+						"name": "remainigUpgrades",
 						"type": "uint256"
 					}
 				],
-				"name": "Transfer",
+				"name": "NewStats",
 				"type": "event"
 			},
 			{
@@ -198,158 +340,41 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address",
-						"name": "to",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "tokenId",
-						"type": "uint256"
-					}
-				],
-				"name": "approve",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "owner",
-						"type": "address"
-					}
-				],
-				"name": "balanceOf",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "tokenId",
-						"type": "uint256"
-					}
-				],
-				"name": "getApproved",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
 						"components": [
 							{
+								"internalType": "bool",
+								"name": "exists",
+								"type": "bool"
+							},
+							{
+								"internalType": "address",
+								"name": "contractAddress",
+								"type": "address"
+							},
+							{
 								"internalType": "uint256",
-								"name": "armorSetId",
+								"name": "tokenId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "owner",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "level",
 								"type": "uint256"
 							},
 							{
 								"internalType": "uint256",
-								"name": "weaponSetId",
+								"name": "exp",
 								"type": "uint256"
 							},
 							{
 								"internalType": "uint256",
-								"name": "shieldId",
+								"name": "upgrades",
 								"type": "uint256"
-							}
-						],
-						"internalType": "struct Equipment",
-						"name": "equipment",
-						"type": "tuple"
-					}
-				],
-				"name": "getInventory",
-				"outputs": [
-					{
-						"components": [
-							{
-								"internalType": "uint256",
-								"name": "strength",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "dexterity",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "constitution",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "luck",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "armor",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "attack",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "health",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "takenDamage",
-								"type": "uint256"
-							}
-						],
-						"internalType": "struct ComputedStats.Stats",
-						"name": "bonusStats",
-						"type": "tuple"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "tokenId",
-						"type": "uint256"
-					}
-				],
-				"name": "getItem",
-				"outputs": [
-					{
-						"components": [
-							{
-								"internalType": "uint256",
-								"name": "id",
-								"type": "uint256"
-							},
-							{
-								"internalType": "string",
-								"name": "name",
-								"type": "string"
 							},
 							{
 								"components": [
@@ -395,12 +420,171 @@
 									}
 								],
 								"internalType": "struct ComputedStats.Stats",
-								"name": "bonusStats",
+								"name": "stats",
+								"type": "tuple"
+							},
+							{
+								"components": [
+									{
+										"internalType": "uint256",
+										"name": "armorSetId",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "weaponSetId",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "shieldId",
+										"type": "uint256"
+									}
+								],
+								"internalType": "struct Equipment",
+								"name": "equipment",
 								"type": "tuple"
 							}
 						],
-						"internalType": "struct CharacterContract.ItemType",
-						"name": "itemType",
+						"internalType": "struct Character",
+						"name": "character",
+						"type": "tuple"
+					},
+					{
+						"internalType": "uint256",
+						"name": "exp",
+						"type": "uint256"
+					}
+				],
+				"name": "addExp",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "contractAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "getCharacter",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "bool",
+								"name": "exists",
+								"type": "bool"
+							},
+							{
+								"internalType": "address",
+								"name": "contractAddress",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "tokenId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "owner",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "level",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "exp",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "upgrades",
+								"type": "uint256"
+							},
+							{
+								"components": [
+									{
+										"internalType": "uint256",
+										"name": "strength",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "dexterity",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "constitution",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "luck",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "armor",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "attack",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "health",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "takenDamage",
+										"type": "uint256"
+									}
+								],
+								"internalType": "struct ComputedStats.Stats",
+								"name": "stats",
+								"type": "tuple"
+							},
+							{
+								"components": [
+									{
+										"internalType": "uint256",
+										"name": "armorSetId",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "weaponSetId",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "shieldId",
+										"type": "uint256"
+									}
+								],
+								"internalType": "struct Equipment",
+								"name": "equipment",
+								"type": "tuple"
+							}
+						],
+						"internalType": "struct Character",
+						"name": "character",
 						"type": "tuple"
 					}
 				],
@@ -411,101 +595,26 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "owner",
-						"type": "address"
-					},
-					{
-						"internalType": "address",
-						"name": "operator",
-						"type": "address"
-					}
-				],
-				"name": "isApprovedForAll",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "player",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "itemType",
-						"type": "uint256"
-					}
-				],
-				"name": "mintByGame",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "tokenId",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "name",
-				"outputs": [
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "tokenId",
-						"type": "uint256"
-					}
-				],
-				"name": "ownerOf",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "from",
-						"type": "address"
-					},
-					{
-						"internalType": "address",
-						"name": "to",
+						"name": "contractAddress",
 						"type": "address"
 					},
 					{
 						"internalType": "uint256",
 						"name": "tokenId",
 						"type": "uint256"
+					},
+					{
+						"internalType": "enum StatType",
+						"name": "stat",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
 					}
 				],
-				"name": "safeTransferFrom",
+				"name": "modifyStats",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -513,45 +622,118 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address",
-						"name": "from",
-						"type": "address"
-					},
-					{
-						"internalType": "address",
-						"name": "to",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "tokenId",
-						"type": "uint256"
-					},
-					{
-						"internalType": "bytes",
-						"name": "_data",
-						"type": "bytes"
+						"components": [
+							{
+								"internalType": "bool",
+								"name": "exists",
+								"type": "bool"
+							},
+							{
+								"internalType": "address",
+								"name": "contractAddress",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "tokenId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "owner",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "level",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "exp",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "upgrades",
+								"type": "uint256"
+							},
+							{
+								"components": [
+									{
+										"internalType": "uint256",
+										"name": "strength",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "dexterity",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "constitution",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "luck",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "armor",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "attack",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "health",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "takenDamage",
+										"type": "uint256"
+									}
+								],
+								"internalType": "struct ComputedStats.Stats",
+								"name": "stats",
+								"type": "tuple"
+							},
+							{
+								"components": [
+									{
+										"internalType": "uint256",
+										"name": "armorSetId",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "weaponSetId",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "shieldId",
+										"type": "uint256"
+									}
+								],
+								"internalType": "struct Equipment",
+								"name": "equipment",
+								"type": "tuple"
+							}
+						],
+						"internalType": "struct Character",
+						"name": "character",
+						"type": "tuple"
 					}
 				],
-				"name": "safeTransferFrom",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "operator",
-						"type": "address"
-					},
-					{
-						"internalType": "bool",
-						"name": "approved",
-						"type": "bool"
-					}
-				],
-				"name": "setApprovalForAll",
+				"name": "save",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -624,49 +806,6 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
-						"name": "id",
-						"type": "uint256"
-					},
-					{
-						"internalType": "string",
-						"name": "name",
-						"type": "string"
-					},
-					{
-						"internalType": "uint256",
-						"name": "strength",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "dexterity",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "constitution",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "luck",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "armor",
-						"type": "uint256"
-					}
-				],
-				"name": "setItemParameters",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
 						"internalType": "address",
 						"name": "newAddress",
 						"type": "address"
@@ -693,48 +832,16 @@
 			{
 				"inputs": [
 					{
-						"internalType": "bytes4",
-						"name": "interfaceId",
-						"type": "bytes4"
-					}
-				],
-				"name": "supportsInterface",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "symbol",
-				"outputs": [
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
 						"internalType": "uint256",
-						"name": "index",
+						"name": "level",
 						"type": "uint256"
 					}
 				],
-				"name": "tokenByIndex",
+				"name": "toNextLevel",
 				"outputs": [
 					{
 						"internalType": "uint256",
-						"name": "",
+						"name": "amount",
 						"type": "uint256"
 					}
 				],
@@ -745,77 +852,21 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "owner",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "index",
-						"type": "uint256"
-					}
-				],
-				"name": "tokenOfOwnerByIndex",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "tokenId",
-						"type": "uint256"
-					}
-				],
-				"name": "tokenURI",
-				"outputs": [
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "totalSupply",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "from",
-						"type": "address"
-					},
-					{
-						"internalType": "address",
-						"name": "to",
+						"name": "contractAddress",
 						"type": "address"
 					},
 					{
 						"internalType": "uint256",
 						"name": "tokenId",
 						"type": "uint256"
+					},
+					{
+						"internalType": "enum StatType",
+						"name": "stat",
+						"type": "uint8"
 					}
 				],
-				"name": "transferFrom",
+				"name": "upgrade",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -830,56 +881,7 @@
 		],
 		"devdoc": {
 			"kind": "dev",
-			"methods": {
-				"approve(address,uint256)": {
-					"details": "See {IERC721-approve}."
-				},
-				"balanceOf(address)": {
-					"details": "See {IERC721-balanceOf}."
-				},
-				"getApproved(uint256)": {
-					"details": "See {IERC721-getApproved}."
-				},
-				"isApprovedForAll(address,address)": {
-					"details": "See {IERC721-isApprovedForAll}."
-				},
-				"name()": {
-					"details": "See {IERC721Metadata-name}."
-				},
-				"ownerOf(uint256)": {
-					"details": "See {IERC721-ownerOf}."
-				},
-				"safeTransferFrom(address,address,uint256)": {
-					"details": "See {IERC721-safeTransferFrom}."
-				},
-				"safeTransferFrom(address,address,uint256,bytes)": {
-					"details": "See {IERC721-safeTransferFrom}."
-				},
-				"setApprovalForAll(address,bool)": {
-					"details": "See {IERC721-setApprovalForAll}."
-				},
-				"supportsInterface(bytes4)": {
-					"details": "See {IERC165-supportsInterface}."
-				},
-				"symbol()": {
-					"details": "See {IERC721Metadata-symbol}."
-				},
-				"tokenByIndex(uint256)": {
-					"details": "See {IERC721Enumerable-tokenByIndex}."
-				},
-				"tokenOfOwnerByIndex(address,uint256)": {
-					"details": "See {IERC721Enumerable-tokenOfOwnerByIndex}."
-				},
-				"tokenURI(uint256)": {
-					"details": "See {IERC721Metadata-tokenURI}."
-				},
-				"totalSupply()": {
-					"details": "See {IERC721Enumerable-totalSupply}."
-				},
-				"transferFrom(address,address,uint256)": {
-					"details": "See {IERC721-transferFrom}."
-				}
-			},
+			"methods": {},
 			"version": 1
 		},
 		"userdoc": {
@@ -890,7 +892,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/004_Equipment.sol": "CharacterContract"
+			"contracts/002_CharacterContract.sol": "CharacterContract"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -904,108 +906,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"@openzeppelin/contracts/token/ERC721/ERC721.sol": {
-			"keccak256": "0x7d2b8ba4b256bfcac347991b75242f9bc37f499c5236af50cf09d0b35943dc0c",
+		"contracts/002_CharacterContract.sol": {
+			"keccak256": "0xef108c5a2172bcd7486f0d9f52aa309cb04da0e1402ac371ecd85c815ae04baf",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://d8eeaf6afe00229af4c232ca058bb08b7a24cc3886f0b387159ac49ffd8b5312",
-				"dweb:/ipfs/QmdnVKmDDWDvdRr6vtrxy3G6WafqA2TAhUZv1UFMsm4B4r"
-			]
-		},
-		"@openzeppelin/contracts/token/ERC721/IERC721.sol": {
-			"keccak256": "0xf101e8720213560fab41104d53b3cc7ba0456ef3a98455aa7f022391783144a0",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://3e7820bcf567e6892d937c3cb10db263a4042e446799bca602535868d822384e",
-				"dweb:/ipfs/QmPG2oeDjKncqsEeyYGjAN7CwAJmMgHterXGGnpzhha4z7"
-			]
-		},
-		"@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol": {
-			"keccak256": "0xd9517254724276e2e8de3769183c1f738f445f0095c26fd9b86d3c6687e887b9",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://0e604bcdcd5e5b2fb299ad09769cde6db19d5aa1929d1b5e939234a0f10d7eb8",
-				"dweb:/ipfs/Qmd8hXE3GZfBHuWx3RNiYgFW2ci7KvHtib8DiwzJ2dgo9V"
-			]
-		},
-		"@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol": {
-			"keccak256": "0x41dc7bf7f69c668eb98aa078c5140a4d3c3b097124ee4b6058a649ca99688300",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://621b0e2f8b95aa04707f3106f48a8c7cfab2d6fbe2dd8253e70b0b024daee683",
-				"dweb:/ipfs/QmTptvu7MJ6QcogPJUxkDEkdKm97KGTC28bhsZKu4sex4M"
-			]
-		},
-		"@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol": {
-			"keccak256": "0xa69205e5009601cf13be78b1e2f500e1e3b1d8012f22d966e63975273f602038",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://d919a0061e43f9878f6171b7f853cb92093805cd1160858c1884195a639b40a0",
-				"dweb:/ipfs/QmRZsS3EYuLp75nBym1QQ4y6aQXGew75wSbv1uwqkvouUK"
-			]
-		},
-		"@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol": {
-			"keccak256": "0xd32fb7f530a914b1083d10a6bed3a586f2451952fec04fe542bcc670a82f7ba5",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://af63ab940a34687c45f0ad84960b048fc5f49330c92ccb422db7822a444733b9",
-				"dweb:/ipfs/QmUShaQEu8HS1GjDnsMJQ8jkZEBrecn6NuDZ3pfjY1gVck"
-			]
-		},
-		"@openzeppelin/contracts/utils/Address.sol": {
-			"keccak256": "0x3336baae5cf23e94274d75336e2d412193be508504aee185e61dc7d58cd05c8a",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://39a05eec7083dfa0cc7e0cbfe6cd1bd085a340af1ede93fdff3ad047c5fb3d8e",
-				"dweb:/ipfs/QmVApz5fCUq2QC8gKTsNNdCmcedJ3ETHp68zR5N3WUKS4r"
-			]
-		},
-		"@openzeppelin/contracts/utils/Context.sol": {
-			"keccak256": "0x90565a39ae45c80f0468dc96c7b20d0afc3055f344c8203a0c9258239f350b9f",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://26e8b38a7ac8e7b4463af00cf7fff1bf48ae9875765bf4f7751e100124d0bc8c",
-				"dweb:/ipfs/QmWcsmkVr24xmmjfnBQZoemFniXjj3vwT78Cz6uqZW1Hux"
-			]
-		},
-		"@openzeppelin/contracts/utils/Counters.sol": {
-			"keccak256": "0x78450f4e3b722cce467b21e285f72ce5eaf361e9ba9dd2241a413926246773cd",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://f103065051300cd995fd4599ba91188d4071b92175b52f26110e02db091617c0",
-				"dweb:/ipfs/QmSyDz67R2HCypDE8Pacn3voVwxw9x17NM66q47YgBnGqc"
-			]
-		},
-		"@openzeppelin/contracts/utils/Strings.sol": {
-			"keccak256": "0x391d3ba97ab6856a16b225d6ee29617ad15ff00db70f3b4df1ab5ea33aa47c9d",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://d636ba90bbbeed04a1ea7fe9ec2466757e30fd38ba2ca173636dbf69a518735e",
-				"dweb:/ipfs/QmQwCB2BHnEuYR22PYt9HkpbgeFDhq4rHmaYqAZbX3WRC7"
-			]
-		},
-		"@openzeppelin/contracts/utils/introspection/ERC165.sol": {
-			"keccak256": "0x5718c5df9bd67ac68a796961df938821bb5dc0cd4c6118d77e9145afb187409b",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://d10e1d9b26042424789246603906ad06143bf9a928f4e99de8b5e3bdc662f549",
-				"dweb:/ipfs/Qmejonoaj5MLekPus229rJQHcC6E9dz2xorjHJR84fMfmn"
-			]
-		},
-		"@openzeppelin/contracts/utils/introspection/IERC165.sol": {
-			"keccak256": "0xa28007762d9da9db878dd421960c8cb9a10471f47ab5c1b3309bfe48e9e79ff4",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://796ab6e88af7bf0e78def0f059310c903af6a312b565344e0ff524a0f26e81c6",
-				"dweb:/ipfs/QmcsVgLgzWdor3UnAztUkXKNGcysm1MPneWksF72AvnwBx"
-			]
-		},
-		"contracts/004_Equipment.sol": {
-			"keccak256": "0x4dc9f12731b5c236876f862026f92f4e5c487fb149154d4bf76b4a1d992b4cef",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://3fae03bcaf14199b1d7f1d8287f8361de2fd0144d2736c40783ce26b3b56f2eb",
-				"dweb:/ipfs/QmPBSeEiGudUn77p1dgENyBpZmFHD9yvNvFwZUcq6cwQkF"
+				"bzz-raw://d192b0d52d719a0399e65ff9e350af7d508ec160b84092210559dd528c84c2a0",
+				"dweb:/ipfs/QmWkSXre6r2BTXMtJYNz585b5fSnsP7rmNwzqN4ctoq2kE"
 			]
 		},
 		"contracts/abstract/BaseContract.sol": {
@@ -1017,11 +923,11 @@
 			]
 		},
 		"contracts/abstract/Interfaces.sol": {
-			"keccak256": "0xeba1b1abf1d50aef20abd47349a801162bbd747feddbb8d99cbad64d60929c53",
+			"keccak256": "0x32a0766dbedfdbfd3abfe6036f3d6599e3ddd2c68c3913c9746e3004de5a82d3",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://c878d2ce41cd3c5626bc2a6372283fc79c6865635ce51cdde4acd97047b52f42",
-				"dweb:/ipfs/QmfPZ4P4peP6zkjGiKhRc97Pj8Pc7t3B9roMCr5Q9fwvbv"
+				"bzz-raw://5d2d44238fb936c244284edf590689d286071e49ee801e99da7a14b4e533803a",
+				"dweb:/ipfs/QmSpGbr2ZNHTUi8HSUnnPMedKwguSJEY8xLLJU4vF21gzF"
 			]
 		},
 		"contracts/abstract/Permissions.sol": {
@@ -1033,11 +939,11 @@
 			]
 		},
 		"contracts/abstract/Structures.sol": {
-			"keccak256": "0x728a77052b900215950c6dc4a40068e0cc638f0e4f8fa331cb5abb879f617095",
+			"keccak256": "0x6a4e25aa822ff27556a4876ef0fd44c7f954a51b433450115ec1ee1bf83200b4",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://795344f7426c7275a0586c610f9e95a7aa5ac610b7a0dcd5124bcc1597808846",
-				"dweb:/ipfs/QmT91Byf27K7QVLMGpWnhyXfJaDo1qAKEni4fm6cUPe8PM"
+				"bzz-raw://a83a62bfd3d1aaede80954555a0cee1994f993e180080ebda4a0afc4867c8008",
+				"dweb:/ipfs/QmehJsmBQiS9LSHscdUrAa67PeYG7dSMN7Xt143AR9X2Sx"
 			]
 		},
 		"contracts/libraries/ComputedStats.sol": {
@@ -1046,6 +952,14 @@
 			"urls": [
 				"bzz-raw://d74c620123d005e257c4162a7e274b41868f254f15ffe4657b876694cf374fa9",
 				"dweb:/ipfs/QmYNFa6QprwJmCuYbXczNXjkhNYAJGNbncGeLU7Jnv8gQm"
+			]
+		},
+		"contracts/libraries/GameMath.sol": {
+			"keccak256": "0x4a6367bc2b158d97351f54bfa3a54b5619f85fae379d17aa7fb92b461e56262a",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://1dc094cf20e7b5a8a91fb42cd5e9c2658ed20adbe35431f59b4d710733e332ba",
+				"dweb:/ipfs/QmWLn3kQshDDdY2jCdJ9K2UqzsWxU4dq2PxcZ6h4LxKKur"
 			]
 		}
 	},

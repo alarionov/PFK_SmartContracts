@@ -18,7 +18,8 @@ interface IGameManagerContract
 interface ICharacterContract
 {
     function getCharacter(address contractaddress, uint tokenId) external returns (Character memory character);
-    function addExp(address contractaddress, uint tokenId, uint exp) external;
+    function addExp(Character memory character, uint exp) external;
+    function save(Character memory character) external;
 }
 
 interface IFightContract
@@ -38,4 +39,11 @@ interface IEquipmentContract
 {
     function getInventory(Equipment memory equipment) external view returns(ComputedStats.Stats memory bonusStats);
     function mintByGame(address player, uint itemType) external returns(uint tokenId);
+    function forcedTransfer(address from, address to, uint itemId) external;
+}
+
+interface IEquipmentManagerContract
+{
+    function equip(Character memory character, ItemSlot slot, uint itemId) external;
+    function uneqip(Character memory character, ItemSlot slot) external;
 }

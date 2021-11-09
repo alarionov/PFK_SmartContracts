@@ -2,17 +2,15 @@
 
 pragma solidity ^0.8.9;
 
-import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 
-//import "./abstract/Structures.sol";
+import "./abstract/Structures.sol";
 import "./abstract/Interfaces.sol";
 import "./abstract/BaseContract.sol";
 
-//import "./libraries/GameMath.sol";
 import "./libraries/ComputedStats.sol";
 
-contract CharacterContract is BaseContract, IEquipmentContract, ERC721Enumerable
+contract EquipmentContract is BaseContract, IEquipmentContract, ERC721Enumerable
 {
     using ComputedStats for ComputedStats.Stats;
     
@@ -20,6 +18,7 @@ contract CharacterContract is BaseContract, IEquipmentContract, ERC721Enumerable
     {
         uint id;
         string name;
+        ItemSlot slot;
         ComputedStats.Stats bonusStats;
     }
 
@@ -37,13 +36,14 @@ contract CharacterContract is BaseContract, IEquipmentContract, ERC721Enumerable
     {
         EQUIPMENT_CONTRACT = address(this);
         
-        _itemTypes[0] = ItemType({ id: 0, name: "Empty", bonusStats: ComputedStats.zeroStats() });
+        _itemTypes[0] = ItemType({ id: 0, name: "Empty", slot: ItemSlot.Any, bonusStats: ComputedStats.zeroStats() });
         _itemToType[0] = 0;
     }
     
     function setItemParameters(
         uint id, 
         string memory name, 
+        ItemSlot slot,
         uint strength, 
         uint dexterity, 
         uint constitution, 
@@ -52,7 +52,7 @@ contract CharacterContract is BaseContract, IEquipmentContract, ERC721Enumerable
     ) public onlyGame
     {
         ComputedStats.Stats memory stats = ComputedStats.newStats(strength, dexterity, constitution, luck, armor);
-        _itemTypes[id] = ItemType({ id: id, name: name, bonusStats: stats });
+        _itemTypes[id] = ItemType({ id: id, name: name, slot: slot, bonusStats: stats });
     }
     
     function mintByGame(address player, uint itemType) public onlyGame returns(uint tokenId)
@@ -85,5 +85,18 @@ contract CharacterContract is BaseContract, IEquipmentContract, ERC721Enumerable
     function getItem(uint tokenId) public view existingToken(tokenId) returns(ItemType memory itemType)
     {
         itemType = _itemTypes[_itemToType[tokenId]];
+    }
+    
+    function forcedTransfer(address from, address to, uint itemId) public onlyGame
+    {
+        require(itemId != 0, "Invalid item id");
+        require(ownerOf(itemId) == address(from), "Invalid owner");
+        
+        _transfer(from, to, itemId);
+    }
+    
+    function itemTypeByItemId(uint itemId) private view returns(ItemType memory itemType)
+    {
+        itemType = _itemTypes[_itemToType[itemId]];
     }
 }

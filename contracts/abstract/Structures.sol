@@ -13,6 +13,14 @@ enum StatType
     Armor
 }
 
+enum ItemSlot
+{
+    Any,
+    Armor,
+    Weapon,
+    Shield
+}
+
 struct Equipment
 {
     uint armorSetId;
