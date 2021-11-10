@@ -9,21 +9,29 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "authContractAddress",
+						"name": "_address",
 						"type": "address"
 					}
 				],
-				"stateMutability": "nonpayable",
-				"type": "constructor"
+				"name": "role",
+				"outputs": [
+					{
+						"internalType": "enum AuthRoles",
+						"name": "_role",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
 			},
 			{
 				"inputs": [],
-				"name": "AUTH_CONTRACT_ADDRESS",
+				"name": "validate",
 				"outputs": [
 					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
+						"internalType": "bool",
+						"name": "result",
+						"type": "bool"
 					}
 				],
 				"stateMutability": "view",
@@ -43,7 +51,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/abstract/Permissions.sol": "Permissions"
+			"contracts/001_AuthContract.sol": "IAuthContract"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -63,14 +71,6 @@
 			"urls": [
 				"bzz-raw://ea8ac78360d7b324b49bec5b360c8cb308d83c8d98094c24ab76f1ab0748f8b1",
 				"dweb:/ipfs/QmbxpN4YnMF58vgrA5Ei1KCxC2GmNpjxb3wbmwcs6xqeZr"
-			]
-		},
-		"contracts/abstract/Permissions.sol": {
-			"keccak256": "0x391d6da95093d3671c88cd033a4076781b6e0152ef7b862afd21714d126b3889",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://477c3e7436c59aae2fb887b7720bad6914186a81ae892da904e9d50cd37240aa",
-				"dweb:/ipfs/QmTjoUMTP6Xs3aXGxspthfsnFvKJnJWjPu4CbT1eXXaF4W"
 			]
 		}
 	},

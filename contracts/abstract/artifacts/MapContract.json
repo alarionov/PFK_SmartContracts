@@ -49,69 +49,33 @@
 		},
 		"gasEstimates": null,
 		"methodIdentifiers": {
-			"CHARACTER_CONTRACT_ADDRESS()": "320b00d8",
-			"FIGHT_CONTRACT_ADDRESS()": "e1d38814",
-			"GAME_MANAGER_CONTRACT_ADDRESS()": "603eefa5",
-			"GAME_MASTER()": "99597b70",
+			"AUTH_CONTRACT_ADDRESS()": "4848d463",
 			"MAX_LEVEL_INDEX()": "859329a2",
 			"RANDOM_CONTRACT_ADDRESS()": "d3dd4f29",
-			"VAULT()": "411557d1",
 			"getEnemies(uint256)": "2f2ddf54",
-			"getProgress((bool,address,uint256,uint256,uint256,uint256,(uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256),(uint256,uint256,uint256)))": "fae2c19b",
-			"hasAccess((bool,address,uint256,uint256,uint256,uint256,(uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256),(uint256,uint256,uint256)),uint256)": "14e8cd99",
-			"setCharacterContractAddress(address)": "83499df6",
-			"setFightContractAddress(address)": "00a8b188",
-			"setGMContractAddress(address)": "1b915579",
-			"setGameMasterAddress(address)": "d8327b2f",
+			"getProgress((bool,address,uint256,address,uint256,uint256,uint256,(uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256),(uint256,uint256,uint256)))": "edd5c519",
+			"hasAccess((bool,address,uint256,address,uint256,uint256,uint256,(uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256),(uint256,uint256,uint256)),uint256)": "5d9c7467",
 			"setRandomContractAddress(address)": "d7050b05",
-			"setVaultAddress(address)": "85535cc5",
-			"update((bool,address,uint256,uint256,uint256,uint256,(uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256),(uint256,uint256,uint256)),uint256,bool)": "3ee52721",
-			"withdraw()": "3ccfd60b"
+			"update((bool,address,uint256,address,uint256,uint256,uint256,(uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256),(uint256,uint256,uint256)),uint256,bool)": "45e4394e"
 		}
 	},
 	"abi": [
 		{
-			"inputs": [],
-			"name": "CHARACTER_CONTRACT_ADDRESS",
-			"outputs": [
+			"anonymous": false,
+			"inputs": [
 				{
-					"internalType": "address",
-					"name": "",
-					"type": "address"
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "eventCode",
+					"type": "uint256"
 				}
 			],
-			"stateMutability": "view",
-			"type": "function"
+			"name": "PostFightEvent",
+			"type": "event"
 		},
 		{
 			"inputs": [],
-			"name": "FIGHT_CONTRACT_ADDRESS",
-			"outputs": [
-				{
-					"internalType": "address",
-					"name": "",
-					"type": "address"
-				}
-			],
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"inputs": [],
-			"name": "GAME_MANAGER_CONTRACT_ADDRESS",
-			"outputs": [
-				{
-					"internalType": "address",
-					"name": "",
-					"type": "address"
-				}
-			],
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"inputs": [],
-			"name": "GAME_MASTER",
+			"name": "AUTH_CONTRACT_ADDRESS",
 			"outputs": [
 				{
 					"internalType": "address",
@@ -138,19 +102,6 @@
 		{
 			"inputs": [],
 			"name": "RANDOM_CONTRACT_ADDRESS",
-			"outputs": [
-				{
-					"internalType": "address",
-					"name": "",
-					"type": "address"
-				}
-			],
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"inputs": [],
-			"name": "VAULT",
 			"outputs": [
 				{
 					"internalType": "address",
@@ -257,6 +208,11 @@
 							"internalType": "uint256",
 							"name": "tokenId",
 							"type": "uint256"
+						},
+						{
+							"internalType": "address",
+							"name": "owner",
+							"type": "address"
 						},
 						{
 							"internalType": "uint256",
@@ -379,6 +335,11 @@
 							"type": "uint256"
 						},
 						{
+							"internalType": "address",
+							"name": "owner",
+							"type": "address"
+						},
+						{
 							"internalType": "uint256",
 							"name": "level",
 							"type": "uint256"
@@ -488,76 +449,11 @@
 			"inputs": [
 				{
 					"internalType": "address",
-					"name": "_address",
-					"type": "address"
-				}
-			],
-			"name": "setCharacterContractAddress",
-			"outputs": [],
-			"stateMutability": "nonpayable",
-			"type": "function"
-		},
-		{
-			"inputs": [
-				{
-					"internalType": "address",
-					"name": "_address",
-					"type": "address"
-				}
-			],
-			"name": "setFightContractAddress",
-			"outputs": [],
-			"stateMutability": "nonpayable",
-			"type": "function"
-		},
-		{
-			"inputs": [
-				{
-					"internalType": "address",
-					"name": "_address",
-					"type": "address"
-				}
-			],
-			"name": "setGMContractAddress",
-			"outputs": [],
-			"stateMutability": "nonpayable",
-			"type": "function"
-		},
-		{
-			"inputs": [
-				{
-					"internalType": "address",
-					"name": "newGM",
-					"type": "address"
-				}
-			],
-			"name": "setGameMasterAddress",
-			"outputs": [],
-			"stateMutability": "nonpayable",
-			"type": "function"
-		},
-		{
-			"inputs": [
-				{
-					"internalType": "address",
 					"name": "newAddress",
 					"type": "address"
 				}
 			],
 			"name": "setRandomContractAddress",
-			"outputs": [],
-			"stateMutability": "nonpayable",
-			"type": "function"
-		},
-		{
-			"inputs": [
-				{
-					"internalType": "address",
-					"name": "_address",
-					"type": "address"
-				}
-			],
-			"name": "setVaultAddress",
 			"outputs": [],
 			"stateMutability": "nonpayable",
 			"type": "function"
@@ -580,6 +476,11 @@
 							"internalType": "uint256",
 							"name": "tokenId",
 							"type": "uint256"
+						},
+						{
+							"internalType": "address",
+							"name": "owner",
+							"type": "address"
 						},
 						{
 							"internalType": "uint256",
@@ -682,13 +583,6 @@
 				}
 			],
 			"name": "update",
-			"outputs": [],
-			"stateMutability": "nonpayable",
-			"type": "function"
-		},
-		{
-			"inputs": [],
-			"name": "withdraw",
 			"outputs": [],
 			"stateMutability": "nonpayable",
 			"type": "function"

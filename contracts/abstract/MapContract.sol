@@ -1,10 +1,17 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity 0.8.9;
+pragma solidity ^0.8.10;
 
 import "./BaseContract.sol";
-import {IMapContract} from "./Interfaces.sol";
-import {Enemy} from "./Structures.sol";
+import "./Structures.sol";
+
+interface IMapContract
+{
+    function getProgress(Character memory character) external view returns(uint);
+    function hasAccess(Character memory character, uint index) external view returns(bool);
+    function getEnemies(uint index) external view returns (Enemy[] memory enemies);
+    function update(Character memory character, uint index, bool victory) external;
+}
 
 abstract contract MapContract is IMapContract, BaseContract
 {
@@ -19,7 +26,7 @@ abstract contract MapContract is IMapContract, BaseContract
         _;
     }
     
-    constructor(uint maxLeveIndex)
+    constructor(address authContractAddress, uint maxLeveIndex) BaseContract(authContractAddress)
     {
         MAX_LEVEL_INDEX = maxLeveIndex;
     }

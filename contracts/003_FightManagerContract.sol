@@ -1,21 +1,33 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.10;
 
 import "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 
 import "./abstract/Structures.sol";
-import "./abstract/Interfaces.sol";
 import "./abstract/BaseContract.sol";
 
+import { ICharacterContract } from "./002_CharacterContract.sol";
+import { IFightContract } from "./003_FightContract.sol";
+import { IEquipmentContract } from "./005_EquipmentContract.sol";
+
 import "./libraries/Experience.sol";
+
+interface IFightManagerContract
+{
+    function conductFight(address mapContractAddress, uint index, address characterContractAddress, uint characterId) external;
+}
 
 contract FightManagerContract is BaseContract, IFightManagerContract
 {
     using EnumerableSet for EnumerableSet.UintSet;
     using ComputedStats for ComputedStats.Stats;
     using Experience for Character;
+    
+    address public CHARACTER_CONTRACT_ADDRESS;
+    address public FIGHT_CONTRACT_ADDRESS;
+    address public EQUIPMENT_CONTRACT;
     
     mapping(address => bool) private _approvedCharacterContracts;
     
@@ -27,10 +39,8 @@ contract FightManagerContract is BaseContract, IFightManagerContract
         _;
     }
     
-    constructor() BaseContract()
-    {
-        GAME_MANAGER_CONTRACT_ADDRESS = address(this);
-    }
+    constructor(address authContractAddress) BaseContract(authContractAddress)
+    {}
     
     /* battle */
     function conductFight(address mapContractAddress, uint index, address characterContractAddress, uint characterId) 

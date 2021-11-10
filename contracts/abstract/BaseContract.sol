@@ -1,33 +1,22 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.10;
 
-import "./Interfaces.sol";
 import "./Permissions.sol";
+
+import {IRandomContract} from "../000_RandomContract.sol";
 
 contract BaseContract is Permissions
 {
     address public RANDOM_CONTRACT_ADDRESS;
-    address public VAULT = address(0x0);
    
-    constructor() Permissions()
+    constructor(address authContractAddress) Permissions(authContractAddress)
     {
-        VAULT = msg.sender;
     }
     
-    function setRandomContractAddress(address newAddress) public onlyGM
+    function setRandomContractAddress(address newAddress) public onlyGM(msg.sender)
     {
         RANDOM_CONTRACT_ADDRESS = newAddress;
-    }
-    
-    function setVaultAddress(address _address) public onlyGM
-    {
-        VAULT = _address;
-    } 
-    
-    function withdraw() public onlyGM
-    {
-        payable(VAULT).transfer(address(this).balance);
     }
     
     function random() internal returns (uint seed)

@@ -6,52 +6,15 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "authContractAddress",
-						"type": "address"
-					}
-				],
-				"stateMutability": "nonpayable",
-				"type": "constructor"
-			},
-			{
 				"inputs": [],
-				"name": "AUTH_CONTRACT_ADDRESS",
+				"name": "random",
 				"outputs": [
 					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
+						"internalType": "uint256",
+						"name": "seed",
+						"type": "uint256"
 					}
 				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "RANDOM_CONTRACT_ADDRESS",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "newAddress",
-						"type": "address"
-					}
-				],
-				"name": "setRandomContractAddress",
-				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			}
@@ -69,7 +32,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/abstract/BaseContract.sol": "BaseContract"
+			"contracts/000_Random.sol": "IRandomContract"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -91,7 +54,7 @@
 				"dweb:/ipfs/QmSyDz67R2HCypDE8Pacn3voVwxw9x17NM66q47YgBnGqc"
 			]
 		},
-		"contracts/000_RandomContract.sol": {
+		"contracts/000_Random.sol": {
 			"keccak256": "0xf543cdb8e4319ff8e2c7531659c4470a0f9c64e06c31b134a2708d7232643600",
 			"license": "MIT",
 			"urls": [
@@ -107,20 +70,12 @@
 				"dweb:/ipfs/QmbxpN4YnMF58vgrA5Ei1KCxC2GmNpjxb3wbmwcs6xqeZr"
 			]
 		},
-		"contracts/abstract/BaseContract.sol": {
-			"keccak256": "0x642413860456d0b0d5e6059805dfc4f290fd129fed35a52254929d4d896ae596",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://5e90898a963ddd44b6b65185e1399807eed8b12a66ecdf210cb94c7518483810",
-				"dweb:/ipfs/QmXV49bstmmKhhfpAFZzd8Ayz226HFRUHKeMQcfBHWeM1E"
-			]
-		},
 		"contracts/abstract/Interfaces.sol": {
-			"keccak256": "0x5205f9c61667cc6d21a93ccbda3f0488d55e2c8ec83fe83f03fc4824e543ad4c",
+			"keccak256": "0x03af84ef4e005e63255f73f0d587506d2c8f8180feb2d160ca10ce1687530fdf",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://9dff414d1e86ae33b96902d9091410b37939eda59cca18bd4e4f10e5537dd82d",
-				"dweb:/ipfs/QmPkdLVDMREfYKMxG2v48tpqubNQABr2tDRWbByD4MF7Hz"
+				"bzz-raw://f7547302f931ee37c68a4dc9813cfc290a993a84883a4968e46f8dc9076fbc59",
+				"dweb:/ipfs/QmPkdPXfzLrmgBo6shMVDTR9197Sqfih8XNpEACbZMZmNe"
 			]
 		},
 		"contracts/abstract/Permissions.sol": {

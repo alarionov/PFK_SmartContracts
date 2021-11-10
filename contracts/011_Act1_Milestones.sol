@@ -1,19 +1,18 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.10;
 
 import "./abstract/Structures.sol";
-import "./abstract/Interfaces.sol";
 import "./abstract/MapContract.sol";
+
 import "./libraries/Utils.sol";
 
 contract Act1Milestones is MapContract
 {
     mapping(uint => uint) private _progressions;
     
-    constructor() MapContract(6)
-    {
-    }
+    constructor(address authContractAddress) MapContract(authContractAddress, 6)
+    {}
     
     function getProgress(Character memory character) 
         public 
@@ -35,7 +34,7 @@ contract Act1Milestones is MapContract
         return _getProgress(character) == index;
     }
     
-    function update(Character memory character, uint index, bool victory) public onlyGame override(IMapContract)
+    function update(Character memory character, uint index, bool victory) public onlyGame(msg.sender) override(IMapContract)
     {
         if (victory)
         {

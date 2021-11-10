@@ -9,73 +9,98 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "authContractAddress",
+						"name": "from",
 						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "itemId",
+						"type": "uint256"
 					}
 				],
+				"name": "forcedTransfer",
+				"outputs": [],
 				"stateMutability": "nonpayable",
-				"type": "constructor"
-			},
-			{
-				"inputs": [],
-				"name": "AUTH_CONTRACT_ADDRESS",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "CHARACTER_CONTRACT_ADDRESS",
-				"outputs": [
+				"inputs": [
 					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "armorSetId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "weaponSetId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "shieldId",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct Equipment",
+						"name": "equipment",
+						"type": "tuple"
 					}
 				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "EQUIPMENT_CONTRACT",
+				"name": "getInventory",
 				"outputs": [
 					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "FIGHT_CONTRACT_ADDRESS",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "RANDOM_CONTRACT_ADDRESS",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "strength",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "dexterity",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "constitution",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "luck",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "armor",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "attack",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "health",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "takenDamage",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct ComputedStats.Stats",
+						"name": "bonusStats",
+						"type": "tuple"
 					}
 				],
 				"stateMutability": "view",
@@ -85,40 +110,23 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "mapContractAddress",
+						"name": "player",
 						"type": "address"
 					},
 					{
 						"internalType": "uint256",
-						"name": "index",
+						"name": "itemType",
 						"type": "uint256"
-					},
-					{
-						"internalType": "address",
-						"name": "characterContractAddress",
-						"type": "address"
-					},
+					}
+				],
+				"name": "mintByGame",
+				"outputs": [
 					{
 						"internalType": "uint256",
-						"name": "characterId",
+						"name": "tokenId",
 						"type": "uint256"
 					}
 				],
-				"name": "conductFight",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "newAddress",
-						"type": "address"
-					}
-				],
-				"name": "setRandomContractAddress",
-				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			}
@@ -136,7 +144,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/003_FightManagerContract.sol": "FightManagerContract"
+			"contracts/005_EquipmentContract.sol": "IEquipmentContract"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -246,14 +254,6 @@
 				"dweb:/ipfs/QmcsVgLgzWdor3UnAztUkXKNGcysm1MPneWksF72AvnwBx"
 			]
 		},
-		"@openzeppelin/contracts/utils/structs/EnumerableSet.sol": {
-			"keccak256": "0x3778dc944f4a696335878bad8beca60f38b7c79b7a0bd8ddbeb618bd502a95ae",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://12961fd593c79b60088c8829fd760db4149790b1c702411919fac76769e8c39a",
-				"dweb:/ipfs/QmXN79ZS3btSrPhiMBWtWmdwaWKjYTaAYpVMt5QHvwwKMw"
-			]
-		},
 		"contracts/000_RandomContract.sol": {
 			"keccak256": "0xf543cdb8e4319ff8e2c7531659c4470a0f9c64e06c31b134a2708d7232643600",
 			"license": "MIT",
@@ -268,30 +268,6 @@
 			"urls": [
 				"bzz-raw://ea8ac78360d7b324b49bec5b360c8cb308d83c8d98094c24ab76f1ab0748f8b1",
 				"dweb:/ipfs/QmbxpN4YnMF58vgrA5Ei1KCxC2GmNpjxb3wbmwcs6xqeZr"
-			]
-		},
-		"contracts/002_CharacterContract.sol": {
-			"keccak256": "0x4142e747bb7fc121afb15df12b51cdfe32e882f15a0d75f85d4bdd021d1909ae",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://05d462e6b22f375483558739745bc771d4cf0d818e50c2f00116652d93fdbd7e",
-				"dweb:/ipfs/QmSDnzVxMW3sSePnMeFjfRJV5qVyiUuJuf1283GRrvLEtu"
-			]
-		},
-		"contracts/003_FightContract.sol": {
-			"keccak256": "0xd8b5abe462587c121ec48c84e96b0031e330711f14de24ddeca99cd767104156",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://a9781d01131a9bfa33569d38ca31204224ae44190161859c4eccb0ec3c20ebd9",
-				"dweb:/ipfs/QmXmVVMWR3fDkibVNpLpcaUogWPgk4mayGrofy6GL6b81a"
-			]
-		},
-		"contracts/003_FightManagerContract.sol": {
-			"keccak256": "0x0e0c23d6694efcbbfaf8ee5f36f8e8bd333a2ca91f3ce99a95bc5e49430a3dbd",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://51deb4d7192dd89c438f114ca4cd1ac9b5ab99bce321e895317672435f22b259",
-				"dweb:/ipfs/QmVaPPnXsRPzfhcHvPF1i96Mq1AuhpAFcGFijx2ei23HgQ"
 			]
 		},
 		"contracts/005_EquipmentContract.sol": {
@@ -340,30 +316,6 @@
 			"urls": [
 				"bzz-raw://d74c620123d005e257c4162a7e274b41868f254f15ffe4657b876694cf374fa9",
 				"dweb:/ipfs/QmYNFa6QprwJmCuYbXczNXjkhNYAJGNbncGeLU7Jnv8gQm"
-			]
-		},
-		"contracts/libraries/Experience.sol": {
-			"keccak256": "0xc38dfc2b7ce551920c089e8fa34d47026e41fb27c9f329049d7ddbf0174c3f2a",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://f08e0255e3e8813bb70ee1709beb99f1a95c084bfd8b215766ac2f583fe270a4",
-				"dweb:/ipfs/QmdKRvDWvhpLQDXj4LCBm7MFaFi2fRHCDBsk3p2z5scZ5W"
-			]
-		},
-		"contracts/libraries/GameMath.sol": {
-			"keccak256": "0x4a6367bc2b158d97351f54bfa3a54b5619f85fae379d17aa7fb92b461e56262a",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://1dc094cf20e7b5a8a91fb42cd5e9c2658ed20adbe35431f59b4d710733e332ba",
-				"dweb:/ipfs/QmWLn3kQshDDdY2jCdJ9K2UqzsWxU4dq2PxcZ6h4LxKKur"
-			]
-		},
-		"contracts/libraries/SeedReader.sol": {
-			"keccak256": "0x0cb098e35131841c80909f1ea319fa197de10e7de9cef55dd1c1a61c02fabb1f",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://91320c60a83e31d57ca55fe4168b3f1fe0583e5b75ffa01eb8011f8f16812d45",
-				"dweb:/ipfs/QmP2VU2ijFbmi3Prcx82cbBD5Rdr1oyprj86J4ikmuAmjo"
 			]
 		}
 	},

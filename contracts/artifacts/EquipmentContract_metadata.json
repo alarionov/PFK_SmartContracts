@@ -1,12 +1,18 @@
 {
 	"compiler": {
-		"version": "0.8.9+commit.e5eed63a"
+		"version": "0.8.10+commit.fc410830"
 	},
 	"language": "Solidity",
 	"output": {
 		"abi": [
 			{
-				"inputs": [],
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "authContractAddress",
+						"type": "address"
+					}
+				],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
 			},
@@ -87,83 +93,12 @@
 			},
 			{
 				"inputs": [],
-				"name": "CHARACTER_CONTRACT_ADDRESS",
+				"name": "AUTH_CONTRACT_ADDRESS",
 				"outputs": [
 					{
 						"internalType": "address",
 						"name": "",
 						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "EQUIPMENT_CONTRACT",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "FIGHT_CONTRACT_ADDRESS",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "GAME_MANAGER_CONTRACT_ADDRESS",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "GAME_MASTER",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"name": "MAP_CONTRACTS",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
 					}
 				],
 				"stateMutability": "view",
@@ -172,19 +107,6 @@
 			{
 				"inputs": [],
 				"name": "RANDOM_CONTRACT_ADDRESS",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "VAULT",
 				"outputs": [
 					{
 						"internalType": "address",
@@ -587,71 +509,6 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address",
-						"name": "_address",
-						"type": "address"
-					}
-				],
-				"name": "setCharacterContractAddress",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_address",
-						"type": "address"
-					}
-				],
-				"name": "setEquipmentContractAddress",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_address",
-						"type": "address"
-					}
-				],
-				"name": "setFightContractAddress",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_address",
-						"type": "address"
-					}
-				],
-				"name": "setGMContractAddress",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "newGM",
-						"type": "address"
-					}
-				],
-				"name": "setGameMasterAddress",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
 						"internalType": "uint256",
 						"name": "id",
 						"type": "uint256"
@@ -706,19 +563,6 @@
 					}
 				],
 				"name": "setRandomContractAddress",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_address",
-						"type": "address"
-					}
-				],
-				"name": "setVaultAddress",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -852,13 +696,6 @@
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "withdraw",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -923,7 +760,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/004_Equipment.sol": "EquipmentContract"
+			"contracts/005_EquipmentContract.sol": "EquipmentContract"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -1001,6 +838,14 @@
 				"dweb:/ipfs/QmWcsmkVr24xmmjfnBQZoemFniXjj3vwT78Cz6uqZW1Hux"
 			]
 		},
+		"@openzeppelin/contracts/utils/Counters.sol": {
+			"keccak256": "0x78450f4e3b722cce467b21e285f72ce5eaf361e9ba9dd2241a413926246773cd",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://f103065051300cd995fd4599ba91188d4071b92175b52f26110e02db091617c0",
+				"dweb:/ipfs/QmSyDz67R2HCypDE8Pacn3voVwxw9x17NM66q47YgBnGqc"
+			]
+		},
 		"@openzeppelin/contracts/utils/Strings.sol": {
 			"keccak256": "0x391d3ba97ab6856a16b225d6ee29617ad15ff00db70f3b4df1ab5ea33aa47c9d",
 			"license": "MIT",
@@ -1025,36 +870,52 @@
 				"dweb:/ipfs/QmcsVgLgzWdor3UnAztUkXKNGcysm1MPneWksF72AvnwBx"
 			]
 		},
-		"contracts/004_Equipment.sol": {
-			"keccak256": "0x6c687d718db3683c8757be2433029d3a14a7f9ed9b07a116519d353be4b6971b",
+		"contracts/000_RandomContract.sol": {
+			"keccak256": "0xf543cdb8e4319ff8e2c7531659c4470a0f9c64e06c31b134a2708d7232643600",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://0a08560ff6ffb5ca076b26d7b27b39d3b0a24c44ac4663ed1a21f00271f0337f",
-				"dweb:/ipfs/QmXPxUkCh4UhzYmVBa2maFs96Am3RFbbPTb3hNvGAaK5xd"
+				"bzz-raw://6d8f2e9e917e0cf0d7e1144b57eab00324eb3deaeb9cdeddeda66cd9b9c56131",
+				"dweb:/ipfs/QmRBqtS67f9pjSUeGHHFQc7rQP9ShnvZDBMAbQAVNs3PPy"
+			]
+		},
+		"contracts/001_AuthContract.sol": {
+			"keccak256": "0xd45705586d7b3e671c3a4dd9f1b9def688edbbcc24afe4494e04e11571bf0829",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ea8ac78360d7b324b49bec5b360c8cb308d83c8d98094c24ab76f1ab0748f8b1",
+				"dweb:/ipfs/QmbxpN4YnMF58vgrA5Ei1KCxC2GmNpjxb3wbmwcs6xqeZr"
+			]
+		},
+		"contracts/005_EquipmentContract.sol": {
+			"keccak256": "0xc7a2982debec3f1acff5cad947e64884ed98be6499b8ccc435f13ada16074d95",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ff433ec128d4410fa300650255f6140265c55043d047b61271572818d60f7ace",
+				"dweb:/ipfs/QmWJZASNcqNPij3GcfM279VjqqkzQ6y4g1McRcVmJqSYuF"
 			]
 		},
 		"contracts/abstract/BaseContract.sol": {
-			"keccak256": "0xfe535c78e7521bbeacea8378c5464fcf703d97dc31bd1c0484379ceb69dd5149",
+			"keccak256": "0x642413860456d0b0d5e6059805dfc4f290fd129fed35a52254929d4d896ae596",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://06513ffb3e31fbd331ca1f112390bb0472df6ff559b5ede7142ef98f7f20c36e",
-				"dweb:/ipfs/QmSSyCNFyWFjX1c1q8JrHbvEhned6MK4rhfN8bEJsQeX8K"
+				"bzz-raw://5e90898a963ddd44b6b65185e1399807eed8b12a66ecdf210cb94c7518483810",
+				"dweb:/ipfs/QmXV49bstmmKhhfpAFZzd8Ayz226HFRUHKeMQcfBHWeM1E"
 			]
 		},
 		"contracts/abstract/Interfaces.sol": {
-			"keccak256": "0x6adfdd0ce972c39af1864662edaf609ad8937062bf0df0ac287f28f257df32bb",
+			"keccak256": "0x4f0bcda15f7225a05789017b00b422b2264baf0e52c6987dfd70c1af7c9e6ea1",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://4b120609d0b0242857af39ba0a3b3cdc731ca444f500f57fe6271ca29ef42794",
-				"dweb:/ipfs/QmaZZgir1y5kv7cRavVv7BBeVk3CLMakFZBZqNExMKHQYB"
+				"bzz-raw://c0f361243863a7b12b7b8ba55ddb7352caa68d88e141fd36e957234bed54df22",
+				"dweb:/ipfs/QmNSrUpFD42ciVBoEdPN3FqWUPDgugo9cQGftrHs4vLT5c"
 			]
 		},
 		"contracts/abstract/Permissions.sol": {
-			"keccak256": "0x8a9577c8dc727d6f5cd1118a9f773e0f9b36bde8ff51e933e84e61504a9a4af2",
+			"keccak256": "0x09a50a900250f5366f1739253d6670494799f5b018c3801dfa5cedac302b0484",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://777e65897adac2c59bf6a3a694e5da3d3b516444d9ebc0003dad7c49fed984ca",
-				"dweb:/ipfs/QmVpHVWavDEVfrvWVV5oss1WrQX1jJJiv3vhtVruCc2V9a"
+				"bzz-raw://3ca61923c8d867538aca0f4124b3127a1be06af0b5877d834672e2606a9ed42b",
+				"dweb:/ipfs/QmdFv8nFkCJ8KDf2KxXWTjvnvCeFr4R2kPs3Cp7APYcMt5"
 			]
 		},
 		"contracts/abstract/Structures.sol": {

@@ -1,13 +1,17 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.10;
 
 import "./abstract/Structures.sol";
-import "./abstract/Interfaces.sol";
 import "./abstract/BaseContract.sol";
 
 import "./libraries/SeedReader.sol";
 import "./libraries/ComputedStats.sol";
+
+interface IFightContract
+{
+    function conductFight(Character memory character, Enemy[] memory enemies) external returns (Fight memory); 
+}
 
 contract FightContract is BaseContract, IFightContract
 {
@@ -15,20 +19,15 @@ contract FightContract is BaseContract, IFightContract
     using ComputedStats for ComputedStats.Stats;
     
     uint8 private MAX_FIGHT_ACTIONS = 10;
-
-    address public MAP_CONTRACT_ADDRESS;
     
-    constructor () BaseContract()
-    {
-        FIGHT_CONTRACT_ADDRESS = address(this);
-    }
+    constructor(address authContractAddress) BaseContract(authContractAddress)
+    {}
     
-    function setMapContractAddress(address newAddress) public onlyGM
-    {
-        MAP_CONTRACT_ADDRESS = newAddress;
-    } 
-    
-    function conductFight(Character memory character, Enemy[] memory enemies) external override(IFightContract) onlyGame returns (Fight memory fight) 
+    function conductFight(Character memory character, Enemy[] memory enemies) 
+        external 
+        override(IFightContract) 
+        onlyGame(msg.sender) 
+        returns(Fight memory fight) 
     {
         SeedReader.Seed memory seed;
         seed.init([random(), random(), random(), random()]);
@@ -52,7 +51,8 @@ contract FightContract is BaseContract, IFightContract
     }
 
     
-    function _fight(SeedReader.Seed memory seed, Character memory character, Enemy[] memory enemies) private view returns (bool victory, uint exp)
+    function _fight(SeedReader.Seed memory seed, Character memory character, Enemy[] memory enemies) 
+        private view returns(bool victory, uint exp)
     {
         exp = 0;
      
@@ -94,7 +94,7 @@ contract FightContract is BaseContract, IFightContract
         SeedReader.Seed memory seed, 
         ComputedStats.Stats memory attacker, 
         ComputedStats.Stats memory target
-    ) private pure returns (uint exp)
+    ) private pure returns(uint exp)
     {
         exp = 0;
         

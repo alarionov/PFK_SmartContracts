@@ -49,7 +49,8 @@
 		},
 		"gasEstimates": null,
 		"methodIdentifiers": {
-			"conductFight(address,uint256,address,uint256)": "7a04b417"
+			"role(address)": "d590f8c9",
+			"validate()": "6901f668"
 		}
 	},
 	"abi": [
@@ -57,28 +58,32 @@
 			"inputs": [
 				{
 					"internalType": "address",
-					"name": "mapContractAddress",
+					"name": "_address",
 					"type": "address"
-				},
-				{
-					"internalType": "uint256",
-					"name": "index",
-					"type": "uint256"
-				},
-				{
-					"internalType": "address",
-					"name": "characterContractAddress",
-					"type": "address"
-				},
-				{
-					"internalType": "uint256",
-					"name": "characterId",
-					"type": "uint256"
 				}
 			],
-			"name": "conductFight",
-			"outputs": [],
-			"stateMutability": "nonpayable",
+			"name": "role",
+			"outputs": [
+				{
+					"internalType": "enum AuthRoles",
+					"name": "_role",
+					"type": "uint8"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "validate",
+			"outputs": [
+				{
+					"internalType": "bool",
+					"name": "result",
+					"type": "bool"
+				}
+			],
+			"stateMutability": "view",
 			"type": "function"
 		}
 	]

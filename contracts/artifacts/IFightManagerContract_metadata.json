@@ -9,82 +9,6 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "authContractAddress",
-						"type": "address"
-					}
-				],
-				"stateMutability": "nonpayable",
-				"type": "constructor"
-			},
-			{
-				"inputs": [],
-				"name": "AUTH_CONTRACT_ADDRESS",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "CHARACTER_CONTRACT_ADDRESS",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "EQUIPMENT_CONTRACT",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "FIGHT_CONTRACT_ADDRESS",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "RANDOM_CONTRACT_ADDRESS",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
 						"name": "mapContractAddress",
 						"type": "address"
 					},
@@ -108,19 +32,6 @@
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "newAddress",
-						"type": "address"
-					}
-				],
-				"name": "setRandomContractAddress",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -136,7 +47,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/003_FightManagerContract.sol": "FightManagerContract"
+			"contracts/003_FightManagerContract.sol": "IFightManagerContract"
 		},
 		"evmVersion": "london",
 		"libraries": {},

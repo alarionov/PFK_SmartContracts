@@ -1,70 +1,24 @@
 {
 	"compiler": {
-		"version": "0.8.9+commit.e5eed63a"
+		"version": "0.8.10+commit.fc410830"
 	},
 	"language": "Solidity",
 	"output": {
 		"abi": [
 			{
-				"inputs": [],
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "authContractAddress",
+						"type": "address"
+					}
+				],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
 			},
 			{
 				"inputs": [],
-				"name": "CHARACTER_CONTRACT_ADDRESS",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "FIGHT_CONTRACT_ADDRESS",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "GAME_MANAGER_CONTRACT_ADDRESS",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "GAME_MASTER",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "MAP_CONTRACT_ADDRESS",
+				"name": "AUTH_CONTRACT_ADDRESS",
 				"outputs": [
 					{
 						"internalType": "address",
@@ -78,19 +32,6 @@
 			{
 				"inputs": [],
 				"name": "RANDOM_CONTRACT_ADDRESS",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "VAULT",
 				"outputs": [
 					{
 						"internalType": "address",
@@ -119,6 +60,11 @@
 								"internalType": "uint256",
 								"name": "tokenId",
 								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "owner",
+								"type": "address"
 							},
 							{
 								"internalType": "uint256",
@@ -358,96 +304,11 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "_address",
-						"type": "address"
-					}
-				],
-				"name": "setCharacterContractAddress",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_address",
-						"type": "address"
-					}
-				],
-				"name": "setFightContractAddress",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_address",
-						"type": "address"
-					}
-				],
-				"name": "setGMContractAddress",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "newGM",
-						"type": "address"
-					}
-				],
-				"name": "setGameMasterAddress",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "newAddress",
-						"type": "address"
-					}
-				],
-				"name": "setMapContractAddress",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
 						"name": "newAddress",
 						"type": "address"
 					}
 				],
 				"name": "setRandomContractAddress",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_address",
-						"type": "address"
-					}
-				],
-				"name": "setVaultAddress",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "withdraw",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -474,58 +335,82 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
-		"contracts/003_FightContract.sol": {
-			"keccak256": "0x1b884a711c15eb8b3bc09c96c2e438fa0b23f9d265eab259669283d5979b11a4",
+		"@openzeppelin/contracts/utils/Counters.sol": {
+			"keccak256": "0x78450f4e3b722cce467b21e285f72ce5eaf361e9ba9dd2241a413926246773cd",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://d46c2f468a80bcbb751260c46daf5eb5cc571ec813874c89974436e69f9edc8e",
-				"dweb:/ipfs/QmUB5urCu5FP6FxDAJvaHRnUH4XRBXBomyh3XFhyV7BZZw"
+				"bzz-raw://f103065051300cd995fd4599ba91188d4071b92175b52f26110e02db091617c0",
+				"dweb:/ipfs/QmSyDz67R2HCypDE8Pacn3voVwxw9x17NM66q47YgBnGqc"
+			]
+		},
+		"contracts/000_RandomContract.sol": {
+			"keccak256": "0xf543cdb8e4319ff8e2c7531659c4470a0f9c64e06c31b134a2708d7232643600",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6d8f2e9e917e0cf0d7e1144b57eab00324eb3deaeb9cdeddeda66cd9b9c56131",
+				"dweb:/ipfs/QmRBqtS67f9pjSUeGHHFQc7rQP9ShnvZDBMAbQAVNs3PPy"
+			]
+		},
+		"contracts/001_AuthContract.sol": {
+			"keccak256": "0xd45705586d7b3e671c3a4dd9f1b9def688edbbcc24afe4494e04e11571bf0829",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ea8ac78360d7b324b49bec5b360c8cb308d83c8d98094c24ab76f1ab0748f8b1",
+				"dweb:/ipfs/QmbxpN4YnMF58vgrA5Ei1KCxC2GmNpjxb3wbmwcs6xqeZr"
+			]
+		},
+		"contracts/003_FightContract.sol": {
+			"keccak256": "0xd8b5abe462587c121ec48c84e96b0031e330711f14de24ddeca99cd767104156",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://a9781d01131a9bfa33569d38ca31204224ae44190161859c4eccb0ec3c20ebd9",
+				"dweb:/ipfs/QmXmVVMWR3fDkibVNpLpcaUogWPgk4mayGrofy6GL6b81a"
 			]
 		},
 		"contracts/abstract/BaseContract.sol": {
-			"keccak256": "0xfe535c78e7521bbeacea8378c5464fcf703d97dc31bd1c0484379ceb69dd5149",
+			"keccak256": "0x642413860456d0b0d5e6059805dfc4f290fd129fed35a52254929d4d896ae596",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://06513ffb3e31fbd331ca1f112390bb0472df6ff559b5ede7142ef98f7f20c36e",
-				"dweb:/ipfs/QmSSyCNFyWFjX1c1q8JrHbvEhned6MK4rhfN8bEJsQeX8K"
+				"bzz-raw://5e90898a963ddd44b6b65185e1399807eed8b12a66ecdf210cb94c7518483810",
+				"dweb:/ipfs/QmXV49bstmmKhhfpAFZzd8Ayz226HFRUHKeMQcfBHWeM1E"
 			]
 		},
 		"contracts/abstract/Interfaces.sol": {
-			"keccak256": "0xdab1a690e2712402f469f268795c0b6b4b51100271e0ec77ba2b225d1cf884e6",
+			"keccak256": "0xdd081a0027a3fbea101bdde25fd7022ad5266e3340f882db023adbf89c2feb91",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://9ae134b2a53fdb47259d21ea9faf896ae1c4b9e1b4aa3726f4c36a333725bba5",
-				"dweb:/ipfs/QmRs8V629QATjySLNVpjz2DeCfnoHaJq5YaE1GzRMjoxgJ"
+				"bzz-raw://1805e650c86dadbce11a604d1949135284c8fab5388e8d899c4fd1b0cce64da6",
+				"dweb:/ipfs/QmRkEoRBkuJim6WYMavvGV3kwvpsWnouJgTvYSs2bcfLyY"
 			]
 		},
 		"contracts/abstract/Permissions.sol": {
-			"keccak256": "0x1b78b6b2f05e83064aa9345825e2555f06f02761e7bc67b1115348fc1f9147ce",
+			"keccak256": "0x09a50a900250f5366f1739253d6670494799f5b018c3801dfa5cedac302b0484",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://79a95801ec1eec19721ca6b1fe2e485d4df3e8543999202c9ee86a627c6d3e41",
-				"dweb:/ipfs/QmWf4VHcLDqTsxxsPq7prJbfFjfxrXsHD4VEZviTk7R3QS"
+				"bzz-raw://3ca61923c8d867538aca0f4124b3127a1be06af0b5877d834672e2606a9ed42b",
+				"dweb:/ipfs/QmdFv8nFkCJ8KDf2KxXWTjvnvCeFr4R2kPs3Cp7APYcMt5"
 			]
 		},
 		"contracts/abstract/Structures.sol": {
-			"keccak256": "0x2a7d27547dd347dc8989edebae84911e28fa84dce4d1688d48f082009af1f773",
+			"keccak256": "0x6a4e25aa822ff27556a4876ef0fd44c7f954a51b433450115ec1ee1bf83200b4",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://25e6c08e5e64f418052858ad3e0ef072cfda26a984df9e721a6e68b513bfef10",
-				"dweb:/ipfs/QmTjQAtHVFWFoncKpDpUg3Jrg7jzB3yrnvLM6TWVDzsr2x"
+				"bzz-raw://a83a62bfd3d1aaede80954555a0cee1994f993e180080ebda4a0afc4867c8008",
+				"dweb:/ipfs/QmehJsmBQiS9LSHscdUrAa67PeYG7dSMN7Xt143AR9X2Sx"
 			]
 		},
 		"contracts/libraries/ComputedStats.sol": {
-			"keccak256": "0xcc81ddcbf3fb1047990f243d8cd9e78c187af962e4eefc87ee08ba00a9c34ec0",
+			"keccak256": "0x594078ed7d10c96a752b08c9f876c14d8ea3ffb197d8347c1ab5056fcd03070b",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://75ccfbd45c8848abd6bcf2803f52889c69142213e87f8c74784a9ae5f6a4d72f",
-				"dweb:/ipfs/QmWBEtyBN4a1KwsUD3rPeMpV5XNGLE1YsoAmPR88hebMFp"
+				"bzz-raw://d74c620123d005e257c4162a7e274b41868f254f15ffe4657b876694cf374fa9",
+				"dweb:/ipfs/QmYNFa6QprwJmCuYbXczNXjkhNYAJGNbncGeLU7Jnv8gQm"
 			]
 		},
 		"contracts/libraries/SeedReader.sol": {

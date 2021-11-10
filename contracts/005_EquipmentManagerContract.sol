@@ -1,16 +1,24 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.10;
 
 import "./abstract/Structures.sol";
-import "./abstract/Interfaces.sol";
 import "./abstract/BaseContract.sol";
 
 import "./libraries/ComputedStats.sol";
 
+interface IEquipmentManagerContract
+{
+    function equip(Character memory character, ItemSlot slot, uint itemId) external;
+    function uneqip(Character memory character, ItemSlot slot) external;
+}
+
 contract EquipmentManager is BaseContract, IEquipmentManagerContract
 {
-    function equip(Character memory character, ItemSlot slot, uint itemId) public onlyGame override(IEquipmentManagerContract)
+    constructor(address authContractAddress) BaseContract(authContractAddress)
+    {}
+    
+    function equip(Character memory character, ItemSlot slot, uint itemId) public onlyGame(msg.sender) override(IEquipmentManagerContract)
     {
         /*
         require(ownerOf(itemId) == character.owner, "You don't own the item");
@@ -76,7 +84,7 @@ contract EquipmentManager is BaseContract, IEquipmentManagerContract
     
     */
     
-    function uneqip(Character memory character, ItemSlot slot) public onlyGame override(IEquipmentManagerContract)
+    function uneqip(Character memory character, ItemSlot slot) public onlyGame(msg.sender) override(IEquipmentManagerContract)
     {
         /*
         if (slot == ItemSlot.Armor)

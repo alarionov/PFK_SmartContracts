@@ -8,6 +8,19 @@
 			{
 				"inputs": [
 					{
+						"internalType": "address",
+						"name": "contractaddress",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "getCharacter",
+				"outputs": [
+					{
 						"components": [
 							{
 								"internalType": "bool",
@@ -117,149 +130,127 @@
 						"internalType": "struct Character",
 						"name": "character",
 						"type": "tuple"
-					},
-					{
-						"components": [
-							{
-								"internalType": "uint256",
-								"name": "id",
-								"type": "uint256"
-							},
-							{
-								"internalType": "bool",
-								"name": "present",
-								"type": "bool"
-							},
-							{
-								"components": [
-									{
-										"internalType": "uint256",
-										"name": "strength",
-										"type": "uint256"
-									},
-									{
-										"internalType": "uint256",
-										"name": "dexterity",
-										"type": "uint256"
-									},
-									{
-										"internalType": "uint256",
-										"name": "constitution",
-										"type": "uint256"
-									},
-									{
-										"internalType": "uint256",
-										"name": "luck",
-										"type": "uint256"
-									},
-									{
-										"internalType": "uint256",
-										"name": "armor",
-										"type": "uint256"
-									},
-									{
-										"internalType": "uint256",
-										"name": "attack",
-										"type": "uint256"
-									},
-									{
-										"internalType": "uint256",
-										"name": "health",
-										"type": "uint256"
-									},
-									{
-										"internalType": "uint256",
-										"name": "takenDamage",
-										"type": "uint256"
-									}
-								],
-								"internalType": "struct ComputedStats.Stats",
-								"name": "stats",
-								"type": "tuple"
-							}
-						],
-						"internalType": "struct Enemy[]",
-						"name": "enemies",
-						"type": "tuple[]"
 					}
 				],
-				"name": "conductFight",
-				"outputs": [
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
 					{
 						"components": [
 							{
+								"internalType": "bool",
+								"name": "exists",
+								"type": "bool"
+							},
+							{
+								"internalType": "address",
+								"name": "contractAddress",
+								"type": "address"
+							},
+							{
 								"internalType": "uint256",
-								"name": "id",
+								"name": "tokenId",
 								"type": "uint256"
 							},
 							{
-								"internalType": "bytes",
-								"name": "seed",
-								"type": "bytes"
+								"internalType": "address",
+								"name": "owner",
+								"type": "address"
 							},
 							{
-								"components": [
-									{
-										"internalType": "uint256",
-										"name": "strength",
-										"type": "uint256"
-									},
-									{
-										"internalType": "uint256",
-										"name": "dexterity",
-										"type": "uint256"
-									},
-									{
-										"internalType": "uint256",
-										"name": "constitution",
-										"type": "uint256"
-									},
-									{
-										"internalType": "uint256",
-										"name": "luck",
-										"type": "uint256"
-									},
-									{
-										"internalType": "uint256",
-										"name": "armor",
-										"type": "uint256"
-									},
-									{
-										"internalType": "uint256",
-										"name": "attack",
-										"type": "uint256"
-									},
-									{
-										"internalType": "uint256",
-										"name": "health",
-										"type": "uint256"
-									},
-									{
-										"internalType": "uint256",
-										"name": "takenDamage",
-										"type": "uint256"
-									}
-								],
-								"internalType": "struct ComputedStats.Stats",
-								"name": "stats",
-								"type": "tuple"
-							},
-							{
-								"internalType": "bool",
-								"name": "victory",
-								"type": "bool"
+								"internalType": "uint256",
+								"name": "level",
+								"type": "uint256"
 							},
 							{
 								"internalType": "uint256",
 								"name": "exp",
 								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "upgrades",
+								"type": "uint256"
+							},
+							{
+								"components": [
+									{
+										"internalType": "uint256",
+										"name": "strength",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "dexterity",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "constitution",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "luck",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "armor",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "attack",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "health",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "takenDamage",
+										"type": "uint256"
+									}
+								],
+								"internalType": "struct ComputedStats.Stats",
+								"name": "stats",
+								"type": "tuple"
+							},
+							{
+								"components": [
+									{
+										"internalType": "uint256",
+										"name": "armorSetId",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "weaponSetId",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "shieldId",
+										"type": "uint256"
+									}
+								],
+								"internalType": "struct Equipment",
+								"name": "equipment",
+								"type": "tuple"
 							}
 						],
-						"internalType": "struct Fight",
-						"name": "",
+						"internalType": "struct Character",
+						"name": "character",
 						"type": "tuple"
 					}
 				],
+				"name": "save",
+				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			}
@@ -277,7 +268,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/abstract/Interfaces.sol": "IFightContract"
+			"contracts/002_CharacterContract.sol": "ICharacterContract"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -291,12 +282,60 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/abstract/Interfaces.sol": {
-			"keccak256": "0x429852a523073ee703846b96f57442518ca878b6dd06470a688a13bf3ecfe8ad",
+		"@openzeppelin/contracts/utils/Counters.sol": {
+			"keccak256": "0x78450f4e3b722cce467b21e285f72ce5eaf361e9ba9dd2241a413926246773cd",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://42727b5895d3b49e8c1e9b3590d2e5b18c4eedcc0e50cf9de27627a417c253f7",
-				"dweb:/ipfs/QmcTwhJKtyCLoi6JAdK6hK6h8rgEMM5b4cFXkpubY2MnLb"
+				"bzz-raw://f103065051300cd995fd4599ba91188d4071b92175b52f26110e02db091617c0",
+				"dweb:/ipfs/QmSyDz67R2HCypDE8Pacn3voVwxw9x17NM66q47YgBnGqc"
+			]
+		},
+		"contracts/000_RandomContract.sol": {
+			"keccak256": "0xf543cdb8e4319ff8e2c7531659c4470a0f9c64e06c31b134a2708d7232643600",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6d8f2e9e917e0cf0d7e1144b57eab00324eb3deaeb9cdeddeda66cd9b9c56131",
+				"dweb:/ipfs/QmRBqtS67f9pjSUeGHHFQc7rQP9ShnvZDBMAbQAVNs3PPy"
+			]
+		},
+		"contracts/001_AuthContract.sol": {
+			"keccak256": "0xd45705586d7b3e671c3a4dd9f1b9def688edbbcc24afe4494e04e11571bf0829",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ea8ac78360d7b324b49bec5b360c8cb308d83c8d98094c24ab76f1ab0748f8b1",
+				"dweb:/ipfs/QmbxpN4YnMF58vgrA5Ei1KCxC2GmNpjxb3wbmwcs6xqeZr"
+			]
+		},
+		"contracts/002_CharacterContract.sol": {
+			"keccak256": "0x4142e747bb7fc121afb15df12b51cdfe32e882f15a0d75f85d4bdd021d1909ae",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://05d462e6b22f375483558739745bc771d4cf0d818e50c2f00116652d93fdbd7e",
+				"dweb:/ipfs/QmSDnzVxMW3sSePnMeFjfRJV5qVyiUuJuf1283GRrvLEtu"
+			]
+		},
+		"contracts/abstract/BaseContract.sol": {
+			"keccak256": "0x642413860456d0b0d5e6059805dfc4f290fd129fed35a52254929d4d896ae596",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5e90898a963ddd44b6b65185e1399807eed8b12a66ecdf210cb94c7518483810",
+				"dweb:/ipfs/QmXV49bstmmKhhfpAFZzd8Ayz226HFRUHKeMQcfBHWeM1E"
+			]
+		},
+		"contracts/abstract/Interfaces.sol": {
+			"keccak256": "0x5205f9c61667cc6d21a93ccbda3f0488d55e2c8ec83fe83f03fc4824e543ad4c",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://9dff414d1e86ae33b96902d9091410b37939eda59cca18bd4e4f10e5537dd82d",
+				"dweb:/ipfs/QmPkdLVDMREfYKMxG2v48tpqubNQABr2tDRWbByD4MF7Hz"
+			]
+		},
+		"contracts/abstract/Permissions.sol": {
+			"keccak256": "0x09a50a900250f5366f1739253d6670494799f5b018c3801dfa5cedac302b0484",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://3ca61923c8d867538aca0f4124b3127a1be06af0b5877d834672e2606a9ed42b",
+				"dweb:/ipfs/QmdFv8nFkCJ8KDf2KxXWTjvnvCeFr4R2kPs3Cp7APYcMt5"
 			]
 		},
 		"contracts/abstract/Structures.sol": {
@@ -313,6 +352,14 @@
 			"urls": [
 				"bzz-raw://d74c620123d005e257c4162a7e274b41868f254f15ffe4657b876694cf374fa9",
 				"dweb:/ipfs/QmYNFa6QprwJmCuYbXczNXjkhNYAJGNbncGeLU7Jnv8gQm"
+			]
+		},
+		"contracts/libraries/GameMath.sol": {
+			"keccak256": "0x4a6367bc2b158d97351f54bfa3a54b5619f85fae379d17aa7fb92b461e56262a",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://1dc094cf20e7b5a8a91fb42cd5e9c2658ed20adbe35431f59b4d710733e332ba",
+				"dweb:/ipfs/QmWLn3kQshDDdY2jCdJ9K2UqzsWxU4dq2PxcZ6h4LxKKur"
 			]
 		}
 	},

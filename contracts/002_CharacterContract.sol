@@ -3,11 +3,16 @@
 pragma solidity ^0.8.10;
 
 import "./abstract/Structures.sol";
-import "./abstract/Interfaces.sol";
 import "./abstract/BaseContract.sol";
 
 import "./libraries/GameMath.sol";
 import "./libraries/ComputedStats.sol";
+
+interface ICharacterContract
+{
+    function getCharacter(address contractaddress, uint tokenId) external returns (Character memory character);
+    function save(Character memory character) external;
+}
 
 contract CharacterContract is BaseContract, ICharacterContract
 {
@@ -26,9 +31,8 @@ contract CharacterContract is BaseContract, ICharacterContract
         _;
     }
     
-    constructor() BaseContract()
+    constructor(address authContractAddress) BaseContract(authContractAddress)
     {
-        CHARACTER_CONTRACT_ADDRESS = address(this);
     }
     
     function _defaultCharacter(address contractAddress, uint tokenId) private pure returns (Character memory character)
@@ -65,7 +69,7 @@ contract CharacterContract is BaseContract, ICharacterContract
     
     /* Upgrades */
     function upgrade(address contractAddress, uint tokenId, StatType stat) external 
-        onlyGame
+        onlyGame(msg.sender)
         upgradable(msg.sender, contractAddress, tokenId)
     {
         require(stat >= StatType.Strength && stat <= StatType.Constitution, "Invalid stat type");
@@ -77,7 +81,7 @@ contract CharacterContract is BaseContract, ICharacterContract
         emit NewStats(character.stats, character.upgrades);
     }
     
-    function modifyStats(address contractAddress, uint tokenId, StatType stat, uint value) external onlyGame 
+    function modifyStats(address contractAddress, uint tokenId, StatType stat, uint value) external onlyGame(msg.sender) 
     {
         Character memory character = _characters[contractAddress][tokenId];
         
@@ -136,7 +140,7 @@ contract CharacterContract is BaseContract, ICharacterContract
         }
     }
     
-    function save(Character memory character) public override(ICharacterContract) onlyGame
+    function save(Character memory character) public override(ICharacterContract) onlyGame(msg.sender)
     {
         _saveCharacter(character);
     }

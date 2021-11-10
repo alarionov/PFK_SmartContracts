@@ -1,11 +1,15 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.10;
 
 import "@openzeppelin/contracts/utils/Counters.sol";
 
-import "./abstract/Interfaces.sol";
 import "./abstract/Permissions.sol";
+
+interface IRandomContract
+{
+     function random() external returns(uint seed);
+}
 
 contract RandomContract is Permissions, IRandomContract
 {
@@ -13,10 +17,10 @@ contract RandomContract is Permissions, IRandomContract
     
     Counters.Counter internal _randomNonce;
     
-    constructor() Permissions() 
+    constructor(address authContractAddress) Permissions(authContractAddress) 
     {}
     
-    function random() public onlyGame override(IRandomContract) returns(uint seed)
+    function random() public onlyGame(msg.sender) override(IRandomContract) returns(uint seed)
     {
         _randomNonce.increment();
         

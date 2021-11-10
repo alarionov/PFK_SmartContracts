@@ -1,14 +1,20 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.10;
 
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 
 import "./abstract/Structures.sol";
-import "./abstract/Interfaces.sol";
 import "./abstract/BaseContract.sol";
 
 import "./libraries/ComputedStats.sol";
+
+interface IEquipmentContract
+{
+    function getInventory(Equipment memory equipment) external view returns(ComputedStats.Stats memory bonusStats);
+    function mintByGame(address player, uint itemType) external returns(uint tokenId);
+    function forcedTransfer(address from, address to, uint itemId) external;
+}
 
 contract EquipmentContract is BaseContract, IEquipmentContract, ERC721Enumerable
 {
@@ -32,10 +38,8 @@ contract EquipmentContract is BaseContract, IEquipmentContract, ERC721Enumerable
         _;
     }
     
-    constructor() ERC721("Equipment", "EQPMT")
+    constructor(address authContractAddress) BaseContract(authContractAddress) ERC721("Equipment", "EQPMT")
     {
-        EQUIPMENT_CONTRACT = address(this);
-        
         _itemTypes[0] = ItemType({ id: 0, name: "Empty", slot: ItemSlot.Any, bonusStats: ComputedStats.zeroStats() });
         _itemToType[0] = 0;
     }
@@ -49,13 +53,13 @@ contract EquipmentContract is BaseContract, IEquipmentContract, ERC721Enumerable
         uint constitution, 
         uint luck, 
         uint armor
-    ) public onlyGame
+    ) public onlyGame(msg.sender)
     {
         ComputedStats.Stats memory stats = ComputedStats.newStats(strength, dexterity, constitution, luck, armor);
         _itemTypes[id] = ItemType({ id: id, name: name, slot: slot, bonusStats: stats });
     }
     
-    function mintByGame(address player, uint itemType) public onlyGame returns(uint tokenId)
+    function mintByGame(address player, uint itemType) public onlyGame(msg.sender) returns(uint tokenId)
     {
         tokenId = totalSupply() + 1;
         
@@ -87,7 +91,7 @@ contract EquipmentContract is BaseContract, IEquipmentContract, ERC721Enumerable
         itemType = _itemTypes[_itemToType[tokenId]];
     }
     
-    function forcedTransfer(address from, address to, uint itemId) public onlyGame
+    function forcedTransfer(address from, address to, uint itemId) public onlyGame(msg.sender)
     {
         require(itemId != 0, "Invalid item id");
         require(ownerOf(itemId) == address(from), "Invalid owner");

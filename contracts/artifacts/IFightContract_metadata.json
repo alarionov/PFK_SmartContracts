@@ -119,59 +119,83 @@
 						"type": "tuple"
 					},
 					{
-						"internalType": "enum ItemSlot",
-						"name": "slot",
-						"type": "uint8"
-					},
-					{
-						"internalType": "uint256",
-						"name": "itemId",
-						"type": "uint256"
-					}
-				],
-				"name": "equip",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
 						"components": [
 							{
+								"internalType": "uint256",
+								"name": "id",
+								"type": "uint256"
+							},
+							{
 								"internalType": "bool",
-								"name": "exists",
+								"name": "present",
 								"type": "bool"
 							},
 							{
-								"internalType": "address",
-								"name": "contractAddress",
-								"type": "address"
-							},
+								"components": [
+									{
+										"internalType": "uint256",
+										"name": "strength",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "dexterity",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "constitution",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "luck",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "armor",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "attack",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "health",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "takenDamage",
+										"type": "uint256"
+									}
+								],
+								"internalType": "struct ComputedStats.Stats",
+								"name": "stats",
+								"type": "tuple"
+							}
+						],
+						"internalType": "struct Enemy[]",
+						"name": "enemies",
+						"type": "tuple[]"
+					}
+				],
+				"name": "conductFight",
+				"outputs": [
+					{
+						"components": [
 							{
 								"internalType": "uint256",
-								"name": "tokenId",
+								"name": "id",
 								"type": "uint256"
 							},
 							{
-								"internalType": "address",
-								"name": "owner",
-								"type": "address"
-							},
-							{
-								"internalType": "uint256",
-								"name": "level",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "exp",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "upgrades",
-								"type": "uint256"
+								"internalType": "bytes",
+								"name": "seed",
+								"type": "bytes"
 							},
 							{
 								"components": [
@@ -221,40 +245,21 @@
 								"type": "tuple"
 							},
 							{
-								"components": [
-									{
-										"internalType": "uint256",
-										"name": "armorSetId",
-										"type": "uint256"
-									},
-									{
-										"internalType": "uint256",
-										"name": "weaponSetId",
-										"type": "uint256"
-									},
-									{
-										"internalType": "uint256",
-										"name": "shieldId",
-										"type": "uint256"
-									}
-								],
-								"internalType": "struct Equipment",
-								"name": "equipment",
-								"type": "tuple"
+								"internalType": "bool",
+								"name": "victory",
+								"type": "bool"
+							},
+							{
+								"internalType": "uint256",
+								"name": "exp",
+								"type": "uint256"
 							}
 						],
-						"internalType": "struct Character",
-						"name": "character",
+						"internalType": "struct Fight",
+						"name": "",
 						"type": "tuple"
-					},
-					{
-						"internalType": "enum ItemSlot",
-						"name": "slot",
-						"type": "uint8"
 					}
 				],
-				"name": "uneqip",
-				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			}
@@ -272,7 +277,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/abstract/Interfaces.sol": "IEquipmentManagerContract"
+			"contracts/003_FightContract.sol": "IFightContract"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -286,12 +291,60 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/abstract/Interfaces.sol": {
-			"keccak256": "0x429852a523073ee703846b96f57442518ca878b6dd06470a688a13bf3ecfe8ad",
+		"@openzeppelin/contracts/utils/Counters.sol": {
+			"keccak256": "0x78450f4e3b722cce467b21e285f72ce5eaf361e9ba9dd2241a413926246773cd",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://42727b5895d3b49e8c1e9b3590d2e5b18c4eedcc0e50cf9de27627a417c253f7",
-				"dweb:/ipfs/QmcTwhJKtyCLoi6JAdK6hK6h8rgEMM5b4cFXkpubY2MnLb"
+				"bzz-raw://f103065051300cd995fd4599ba91188d4071b92175b52f26110e02db091617c0",
+				"dweb:/ipfs/QmSyDz67R2HCypDE8Pacn3voVwxw9x17NM66q47YgBnGqc"
+			]
+		},
+		"contracts/000_RandomContract.sol": {
+			"keccak256": "0xf543cdb8e4319ff8e2c7531659c4470a0f9c64e06c31b134a2708d7232643600",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6d8f2e9e917e0cf0d7e1144b57eab00324eb3deaeb9cdeddeda66cd9b9c56131",
+				"dweb:/ipfs/QmRBqtS67f9pjSUeGHHFQc7rQP9ShnvZDBMAbQAVNs3PPy"
+			]
+		},
+		"contracts/001_AuthContract.sol": {
+			"keccak256": "0xd45705586d7b3e671c3a4dd9f1b9def688edbbcc24afe4494e04e11571bf0829",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ea8ac78360d7b324b49bec5b360c8cb308d83c8d98094c24ab76f1ab0748f8b1",
+				"dweb:/ipfs/QmbxpN4YnMF58vgrA5Ei1KCxC2GmNpjxb3wbmwcs6xqeZr"
+			]
+		},
+		"contracts/003_FightContract.sol": {
+			"keccak256": "0xd8b5abe462587c121ec48c84e96b0031e330711f14de24ddeca99cd767104156",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://a9781d01131a9bfa33569d38ca31204224ae44190161859c4eccb0ec3c20ebd9",
+				"dweb:/ipfs/QmXmVVMWR3fDkibVNpLpcaUogWPgk4mayGrofy6GL6b81a"
+			]
+		},
+		"contracts/abstract/BaseContract.sol": {
+			"keccak256": "0x642413860456d0b0d5e6059805dfc4f290fd129fed35a52254929d4d896ae596",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5e90898a963ddd44b6b65185e1399807eed8b12a66ecdf210cb94c7518483810",
+				"dweb:/ipfs/QmXV49bstmmKhhfpAFZzd8Ayz226HFRUHKeMQcfBHWeM1E"
+			]
+		},
+		"contracts/abstract/Interfaces.sol": {
+			"keccak256": "0xdd081a0027a3fbea101bdde25fd7022ad5266e3340f882db023adbf89c2feb91",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://1805e650c86dadbce11a604d1949135284c8fab5388e8d899c4fd1b0cce64da6",
+				"dweb:/ipfs/QmRkEoRBkuJim6WYMavvGV3kwvpsWnouJgTvYSs2bcfLyY"
+			]
+		},
+		"contracts/abstract/Permissions.sol": {
+			"keccak256": "0x09a50a900250f5366f1739253d6670494799f5b018c3801dfa5cedac302b0484",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://3ca61923c8d867538aca0f4124b3127a1be06af0b5877d834672e2606a9ed42b",
+				"dweb:/ipfs/QmdFv8nFkCJ8KDf2KxXWTjvnvCeFr4R2kPs3Cp7APYcMt5"
 			]
 		},
 		"contracts/abstract/Structures.sol": {
@@ -308,6 +361,14 @@
 			"urls": [
 				"bzz-raw://d74c620123d005e257c4162a7e274b41868f254f15ffe4657b876694cf374fa9",
 				"dweb:/ipfs/QmYNFa6QprwJmCuYbXczNXjkhNYAJGNbncGeLU7Jnv8gQm"
+			]
+		},
+		"contracts/libraries/SeedReader.sol": {
+			"keccak256": "0x0cb098e35131841c80909f1ea319fa197de10e7de9cef55dd1c1a61c02fabb1f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://91320c60a83e31d57ca55fe4168b3f1fe0583e5b75ffa01eb8011f8f16812d45",
+				"dweb:/ipfs/QmP2VU2ijFbmi3Prcx82cbBD5Rdr1oyprj86J4ikmuAmjo"
 			]
 		}
 	},

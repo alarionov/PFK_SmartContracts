@@ -8,19 +8,6 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address",
-						"name": "contractaddress",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "tokenId",
-						"type": "uint256"
-					}
-				],
-				"name": "getCharacter",
-				"outputs": [
-					{
 						"components": [
 							{
 								"internalType": "bool",
@@ -130,8 +117,20 @@
 						"internalType": "struct Character",
 						"name": "character",
 						"type": "tuple"
+					},
+					{
+						"internalType": "enum ItemSlot",
+						"name": "slot",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint256",
+						"name": "itemId",
+						"type": "uint256"
 					}
 				],
+				"name": "equip",
+				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
@@ -247,9 +246,14 @@
 						"internalType": "struct Character",
 						"name": "character",
 						"type": "tuple"
+					},
+					{
+						"internalType": "enum ItemSlot",
+						"name": "slot",
+						"type": "uint8"
 					}
 				],
-				"name": "save",
+				"name": "uneqip",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -268,7 +272,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/abstract/Interfaces.sol": "ICharacterContract"
+			"contracts/005_EquipmentManagerContract.sol": "IEquipmentManagerContract"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -282,12 +286,60 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/abstract/Interfaces.sol": {
-			"keccak256": "0x429852a523073ee703846b96f57442518ca878b6dd06470a688a13bf3ecfe8ad",
+		"@openzeppelin/contracts/utils/Counters.sol": {
+			"keccak256": "0x78450f4e3b722cce467b21e285f72ce5eaf361e9ba9dd2241a413926246773cd",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://42727b5895d3b49e8c1e9b3590d2e5b18c4eedcc0e50cf9de27627a417c253f7",
-				"dweb:/ipfs/QmcTwhJKtyCLoi6JAdK6hK6h8rgEMM5b4cFXkpubY2MnLb"
+				"bzz-raw://f103065051300cd995fd4599ba91188d4071b92175b52f26110e02db091617c0",
+				"dweb:/ipfs/QmSyDz67R2HCypDE8Pacn3voVwxw9x17NM66q47YgBnGqc"
+			]
+		},
+		"contracts/000_RandomContract.sol": {
+			"keccak256": "0xf543cdb8e4319ff8e2c7531659c4470a0f9c64e06c31b134a2708d7232643600",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6d8f2e9e917e0cf0d7e1144b57eab00324eb3deaeb9cdeddeda66cd9b9c56131",
+				"dweb:/ipfs/QmRBqtS67f9pjSUeGHHFQc7rQP9ShnvZDBMAbQAVNs3PPy"
+			]
+		},
+		"contracts/001_AuthContract.sol": {
+			"keccak256": "0xd45705586d7b3e671c3a4dd9f1b9def688edbbcc24afe4494e04e11571bf0829",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ea8ac78360d7b324b49bec5b360c8cb308d83c8d98094c24ab76f1ab0748f8b1",
+				"dweb:/ipfs/QmbxpN4YnMF58vgrA5Ei1KCxC2GmNpjxb3wbmwcs6xqeZr"
+			]
+		},
+		"contracts/005_EquipmentManagerContract.sol": {
+			"keccak256": "0x73a34cc750ffcac1c0f10e601492f2f41a793f3785e873230788a3ca5c23987d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://de63937bedc734ac4edb0f7cd666bac281ce914673c039295f934ca7e3d5830b",
+				"dweb:/ipfs/QmdjxYUnXDFi6oQkbiopRBzrxtCVgZvkbLhAkfEh6HQwib"
+			]
+		},
+		"contracts/abstract/BaseContract.sol": {
+			"keccak256": "0x642413860456d0b0d5e6059805dfc4f290fd129fed35a52254929d4d896ae596",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5e90898a963ddd44b6b65185e1399807eed8b12a66ecdf210cb94c7518483810",
+				"dweb:/ipfs/QmXV49bstmmKhhfpAFZzd8Ayz226HFRUHKeMQcfBHWeM1E"
+			]
+		},
+		"contracts/abstract/Interfaces.sol": {
+			"keccak256": "0x3b7b4bb0746f2541ab50929c3007ae3a4bc8e142ba3eaae8522b8eadb28faf75",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://2abd9a6b0196a5bfb6bcdbaf5838e2a67f920e21d90796ed4e61a66c664cae84",
+				"dweb:/ipfs/QmbKXJMsUyjQzA5Lwr5ytN1iiRumAvdABuyu63w3FsgLaj"
+			]
+		},
+		"contracts/abstract/Permissions.sol": {
+			"keccak256": "0x09a50a900250f5366f1739253d6670494799f5b018c3801dfa5cedac302b0484",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://3ca61923c8d867538aca0f4124b3127a1be06af0b5877d834672e2606a9ed42b",
+				"dweb:/ipfs/QmdFv8nFkCJ8KDf2KxXWTjvnvCeFr4R2kPs3Cp7APYcMt5"
 			]
 		},
 		"contracts/abstract/Structures.sol": {

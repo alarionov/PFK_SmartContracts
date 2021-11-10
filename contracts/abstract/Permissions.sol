@@ -1,77 +1,48 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.10;
 
-import "./Interfaces.sol";
+import {AuthRoles, IAuthContract} from "../001_AuthContract.sol";
 
 contract Permissions
 {
-    address public GAME_MASTER = address(0x0);
+    address public AUTH_CONTRACT_ADDRESS = address(0x0);
     
-    address public GAME_MANAGER_CONTRACT_ADDRESS = address(0x0);
-    address public CHARACTER_CONTRACT_ADDRESS = address(0x0);
-    address public FIGHT_CONTRACT_ADDRESS = address(0x0);
-    address public EQUIPMENT_CONTRACT = address(0x0);
+    IAuthContract private _authContract;
     
-    mapping(address => bool) public MAP_CONTRACTS;
-    
-    modifier onlyGM
+    modifier onlyGame(address _address)
     {
-        require(msg.sender == GAME_MASTER, "Can be called only by GM");
-        _;
-    }
-    
-    modifier onlyFC
-    {
-        require(msg.sender == FIGHT_CONTRACT_ADDRESS, "Can be called only by the Fight Contract");
-        _;
-    }
-    
-    modifier onlyGameManager
-    {
-        require(msg.sender ==  GAME_MANAGER_CONTRACT_ADDRESS, "Can be called only from the Core Contract");
-        _;
-    }
-    
-    modifier onlyGame
-    {
+        AuthRoles role = _authContract.role(_address);
+        
         require(
-            msg.sender == GAME_MASTER ||
-            msg.sender == GAME_MANAGER_CONTRACT_ADDRESS ||
-            msg.sender == CHARACTER_CONTRACT_ADDRESS ||
-            msg.sender == FIGHT_CONTRACT_ADDRESS ||
-            MAP_CONTRACTS[msg.sender],
+            role >= AuthRoles.GameContract,
             "Only game contracts can call this method");
         _;
     }
     
-    constructor()
+    modifier onlyGM(address _address)
     {
-        GAME_MASTER = msg.sender;
+        AuthRoles role = _authContract.role(_address);
+        
+        require(
+            role == AuthRoles.GameMaster,
+            "Only Game Master can call this method");
+        _;
     }
     
-     function setGameMasterAddress(address newGM) public onlyGM
+    constructor(address authContractAddress)
     {
-        GAME_MASTER = newGM;
+        _setAuthContractAddress(authContractAddress);
+    }
+    
+    function _setAuthContractAddress(address newAddress) private
+    {
+        AUTH_CONTRACT_ADDRESS = newAddress;
+        _authContract = IAuthContract(AUTH_CONTRACT_ADDRESS);
     } 
     
-    function setGMContractAddress(address _address) public onlyGM
+    function setAuthContractAddress(address newAddress) private 
     {
-        GAME_MANAGER_CONTRACT_ADDRESS = _address;
-    } 
-    
-    function setFightContractAddress(address _address) public onlyGM
-    {
-        FIGHT_CONTRACT_ADDRESS = _address;
-    } 
-    
-    function setCharacterContractAddress(address _address) public onlyGM
-    {
-        CHARACTER_CONTRACT_ADDRESS = _address;
-    } 
-    
-    function setEquipmentContractAddress(address _address) public onlyGM
-    {
-        EQUIPMENT_CONTRACT = _address;
+        _setAuthContractAddress(newAddress);
     }
 }

@@ -6,24 +6,56 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "authContractAddress",
-						"type": "address"
-					}
-				],
+				"inputs": [],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
 			},
 			{
-				"inputs": [],
-				"name": "AUTH_CONTRACT_ADDRESS",
-				"outputs": [
+				"inputs": [
 					{
 						"internalType": "address",
 						"name": "",
 						"type": "address"
+					}
+				],
+				"name": "ContractRoles",
+				"outputs": [
+					{
+						"internalType": "enum AuthRoles",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_address",
+						"type": "address"
+					}
+				],
+				"name": "role",
+				"outputs": [
+					{
+						"internalType": "enum AuthRoles",
+						"name": "_role",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "validate",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "result",
+						"type": "bool"
 					}
 				],
 				"stateMutability": "view",
@@ -43,7 +75,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/abstract/Permissions.sol": "Permissions"
+			"contracts/001_AuthContract.sol": "AuthContract"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -63,14 +95,6 @@
 			"urls": [
 				"bzz-raw://ea8ac78360d7b324b49bec5b360c8cb308d83c8d98094c24ab76f1ab0748f8b1",
 				"dweb:/ipfs/QmbxpN4YnMF58vgrA5Ei1KCxC2GmNpjxb3wbmwcs6xqeZr"
-			]
-		},
-		"contracts/abstract/Permissions.sol": {
-			"keccak256": "0x391d6da95093d3671c88cd033a4076781b6e0152ef7b862afd21714d126b3889",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://477c3e7436c59aae2fb887b7720bad6914186a81ae892da904e9d50cd37240aa",
-				"dweb:/ipfs/QmTjoUMTP6Xs3aXGxspthfsnFvKJnJWjPu4CbT1eXXaF4W"
 			]
 		}
 	},

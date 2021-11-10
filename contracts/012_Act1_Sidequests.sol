@@ -1,10 +1,12 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.10;
 
 import "./abstract/Structures.sol";
-import "./abstract/Interfaces.sol";
 import "./abstract/MapContract.sol";
+
+import { IEquipmentContract } from "./005_EquipmentContract.sol";
+
 import "./libraries/Utils.sol";
 
 contract Act1Sidequests is MapContract
@@ -14,6 +16,7 @@ contract Act1Sidequests is MapContract
         SHIELD_REWARD
     }
     
+    address public EQUIPMENT_CONTRACT;
     address public ACT1_MILESTONES_CONTACT_ADDRESS;
     
     uint public WOODEN_SHIELD_ID;
@@ -23,21 +26,20 @@ contract Act1Sidequests is MapContract
     uint[] private _cooldowns = [1,2,3,4,5,6];
     mapping(uint => uint[]) private _activeAfter;
     
-    constructor() MapContract(5)
-    {
-    }
+    constructor(address authContractAddress) MapContract(authContractAddress, 5)
+    {}
     
-    function setMainMapContract(address mainMapContract) public onlyGame
+    function setMainMapContract(address mainMapContract) public onlyGame(msg.sender)
     {
         ACT1_MILESTONES_CONTACT_ADDRESS = mainMapContract;
     }
     
-    function setCooldowns(uint[] memory newCooldowns) public onlyGame
+    function setCooldowns(uint[] memory newCooldowns) public onlyGame(msg.sender)
     {
         _cooldowns = newCooldowns;
     }
     
-    function setWoodenShieldId(uint _itemTypeId) public onlyGame
+    function setWoodenShieldId(uint _itemTypeId) public onlyGame(msg.sender)
     {
         WOODEN_SHIELD_ID = _itemTypeId;
     }
@@ -59,7 +61,7 @@ contract Act1Sidequests is MapContract
         cooldowns = _activeAfter[hash];
     }
     
-    function update(Character memory character, uint index, bool victory) public onlyGame override(IMapContract)
+    function update(Character memory character, uint index, bool victory) public onlyGame(msg.sender) override(IMapContract)
     {
         uint hash = Utils.getHash(character);
         _activeAfter[hash][index] = block.number + _cooldowns[index];
