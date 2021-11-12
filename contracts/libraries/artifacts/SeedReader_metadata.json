@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.9+commit.e5eed63a"
+		"version": "0.8.10+commit.fc410830"
 	},
 	"language": "Solidity",
 	"output": {
@@ -26,18 +26,18 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
 		"contracts/libraries/SeedReader.sol": {
-			"keccak256": "0x0cb098e35131841c80909f1ea319fa197de10e7de9cef55dd1c1a61c02fabb1f",
+			"keccak256": "0xa89ad78135fd782be440071b147b551a67d2a9c787b01b5a6a8fd09c4cab7b0a",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://91320c60a83e31d57ca55fe4168b3f1fe0583e5b75ffa01eb8011f8f16812d45",
-				"dweb:/ipfs/QmP2VU2ijFbmi3Prcx82cbBD5Rdr1oyprj86J4ikmuAmjo"
+				"bzz-raw://7c5567cf09c38ef4af565c0fc2f0e0ad84a04378cb006d93da01aecf773c202c",
+				"dweb:/ipfs/QmdjCNce41tKTgxXh4RRuZ5wkdQZFtmCEGGq1bbRv5z5Tr"
 			]
 		}
 	},

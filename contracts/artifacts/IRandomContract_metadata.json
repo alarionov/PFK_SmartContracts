@@ -32,7 +32,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/000_Random.sol": "IRandomContract"
+			"contracts/000_RandomContract.sol": "IRandomContract"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -54,7 +54,7 @@
 				"dweb:/ipfs/QmSyDz67R2HCypDE8Pacn3voVwxw9x17NM66q47YgBnGqc"
 			]
 		},
-		"contracts/000_Random.sol": {
+		"contracts/000_RandomContract.sol": {
 			"keccak256": "0xf543cdb8e4319ff8e2c7531659c4470a0f9c64e06c31b134a2708d7232643600",
 			"license": "MIT",
 			"urls": [
@@ -70,36 +70,12 @@
 				"dweb:/ipfs/QmbxpN4YnMF58vgrA5Ei1KCxC2GmNpjxb3wbmwcs6xqeZr"
 			]
 		},
-		"contracts/abstract/Interfaces.sol": {
-			"keccak256": "0x03af84ef4e005e63255f73f0d587506d2c8f8180feb2d160ca10ce1687530fdf",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://f7547302f931ee37c68a4dc9813cfc290a993a84883a4968e46f8dc9076fbc59",
-				"dweb:/ipfs/QmPkdPXfzLrmgBo6shMVDTR9197Sqfih8XNpEACbZMZmNe"
-			]
-		},
 		"contracts/abstract/Permissions.sol": {
-			"keccak256": "0x09a50a900250f5366f1739253d6670494799f5b018c3801dfa5cedac302b0484",
+			"keccak256": "0x391d6da95093d3671c88cd033a4076781b6e0152ef7b862afd21714d126b3889",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://3ca61923c8d867538aca0f4124b3127a1be06af0b5877d834672e2606a9ed42b",
-				"dweb:/ipfs/QmdFv8nFkCJ8KDf2KxXWTjvnvCeFr4R2kPs3Cp7APYcMt5"
-			]
-		},
-		"contracts/abstract/Structures.sol": {
-			"keccak256": "0x6a4e25aa822ff27556a4876ef0fd44c7f954a51b433450115ec1ee1bf83200b4",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://a83a62bfd3d1aaede80954555a0cee1994f993e180080ebda4a0afc4867c8008",
-				"dweb:/ipfs/QmehJsmBQiS9LSHscdUrAa67PeYG7dSMN7Xt143AR9X2Sx"
-			]
-		},
-		"contracts/libraries/ComputedStats.sol": {
-			"keccak256": "0x594078ed7d10c96a752b08c9f876c14d8ea3ffb197d8347c1ab5056fcd03070b",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://d74c620123d005e257c4162a7e274b41868f254f15ffe4657b876694cf374fa9",
-				"dweb:/ipfs/QmYNFa6QprwJmCuYbXczNXjkhNYAJGNbncGeLU7Jnv8gQm"
+				"bzz-raw://477c3e7436c59aae2fb887b7720bad6914186a81ae892da904e9d50cd37240aa",
+				"dweb:/ipfs/QmTjoUMTP6Xs3aXGxspthfsnFvKJnJWjPu4CbT1eXXaF4W"
 			]
 		}
 	},

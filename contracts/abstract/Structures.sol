@@ -13,35 +13,11 @@ enum StatType
     Armor
 }
 
-enum ItemSlot
-{
-    Any,
-    Armor,
-    Weapon,
-    Shield
-}
-
 struct Equipment
 {
     uint armorSetId;
     uint weaponSetId;
     uint shieldId;
-}
-
-struct Character
-{
-    bool exists;
-    
-    address contractAddress;
-    uint tokenId;
-    address owner;
-    
-    uint level;
-    uint exp;
-    uint upgrades;
-    
-    ComputedStats.Stats stats;
-    Equipment equipment;
 }
 
 struct Fight

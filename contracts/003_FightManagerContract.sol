@@ -11,6 +11,7 @@ import "./abstract/BaseContract.sol";
 import { ICharacterContract } from "./002_CharacterContract.sol";
 import { IFightContract } from "./003_FightContract.sol";
 import { IEquipmentContract } from "./005_EquipmentContract.sol";
+import { IMapContract } from "./abstract/MapContract.sol";
 
 import "./libraries/Experience.sol";
 

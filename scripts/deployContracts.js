@@ -31,15 +31,22 @@ async function sendTransaction(rawTx, privateKey)
     return response;
 }
 
-async function deployContract(wallet, privateKey, artifactsPath) 
+async function deployContract(wallet, privateKey, artifactsPath, args) 
 {
     const metadataJson = JSON.parse(await remix.call('fileManager', 'getFile', artifactsPath));
     const metadata = linkLibraries(metadataJson, LIBRARIES);
     const contract = new web3.eth.Contract(metadata.abi);
-    const data = contract.deploy({data: "0x" + metadata.data.bytecode.object}).encodeABI();
+    const params = {data: "0x" + metadata.data.bytecode.object};
+    
+    if (typeof(args) === "object")
+    {
+        Object.assign(params, { arguments: args }); 
+    }
+
+    const data = contract.deploy(params).encodeABI();
     const rawTx = await getRawTx(wallet, data);
     const response = await sendTransaction(rawTx, privateKey);
-    return response.contractAddress;
+    return new web3.eth.Contract(metadata.abi, response.contractAddress);
 }
 
 const linkLibraries = (metadata, libraries) => {
@@ -54,10 +61,11 @@ const linkLibraries = (metadata, libraries) => {
 };
 
 const LIBRARIES = {
-    "ComputedStats": "0xB06374F9De9e8F98341c4c3349a25dA229e20919",
-    "GameMath": "0xcc1e70c46E0F9A71f522862Da52765ca573FAD14",
-    "SeedReader": "0xbCfF6019C9B75748b85d58867306A9d7DA571c91",
-    "Utils": "0xB092Ba8eAF2B58617e1A6B227617162aa3804AF1"
+    ComputedStats: "0xb01668351168342173927799a19c524588Eb5D09",
+    Experience: "0xE59d43B028541054570BFCDAbDF6609Be993A769",
+    GameMath: "0x42eBad262F9fd1f4D55B510C44164B9cdB61fc22",
+    SeedReader: "0x8c4D25f1359E064E039E6Ec04A133b1140dc2Ccb",
+    Utils: "0x836e7eba35F8441d7eD63cc8c81C0F37B1c16017"
 };
 
 /*
@@ -75,7 +83,7 @@ let NONCE = 0;
         console.log("....................................");
         
         const wallet = "0x8229d792c1BCCdb9Cc336821502aC906005317a6";
-        const privateKey = "";
+        const privateKey = "93fc8fe13e93f6fde887374afee9a5ee456b963d90278d1d88f3a2592586984c";
         
         if (privateKey === "")
         {
@@ -83,6 +91,10 @@ let NONCE = 0;
         }
         
         NONCE = await web3.eth.getTransactionCount(wallet);
+        
+        const artifactsPath = `browser/contracts/artifacts/AuthContract.json`;
+        const authContract = await deployContract(wallet, privateKey, artifactsPath);
+        NONCE += 1;
         
         const contracts = {
             "RandomContract": null,
@@ -99,15 +111,17 @@ let NONCE = 0;
         {
             console.log(`Deploying ${contractName}`);
             const artifactsPath = `browser/contracts/artifacts/${contractName}.json`;
-            contracts[contractName] = await deployContract(wallet, privateKey, artifactsPath);
+            contracts[contractName] = await deployContract(wallet, privateKey, artifactsPath, [authContract.options.address]);
             NONCE += 1;
         }
+        
+        contracts["AuthContract"] = authContract;
         
         console.log("Contracts:");
         
         for (let contractName in contracts)
         {
-            console.log(`${contractName} ${contracts[contractName]}`);
+            console.log(`${contractName} ${contracts[contractName].options.address}`);
         }
         
         return;

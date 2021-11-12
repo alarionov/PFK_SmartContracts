@@ -47,7 +47,7 @@ let NONCE = 0;
         console.log("....................................");
         
         const wallet = "0x8229d792c1BCCdb9Cc336821502aC906005317a6";
-        const privateKey = "";
+        const privateKey = "93fc8fe13e93f6fde887374afee9a5ee456b963d90278d1d88f3a2592586984c";
         
         if (privateKey === "")
         {
@@ -58,6 +58,7 @@ let NONCE = 0;
         
         const libraries = {
             ComputedStats: null,
+            Experience: null,
             GameMath: null,
             SeedReader: null,
             Utils: null

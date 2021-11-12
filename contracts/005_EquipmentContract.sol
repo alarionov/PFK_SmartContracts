@@ -2,32 +2,41 @@
 
 pragma solidity ^0.8.10;
 
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
-
 import "./abstract/Structures.sol";
 import "./abstract/BaseContract.sol";
 
 import "./libraries/ComputedStats.sol";
+
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+
+enum ItemSlot
+{
+    Any,
+    Armor,
+    Weapon,
+    Shield
+}
+
+struct ItemType 
+{
+    uint id;
+    string name;
+    ItemSlot slot;
+    ComputedStats.Stats bonusStats;
+}
 
 interface IEquipmentContract
 {
     function getInventory(Equipment memory equipment) external view returns(ComputedStats.Stats memory bonusStats);
     function mintByGame(address player, uint itemType) external returns(uint tokenId);
     function forcedTransfer(address from, address to, uint itemId) external;
+    function getItemTypeByItemId(uint tokenId) external view returns(ItemType memory itemType);
 }
 
 contract EquipmentContract is BaseContract, IEquipmentContract, ERC721Enumerable
 {
     using ComputedStats for ComputedStats.Stats;
     
-    struct ItemType 
-    {
-        uint id;
-        string name;
-        ItemSlot slot;
-        ComputedStats.Stats bonusStats;
-    }
-
     mapping(uint => ItemType) _itemTypes;
     mapping(uint => uint) _itemToType;
     
@@ -99,7 +108,7 @@ contract EquipmentContract is BaseContract, IEquipmentContract, ERC721Enumerable
         _transfer(from, to, itemId);
     }
     
-    function itemTypeByItemId(uint itemId) private view returns(ItemType memory itemType)
+    function getItemTypeByItemId(uint itemId) public view override(IEquipmentContract) returns(ItemType memory itemType)
     {
         itemType = _itemTypes[_itemToType[itemId]];
     }

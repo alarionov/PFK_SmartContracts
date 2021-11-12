@@ -8,6 +8,22 @@ import "./abstract/BaseContract.sol";
 import "./libraries/GameMath.sol";
 import "./libraries/ComputedStats.sol";
 
+struct Character
+{
+    bool exists;
+    
+    address contractAddress;
+    uint tokenId;
+    address owner;
+    
+    uint level;
+    uint exp;
+    uint upgrades;
+    
+    ComputedStats.Stats stats;
+    Equipment equipment;
+}
+
 interface ICharacterContract
 {
     function getCharacter(address contractaddress, uint tokenId) external returns (Character memory character);

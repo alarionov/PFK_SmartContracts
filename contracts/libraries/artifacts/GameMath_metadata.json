@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.9+commit.e5eed63a"
+		"version": "0.8.10+commit.fc410830"
 	},
 	"language": "Solidity",
 	"output": {
@@ -26,18 +26,18 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
 		"contracts/libraries/GameMath.sol": {
-			"keccak256": "0x4a6367bc2b158d97351f54bfa3a54b5619f85fae379d17aa7fb92b461e56262a",
+			"keccak256": "0x16946710aeff15fc7f54487d0800519c9c85ef411df811ff311d2eebfa452c99",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://1dc094cf20e7b5a8a91fb42cd5e9c2658ed20adbe35431f59b4d710733e332ba",
-				"dweb:/ipfs/QmWLn3kQshDDdY2jCdJ9K2UqzsWxU4dq2PxcZ6h4LxKKur"
+				"bzz-raw://fe3cc4010a62d6ea25b2544432d85d787bab41a00927067499a5d03706cfb980",
+				"dweb:/ipfs/QmU8drariAknLtZkfXMo78G65WkTideL92vkakneLSbCfe"
 			]
 		}
 	},
