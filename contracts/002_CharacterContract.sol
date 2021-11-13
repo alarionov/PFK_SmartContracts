@@ -2,11 +2,12 @@
 
 pragma solidity ^0.8.10;
 
-import "./abstract/Structures.sol";
 import "./abstract/BaseContract.sol";
 
 import "./libraries/GameMath.sol";
 import "./libraries/ComputedStats.sol";
+
+import { Equipment } from "./005_EquipmentContract.sol";
 
 struct Character
 {
@@ -84,11 +85,11 @@ contract CharacterContract is BaseContract, ICharacterContract
     }
     
     /* Upgrades */
-    function upgrade(address contractAddress, uint tokenId, StatType stat) external 
+    function upgrade(address contractAddress, uint tokenId, ComputedStats.StatType stat) external 
         onlyGame(msg.sender)
         upgradable(msg.sender, contractAddress, tokenId)
     {
-        require(stat >= StatType.Strength && stat <= StatType.Constitution, "Invalid stat type");
+        require(stat >= ComputedStats.StatType.Strength && stat <= ComputedStats.StatType.Constitution, "Invalid stat type");
         
         Character memory character = _characters[contractAddress][tokenId];
         
@@ -97,7 +98,7 @@ contract CharacterContract is BaseContract, ICharacterContract
         emit NewStats(character.stats, character.upgrades);
     }
     
-    function modifyStats(address contractAddress, uint tokenId, StatType stat, uint value) external onlyGame(msg.sender) 
+    function modifyStats(address contractAddress, uint tokenId, ComputedStats.StatType stat, uint value) external onlyGame(msg.sender) 
     {
         Character memory character = _characters[contractAddress][tokenId];
         
@@ -106,51 +107,51 @@ contract CharacterContract is BaseContract, ICharacterContract
         emit NewStats(character.stats, character.upgrades);
     }
     
-    function _upgrade(Character memory character, StatType stat, uint value) private pure
+    function _upgrade(Character memory character, ComputedStats.StatType stat, uint value) private pure
     {
         character.upgrades -= value;
         
-        if (stat == StatType.Strength)
+        if (stat == ComputedStats.StatType.Strength)
         {
             character.stats.strength += value;    
         }
-        else if (stat == StatType.Dexterity)
+        else if (stat == ComputedStats.StatType.Dexterity)
         {
             character.stats.dexterity += value;
         }
-        else if (stat == StatType.Constitution)
+        else if (stat == ComputedStats.StatType.Constitution)
         {
             character.stats.dexterity += value;
         }
-        else if (stat == StatType.Luck)
+        else if (stat == ComputedStats.StatType.Luck)
         {
             character.stats.dexterity += value;
         }
-        else if (stat == StatType.Armor)
+        else if (stat == ComputedStats.StatType.Armor)
         {
             character.stats.dexterity += value;
         }
     }
     
-    function _modify(Character memory character, StatType stat, uint value, int8 sign) private pure
+    function _modify(Character memory character, ComputedStats.StatType stat, uint value, int8 sign) private pure
     {
-        if (stat == StatType.Strength)
+        if (stat == ComputedStats.StatType.Strength)
         {
             character.stats.strength = GameMath.modify(character.stats.strength, value, sign);
         }
-        else if (stat == StatType.Dexterity)
+        else if (stat == ComputedStats.StatType.Dexterity)
         {
             character.stats.dexterity = GameMath.modify(character.stats.dexterity, value, sign);
         }
-        else if (stat == StatType.Constitution)
+        else if (stat == ComputedStats.StatType.Constitution)
         {
             character.stats.constitution = GameMath.modify(character.stats.constitution, value, sign);
         }
-        else if (stat == StatType.Luck)
+        else if (stat == ComputedStats.StatType.Luck)
         {
             character.stats.luck = GameMath.modify(character.stats.luck, value, sign);
         }
-        else if (stat == StatType.Armor)
+        else if (stat == ComputedStats.StatType.Armor)
         {
             character.stats.armor = GameMath.modify(character.stats.armor, value, sign);
         }

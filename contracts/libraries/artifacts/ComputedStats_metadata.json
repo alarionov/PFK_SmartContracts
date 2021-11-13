@@ -941,11 +941,11 @@
 	},
 	"sources": {
 		"contracts/libraries/ComputedStats.sol": {
-			"keccak256": "0x28de0a2877cda6addb55c7f76ea46ac19a4264539ee96fdab7dd948d77c91e5e",
+			"keccak256": "0xebec5a2b0a7f048a55065c44f1602d4e4393caeb6a30e3d9e540cca4f30e1dc5",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://366b14e463ecfd0865aa1c7a8ae33e77758fb00b6a1c69f4c7c5a14c7c58d8d4",
-				"dweb:/ipfs/QmeX7TfY1ZYrGVUKDJzkapoXqWaMU6AWQgCSJukJJHA6pg"
+				"bzz-raw://12c2935f99546844ec1ceafd050bea29bbbd3965bd28e5e8363abc7220f92c64",
+				"dweb:/ipfs/QmX1PrWgapn9tmczkAf4A5UdZ2KUgMZwGJZKpHPCo35N37"
 			]
 		}
 	},

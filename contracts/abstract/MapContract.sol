@@ -2,8 +2,10 @@
 
 pragma solidity ^0.8.10;
 
+import "./Enemy.sol";
 import "./BaseContract.sol";
-import "./Structures.sol";
+
+import { Character } from "../002_CharacterContract.sol";
 
 interface IMapContract
 {

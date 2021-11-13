@@ -2,7 +2,6 @@
 
 pragma solidity ^0.8.10;
 
-import "./abstract/Structures.sol";
 import "./abstract/MapContract.sol";
 
 import { IEquipmentContract } from "./005_EquipmentContract.sol";

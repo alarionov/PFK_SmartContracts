@@ -2,7 +2,6 @@
 
 pragma solidity ^0.8.10;
 
-import "./abstract/Structures.sol";
 import "./abstract/BaseContract.sol";
 
 import "./libraries/ComputedStats.sol";
@@ -23,6 +22,13 @@ struct ItemType
     string name;
     ItemSlot slot;
     ComputedStats.Stats bonusStats;
+}
+
+struct Equipment
+{
+    uint armorSetId;
+    uint weaponSetId;
+    uint shieldId;
 }
 
 interface IEquipmentContract

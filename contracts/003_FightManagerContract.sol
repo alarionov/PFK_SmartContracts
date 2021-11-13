@@ -5,15 +5,16 @@ pragma solidity ^0.8.10;
 import "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 
-import "./abstract/Structures.sol";
+import "./abstract/Enemy.sol";
 import "./abstract/BaseContract.sol";
 
 import { ICharacterContract } from "./002_CharacterContract.sol";
-import { IFightContract } from "./003_FightContract.sol";
+import { Fight, IFightContract } from "./003_FightContract.sol";
 import { IEquipmentContract } from "./005_EquipmentContract.sol";
 import { IMapContract } from "./abstract/MapContract.sol";
 
 import "./libraries/Experience.sol";
+import "./libraries/ComputedStats.sol";
 
 interface IFightManagerContract
 {
@@ -43,7 +44,13 @@ contract FightManagerContract is BaseContract, IFightManagerContract
     constructor(address authContractAddress) BaseContract(authContractAddress)
     {}
     
-    /* battle */
+    function setCharacterContractAddress(address newAddress) public onlyGM(msg.sender)
+    {
+        CHARACTER_CONTRACT_ADDRESS = newAddress;
+    }
+    
+    
+    
     function conductFight(address mapContractAddress, uint index, address characterContractAddress, uint characterId) 
         public
         override(IFightManagerContract)

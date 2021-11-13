@@ -4,7 +4,7 @@ pragma solidity ^0.8.10;
 
 import "./Permissions.sol";
 
-import {IRandomContract} from "../000_RandomContract.sol";
+import { IRandomContract } from "../000_RandomContract.sol";
 
 contract BaseContract is Permissions
 {

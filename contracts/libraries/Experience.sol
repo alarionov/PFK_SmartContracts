@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.10;
 
-import "../abstract/Structures.sol";
+import { Character } from "../002_CharacterContract.sol";
 
 library Experience 
 {

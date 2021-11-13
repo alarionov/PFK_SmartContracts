@@ -2,11 +2,24 @@
 
 pragma solidity ^0.8.10;
 
-import "./abstract/Structures.sol";
+import "./abstract/Enemy.sol";
 import "./abstract/BaseContract.sol";
 
 import "./libraries/SeedReader.sol";
 import "./libraries/ComputedStats.sol";
+
+import { Character } from "./002_CharacterContract.sol";
+
+struct Fight
+{
+    uint id;
+    bytes seed;
+    
+    ComputedStats.Stats stats;
+    
+    bool victory;
+    uint exp;
+}
 
 interface IFightContract
 {

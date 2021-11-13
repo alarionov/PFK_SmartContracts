@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.10;
 
-import {AuthRoles, IAuthContract} from "../001_AuthContract.sol";
+import { AuthRoles, IAuthContract } from "../001_AuthContract.sol";
 
 contract Permissions
 {

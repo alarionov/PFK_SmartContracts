@@ -4,6 +4,15 @@ pragma solidity ^0.8.10;
 
 library ComputedStats 
 {
+    enum StatType
+    {
+        Strength,
+        Dexterity,
+        Constitution,
+        Luck,
+        Armor
+    }
+
     struct Stats
     {
         uint strength;
