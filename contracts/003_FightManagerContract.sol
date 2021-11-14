@@ -29,17 +29,13 @@ contract FightManagerContract is BaseContract, IFightManagerContract
     
     address public CHARACTER_CONTRACT_ADDRESS;
     address public FIGHT_CONTRACT_ADDRESS;
-    address public EQUIPMENT_CONTRACT;
+    address public EQUIPMENT_CONTRACT_ADDRESS;
     
-    mapping(address => bool) private _approvedCharacterContracts;
+    ICharacterContract private _characterContract;
+    IFightContract private _fightContract;
+    IEquipmentContract private _equipmentContract;
     
-    modifier auth(address player, address contractAddress, uint tokenId)
-    {
-        require(_approvedCharacterContracts[contractAddress], "This contract is not supported");
-        require(IERC721(contractAddress).ownerOf(tokenId) == player, "Player should own the character");
-        
-        _;
-    }
+
     
     constructor(address authContractAddress) BaseContract(authContractAddress)
     {}
@@ -47,17 +43,26 @@ contract FightManagerContract is BaseContract, IFightManagerContract
     function setCharacterContractAddress(address newAddress) public onlyGM(msg.sender)
     {
         CHARACTER_CONTRACT_ADDRESS = newAddress;
+        _characterContract = ICharacterContract(CHARACTER_CONTRACT_ADDRESS);
     }
     
+    function setFightContractAddress(address newAddress) public onlyGM(msg.sender)
+    {
+        FIGHT_CONTRACT_ADDRESS = newAddress;
+        _fightContract = IFightContract(FIGHT_CONTRACT_ADDRESS);
+    }
     
+    function setEquipmentContractAddress(address newAddress) public onlyGM(msg.sender)
+    {
+        EQUIPMENT_CONTRACT_ADDRESS = newAddress;
+        _equipmentContract = IEquipmentContract(EQUIPMENT_CONTRACT_ADDRESS);
+    }
     
     function conductFight(address mapContractAddress, uint index, address characterContractAddress, uint characterId) 
         public
         override(IFightManagerContract)
         auth(msg.sender, characterContractAddress, characterId)
     {
-        ICharacterContract characterContract = ICharacterContract(CHARACTER_CONTRACT_ADDRESS);
-        IFightContract fightContract = IFightContract(FIGHT_CONTRACT_ADDRESS);
         IMapContract mapContract = IMapContract(mapContractAddress);
         
         Character memory character = _getCharacterWithInventoryStats(characterContractAddress, characterId);
@@ -67,22 +72,19 @@ contract FightManagerContract is BaseContract, IFightManagerContract
     
         Enemy[] memory enemies = mapContract.getEnemies(index);
     
-        Fight memory fight = fightContract.conductFight(character, enemies);
+        Fight memory fight = _fightContract.conductFight(character, enemies);
     
         character.addExp(fight.exp);
         
-        characterContract.save(character);
+        _characterContract.save(character);
         mapContract.update(character, index, fight.victory);
     }
     
     function _getCharacterWithInventoryStats(address characterContractAddress, uint characterId) private returns(Character memory character)
     {
-        ICharacterContract characterContract = ICharacterContract(CHARACTER_CONTRACT_ADDRESS);
-        IEquipmentContract equipmentContract = IEquipmentContract(EQUIPMENT_CONTRACT);
+        character = _characterContract.getCharacter(characterContractAddress, characterId);
         
-        character = characterContract.getCharacter(characterContractAddress, characterId);
-        
-        ComputedStats.Stats memory bonusStats = equipmentContract.getInventory(character.equipment);
+        ComputedStats.Stats memory bonusStats = _equipmentContract.getInventory(character.equipment);
         
         character.stats.add(bonusStats);
     }

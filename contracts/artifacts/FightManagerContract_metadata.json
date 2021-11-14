@@ -44,7 +44,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "EQUIPMENT_CONTRACT",
+				"name": "EQUIPMENT_CONTRACT_ADDRESS",
 				"outputs": [
 					{
 						"internalType": "address",
@@ -118,6 +118,32 @@
 					}
 				],
 				"name": "setCharacterContractAddress",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newAddress",
+						"type": "address"
+					}
+				],
+				"name": "setEquipmentContractAddress",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newAddress",
+						"type": "address"
+					}
+				],
+				"name": "setFightContractAddress",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -300,11 +326,11 @@
 			]
 		},
 		"contracts/003_FightManagerContract.sol": {
-			"keccak256": "0x2b33723cd9be4df93f8de73ea2522abdcb2445d20d04e2015ccb63a778ee64eb",
+			"keccak256": "0x94caadd15e23764edef55e146bae05bea0a57f8e5f6a184dd4f6c9f287747ad0",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e48825082573341b3b0210048a4e3184a2c48724ec37869f204c051230481c55",
-				"dweb:/ipfs/QmYnC1WDvzsC579N8hvV7Wy3RNSfChij1QZuCNNJfvNzRY"
+				"bzz-raw://6277e0337790839af6a4bd03f67bdb23339f9c57924671731ab9fe487edf19cb",
+				"dweb:/ipfs/QmRqFMFH13TFcp2b5wzaLXXVwqzjxW48BFbiet7Ru6fEdC"
 			]
 		},
 		"contracts/005_EquipmentContract.sol": {
@@ -316,11 +342,11 @@
 			]
 		},
 		"contracts/abstract/BaseContract.sol": {
-			"keccak256": "0x6da28083aaa7d67d7cebb92a390bbcb60296151760229145c30e395a115629e3",
+			"keccak256": "0xb3f02eca4b9178b944b942fe3682b6d119289b9305ea51c386cec1757a1d57c5",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://b01ae4f82854d05f87f3d81d44ef8ddb84f55ee1f21665186528ddef33582b02",
-				"dweb:/ipfs/QmdNA8GYgCLELqkFXPXa2HJ3VwFfvmsnPGuU8qjpsXc4Ek"
+				"bzz-raw://0055a4e5e85a01e8323f992f324b35cb0f86160bfe701b17d704774d46898a75",
+				"dweb:/ipfs/QmZ27t6zmsFK7CJkfCq1xemG5zBwKdb39oRRmarcmRwXXK"
 			]
 		},
 		"contracts/abstract/Enemy.sol": {

@@ -50,7 +50,8 @@
 		"gasEstimates": null,
 		"methodIdentifiers": {
 			"role(address)": "d590f8c9",
-			"validate()": "6901f668"
+			"setRole(address,uint8)": "571c3e60",
+			"validate(address,address,uint256)": "aa3ad4e4"
 		}
 	},
 	"abi": [
@@ -74,15 +75,43 @@
 			"type": "function"
 		},
 		{
-			"inputs": [],
-			"name": "validate",
-			"outputs": [
+			"inputs": [
 				{
-					"internalType": "bool",
-					"name": "result",
-					"type": "bool"
+					"internalType": "address",
+					"name": "contractAddress",
+					"type": "address"
+				},
+				{
+					"internalType": "enum AuthRoles",
+					"name": "role",
+					"type": "uint8"
 				}
 			],
+			"name": "setRole",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "player",
+					"type": "address"
+				},
+				{
+					"internalType": "address",
+					"name": "contractAddress",
+					"type": "address"
+				},
+				{
+					"internalType": "uint256",
+					"name": "tokenId",
+					"type": "uint256"
+				}
+			],
+			"name": "validate",
+			"outputs": [],
 			"stateMutability": "view",
 			"type": "function"
 		}

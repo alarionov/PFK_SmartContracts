@@ -9,6 +9,7 @@ import { IRandomContract } from "../000_RandomContract.sol";
 contract BaseContract is Permissions
 {
     address public RANDOM_CONTRACT_ADDRESS;
+    IRandomContract private _randomContract;
    
     constructor(address authContractAddress) Permissions(authContractAddress)
     {
@@ -17,11 +18,11 @@ contract BaseContract is Permissions
     function setRandomContractAddress(address newAddress) public onlyGM(msg.sender)
     {
         RANDOM_CONTRACT_ADDRESS = newAddress;
+        _randomContract = IRandomContract(RANDOM_CONTRACT_ADDRESS);
     }
     
     function random() internal returns (uint seed)
     {
-        IRandomContract randomContract = IRandomContract(RANDOM_CONTRACT_ADDRESS);
-        seed = randomContract.random();
+        seed = _randomContract.random();
     }
 }
