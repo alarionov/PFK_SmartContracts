@@ -55,6 +55,7 @@
 			"getEnemies(uint256)": "2f2ddf54",
 			"getProgress((bool,address,uint256,address,uint256,uint256,uint256,(uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256),(uint256,uint256,uint256)))": "edd5c519",
 			"hasAccess((bool,address,uint256,address,uint256,uint256,uint256,(uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256),(uint256,uint256,uint256)),uint256)": "5d9c7467",
+			"setAuthContractAddress(address)": "d6d4eb7f",
 			"setRandomContractAddress(address)": "d7050b05",
 			"update((bool,address,uint256,address,uint256,uint256,uint256,(uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256),(uint256,uint256,uint256)),uint256,bool)": "45e4394e"
 		}
@@ -443,6 +444,19 @@
 				}
 			],
 			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "newAddress",
+					"type": "address"
+				}
+			],
+			"name": "setAuthContractAddress",
+			"outputs": [],
+			"stateMutability": "nonpayable",
 			"type": "function"
 		},
 		{

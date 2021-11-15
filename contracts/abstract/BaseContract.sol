@@ -9,7 +9,7 @@ import { IRandomContract } from "../000_RandomContract.sol";
 contract BaseContract is Permissions
 {
     address public RANDOM_CONTRACT_ADDRESS;
-    IRandomContract private _randomContract;
+    IRandomContract internal _randomContract;
    
     constructor(address authContractAddress) Permissions(authContractAddress)
     {

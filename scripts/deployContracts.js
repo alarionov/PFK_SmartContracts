@@ -61,21 +61,12 @@ const linkLibraries = (metadata, libraries) => {
 };
 
 const LIBRARIES = {
-    ComputedStats: "0xb01668351168342173927799a19c524588Eb5D09",
-    Experience: "0xE59d43B028541054570BFCDAbDF6609Be993A769",
-    GameMath: "0x42eBad262F9fd1f4D55B510C44164B9cdB61fc22",
-    SeedReader: "0x8c4D25f1359E064E039E6Ec04A133b1140dc2Ccb",
-    Utils: "0x836e7eba35F8441d7eD63cc8c81C0F37B1c16017"
+    "ComputedStats": "0x76CD5A45757131A9447963bFCE02bB38Fe2821fc",
+    "Experience": "0xB180140C1f38172F652cF7998e83053e47BF1B0d",
+    "GameMath": "0x667591B9deBC4Fc57eb01992bc48e6E7E743c101",
+    "SeedReader": "0xBA2090f24133B154c32B49D887A32D501BbF2fBC",
+    "Utils": "0x3f21Ad62f76d2aDC3B2A6F3670C318f84a3FDE1A"
 };
-
-/*
-RandomContract 0xe460a7Fc82bCfF0D663EA5F1552a0FEe0BCA53b6
-GameManager 0x9135D512E685b5Fb3c08dee49300F136AE4374c8
-CharacterContract 0x4F179eB786540014435783607edbFC70299DfD16
-FightContract 0x95e21E0D2118184fc7ebb0cCd42d4AeC8c0a3EE6
-Act1Milestones 0xE226bebE0413B0330AB023A0Ebd9414605257912
-Act1Sidequests 0xC6bD0a7a420303D5D495c1A4D7B7AF4969619D9e
-*/
 
 let NONCE = 0;
 (async () => {
@@ -123,102 +114,6 @@ let NONCE = 0;
         {
             console.log(`${contractName} ${contracts[contractName].options.address}`);
         }
-        
-        return;
-        
-        /*
-        const settings = [
-            { method: "setCoreContractAddress", value: contracts["GameManager"].options.address },
-            { method: "setCharacterContractAddress", value: contracts["WordBearer"].options.address },
-            { method: "setFightContractAddress", value: contracts["FightLogic"].options.address },
-        ];
-        
-        for (const params of settings)
-        {
-            for (const contractName of ["Random", "GameManager", "WordBearer", "FightLogic", "FightToken"])
-            {
-                console.log(`Calling ${params.method} on ${contractName}`);
-                
-                const contract = contracts[contractName];
-                
-                if (contract.options.address === params.value) continue;
-                
-                const data = contract.methods[params.method](params.value).encodeABI();
-                const rawTx = await getRawTx(wallet, data, contract.options.address);
-                const response = await sendTransaction(rawTx, privateKey);
-
-                NONCE += 1;
-            }
-        }
-        
-        for (const contractName of ["GameManager", "WordBearer", "FightLogic"])
-        {
-            console.log(`Setting Random contract on ${contractName}`);
-            
-            const contract = contracts[contractName];
-            
-            const data = contract.methods.setRandomContractAddress(contracts["Random"].options.address).encodeABI();
-            const rawTx = await getRawTx(wallet, data, contract.options.address);
-            const response = await sendTransaction(rawTx, privateKey);
-            
-            NONCE += 1;
-        }
-        
-        const additionFLSettings = [
-            { method: "setMapContractAddress", value: contracts["Map"].options.address },
-        ];
-        
-        for (const params of additionFLSettings)
-        {
-            console.log(`Calling ${params.method} on FightLogic`);
-            
-            const contract = contracts["FightLogic"];
-            const data = contract.methods[params.method](params.value).encodeABI();
-            const rawTx = await getRawTx(wallet, data, contract.options.address);
-            const response = await sendTransaction(rawTx, privateKey);
-
-            NONCE += 1;
-        }
-        
-        const additionCoreSettings = [
-            { method: "setWordContractAddress", value: contracts["WordMock"].options.address },
-            { method: "setFightTokenContractAddress", value: contracts["FightToken"].options.address }
-        ];
-        
-        for (const params of additionCoreSettings)
-        {
-            console.log(`Calling ${params.method} on GameManager`);
-            const contract = contracts["GameManager"];
-            const data = contract.methods[params.method](params.value).encodeABI();
-            const rawTx = await getRawTx(wallet, data, contract.options.address);
-            const response = await sendTransaction(rawTx, privateKey);
-
-            NONCE += 1;
-        }
-        
-        for (let i = 0; i <= 2; ++i)
-        {
-            console.log(`Registering words`);
-            
-            const contract = contracts["GameManager"];
-            const data = contract.methods.registerWord(i).encodeABI();
-            const rawTx = await getRawTx(wallet, data, contract.options.address, web3.utils.toWei('0.1', 'ether'));
-            const response = await sendTransaction(rawTx, privateKey);
-
-            NONCE += 1;
-        }
-        
-        await (async () => {
-            console.log("Starting the season");
-            
-            const contract = contracts["GameManager"];
-            const data = contract.methods.startSeason().encodeABI();
-            const rawTx = await getRawTx(wallet, data, contract.options.address);
-            const response = await sendTransaction(rawTx, privateKey);
-
-            NONCE += 1;
-        })();
-        */
     }
     catch(e)
     {

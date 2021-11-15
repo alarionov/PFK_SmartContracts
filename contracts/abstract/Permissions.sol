@@ -8,7 +8,7 @@ contract Permissions
 {
     address public AUTH_CONTRACT_ADDRESS = address(0x0);
     
-    IAuthContract private _authContract;
+    IAuthContract internal _authContract;
     
     modifier onlyGame(address _address)
     {
@@ -41,7 +41,7 @@ contract Permissions
         _authContract = IAuthContract(AUTH_CONTRACT_ADDRESS);
     } 
     
-    function setAuthContractAddress(address newAddress) private 
+    function setAuthContractAddress(address newAddress) public onlyGM(msg.sender) 
     {
         _setAuthContractAddress(newAddress);
     }

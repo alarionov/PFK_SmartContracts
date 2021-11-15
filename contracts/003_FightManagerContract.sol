@@ -35,7 +35,11 @@ contract FightManagerContract is BaseContract, IFightManagerContract
     IFightContract private _fightContract;
     IEquipmentContract private _equipmentContract;
     
-
+    modifier auth(address player, address contractAddress, uint tokenId)
+    {
+        _authContract.validate(player, contractAddress, tokenId);
+        _;
+    }
     
     constructor(address authContractAddress) BaseContract(authContractAddress)
     {}

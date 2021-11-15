@@ -15,12 +15,15 @@ contract Act1Sidequests is MapContract
         SHIELD_REWARD
     }
     
-    address public EQUIPMENT_CONTRACT;
+    address public EQUIPMENT_CONTRACT_ADDRESS;
     address public ACT1_MILESTONES_CONTACT_ADDRESS;
     
+    IEquipmentContract _equipmentContract;
+    IMapContract _mainMap;
+    
+    uint public constant LUMBERYARD_QUEST_INDEX = 1;
     uint public WOODEN_SHIELD_ID;
     mapping(uint => bool) _woodenShieldClaimed;
-    
     
     uint[] private _cooldowns = [1,2,3,4,5,6];
     mapping(uint => uint[]) private _activeAfter;
@@ -28,25 +31,32 @@ contract Act1Sidequests is MapContract
     constructor(address authContractAddress) MapContract(authContractAddress, 5)
     {}
     
-    function setMainMapContract(address mainMapContract) public onlyGame(msg.sender)
+    function setEquipmentContractAddress(address newAddress) public onlyGM(msg.sender)
     {
-        ACT1_MILESTONES_CONTACT_ADDRESS = mainMapContract;
+        EQUIPMENT_CONTRACT_ADDRESS = newAddress;
+        _equipmentContract = IEquipmentContract(EQUIPMENT_CONTRACT_ADDRESS);
     }
     
-    function setCooldowns(uint[] memory newCooldowns) public onlyGame(msg.sender)
+    function setMainMapContractAddress(address mainMapContract) public onlyGM(msg.sender)
+    {
+        ACT1_MILESTONES_CONTACT_ADDRESS = mainMapContract;
+        _mainMap = IMapContract(ACT1_MILESTONES_CONTACT_ADDRESS);
+    }
+    
+    function setCooldowns(uint[] memory newCooldowns) public onlyGM(msg.sender)
     {
         _cooldowns = newCooldowns;
     }
     
-    function setWoodenShieldId(uint _itemTypeId) public onlyGame(msg.sender)
+    function setWoodenShieldId(uint _itemTypeId) public onlyGM(msg.sender)
     {
         WOODEN_SHIELD_ID = _itemTypeId;
     }
     
     function _rewardWoodenShield(address playerAddress) private
     {
-        IEquipmentContract equipmentContract = IEquipmentContract(EQUIPMENT_CONTRACT);
-        emit PostFightEvent(uint(Events.SHIELD_REWARD));
+        _equipmentContract.mintByGame(playerAddress, WOODEN_SHIELD_ID); 
+        //emit PostFightEvent(uint(Events.SHIELD_REWARD));
     }
     
     function getProgress(Character memory character) public pure override(IMapContract) returns(uint)
@@ -65,7 +75,7 @@ contract Act1Sidequests is MapContract
         uint hash = Utils.getHash(character);
         _activeAfter[hash][index] = block.number + _cooldowns[index];
         
-        if (!_woodenShieldClaimed[hash] && victory && WOODEN_SHIELD_ID > 0)
+        if (index == LUMBERYARD_QUEST_INDEX && !_woodenShieldClaimed[hash] && victory && WOODEN_SHIELD_ID > 0)
         {
             _rewardWoodenShield(character.owner);
             _woodenShieldClaimed[hash] = true;
@@ -75,7 +85,7 @@ contract Act1Sidequests is MapContract
     function hasAccess(Character memory character, uint index) public view override(IMapContract) returns(bool)
     {
         uint hash = Utils.getHash(character);
-        bool unlocked = IMapContract(ACT1_MILESTONES_CONTACT_ADDRESS).getProgress(character) > index;
+        bool unlocked = _mainMap.getProgress(character) > index;
         bool active = _activeAfter[hash][index] < block.number;
         return unlocked && active;
     }
