@@ -2,4 +2,4 @@ ganache/*
 
 .deps/*
 build/*
-
+**/artifacts/*
