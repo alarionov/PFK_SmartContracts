@@ -7,8 +7,8 @@ import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 enum AuthRoles
 {
     Nobody,
+    ExternalCharacterContract,
     GameContract,
-    CharacterContract,
     GameMaster
 }
 
@@ -17,6 +17,11 @@ interface IAuthContract
     function setRole(address contractAddress, AuthRoles role) external;
     function validate(address player, address contractAddress, uint tokenId) external view;
     function role(address _address) external view returns(AuthRoles _role);
+}
+
+interface IExternalCharacterContract
+{
+    function ownerOf(uint tokenId) external view returns(address owner); 
 }
 
 contract AuthContract is IAuthContract
@@ -42,8 +47,8 @@ contract AuthContract is IAuthContract
     
     function validate(address player, address contractAddress, uint tokenId) public view
     {
-        require(role(contractAddress) == AuthRoles.CharacterContract, "This contract is not supported");
-        //require(IERC721(contractAddress).ownerOf(tokenId) == player, "Player should own the character");
+        require(role(contractAddress) == AuthRoles.ExternalCharacterContract, "This contract is not supported");
+        require(IExternalCharacterContract(contractAddress).ownerOf(tokenId) == player, "Player should own the character");
     }
     
     function role(address _address) public view returns(AuthRoles _role)

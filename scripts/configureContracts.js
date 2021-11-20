@@ -58,16 +58,18 @@ async function callsToContract(wallet, privateKey, contract, calls)
 }
 
 const CONTRACT_ADDRESSES = {
-    "AuthContract": "0xef2371968287B8Cc8f063Af8B497498BdD6FfF03",
-    "RandomContract": "0xE3659A17D1eeec8E9f24BcBC76d3C1fd48Ab4880",
-    "CharacterContract": "0xB152dD6fa4D2e4a86C385a3217Afb866B691374C",
-    "FightContract": "0x3AF816A2cE5aCc8Fa1A918381B8375B372f3e783",
-    "FightManagerContract": "0xaEB6F6bC492025B4A0597E5a1a05c5094ce35ddc",
-    "EquipmentContract": "0x507eDC3528a83701F43C69c4F097EcfB394f8f4c",
-    "EquipmentManagerContract": "0x2bCF7c3EC331d8234D0a7C5E4D27A9f64b609a3a",
-    "Act1Milestones": "0x6b6992dD2C14FDb0b77A31641f4710c603B30022",
-    "Act1Sidequests": "0x2499aaa7DE00ca0Fb0Ea745aedD745Bec4e51b55"
+    AuthContract: "0xC306eE22592f8c6f0AA9b2a0797596f63be56bA1",
+    RandomContract: "0x835Fa2A577e5dCB39FFe2911D6eA6795737E4906",
+    CharacterContract: "0x8D2F530793D3F05D24aa86dE1464880C72A53d30",
+    FightContract: "0x1BE71728fdc44B3482d06f5eC3afc8Ccd1b977bb",
+    FightManagerContract: "0xAD04F3Dd0216956FFeB67B70167947674e9A1862",
+    EquipmentContract: "0x70C6E0a66B5c489Ab065029abb4c39Cf996Fb38F",
+    EquipmentManagerContract: "0x441e45f30E7215875ba98793390f0aEa8C794389",
+    Act1Milestones: "0x24b2a0eD0315191fB764fC1ad6443368B4Eb4c55",
+    Act1Sidequests: "0xFd927588A534906b3d3DC71D12eb34011B0a1a76"
 };
+
+// Purr Ownership 0x83D1EE256345B48327dcAc1D93B65bC179d456Ad
 
 let NONCE = 0;
 (async () => {
@@ -109,15 +111,14 @@ let NONCE = 0;
     /**/
     
     await callsToContract(wallet, privateKey, contracts["AuthContract"], [
-        { method: "setRole", args: [contracts["CharacterContract"].options.address, /* Character Contract role */ 2] },
-        { method: "setRole", args: [contracts["FightContract"].options.address, /* Game Contract role */ 1] },
-        { method: "setRole", args: [contracts["FightManagerContract"].options.address, /* Game Contract role */ 1] },
-        { method: "setRole", args: [contracts["EquipmentContract"].options.address, /* Game Contract role */ 1] },
-        { method: "setRole", args: [contracts["EquipmentManagerContract"].options.address, /* Game Contract role */ 1] },
-        { method: "setRole", args: [contracts["Act1Milestones"].options.address, /* Game Contract role */ 1] },
-        { method: "setRole", args: [contracts["Act1Sidequests"].options.address, /* Game Contract role */ 1] },
+        { method: "setRole", args: [contracts["CharacterContract"].options.address, /* Game Contract role */ 2] },
+        { method: "setRole", args: [contracts["FightContract"].options.address, /* Game Contract role */ 2] },
+        { method: "setRole", args: [contracts["FightManagerContract"].options.address, /* Game Contract role */ 2] },
+        { method: "setRole", args: [contracts["EquipmentContract"].options.address, /* Game Contract role */ 2] },
+        { method: "setRole", args: [contracts["EquipmentManagerContract"].options.address, /* Game Contract role */ 2] },
+        { method: "setRole", args: [contracts["Act1Milestones"].options.address, /* Game Contract role */ 2] },
+        { method: "setRole", args: [contracts["Act1Sidequests"].options.address, /* Game Contract role */ 2] },
     ]);
-    
     
     await callsToContract(wallet, privateKey, contracts["FightContract"], [
         { method: "setRandomContractAddress", args: [contracts["RandomContract"].options.address] },
