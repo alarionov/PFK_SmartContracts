@@ -58,15 +58,15 @@ async function callsToContract(wallet, privateKey, contract, calls)
 }
 
 const CONTRACT_ADDRESSES = {
-    AuthContract: "0xC306eE22592f8c6f0AA9b2a0797596f63be56bA1",
-    RandomContract: "0x835Fa2A577e5dCB39FFe2911D6eA6795737E4906",
-    CharacterContract: "0x8D2F530793D3F05D24aa86dE1464880C72A53d30",
-    FightContract: "0x1BE71728fdc44B3482d06f5eC3afc8Ccd1b977bb",
-    FightManagerContract: "0xAD04F3Dd0216956FFeB67B70167947674e9A1862",
-    EquipmentContract: "0x70C6E0a66B5c489Ab065029abb4c39Cf996Fb38F",
-    EquipmentManagerContract: "0x441e45f30E7215875ba98793390f0aEa8C794389",
-    Act1Milestones: "0x24b2a0eD0315191fB764fC1ad6443368B4Eb4c55",
-    Act1Sidequests: "0xFd927588A534906b3d3DC71D12eb34011B0a1a76"
+    AuthContract: "0xCc372fD17eFCd99C85bBf26969F774bB6b27dfeC",
+    RandomContract: "0xBeB8d5b198c6FFbd3027dd126883db390c9d226B",
+    CharacterContract: "0x86c82ad509236b39651d229D306951E97733F5F3",
+    FightContract: "0x541468E2Bcfb987E5F2b09e1503f4365a360790a",
+    FightManagerContract: "0x301fb5F54f9b508e6E5609eF1dDAD7D2C774bc8b",
+    EquipmentContract: "0x2FD1EA8099573DDb6cB331f789EE39062e431f21",
+    EquipmentManagerContract: "0x151a64275c8910F7FC6855d86C16c17943E1811F",
+    Act1Milestones: "0xf7509aF5A7cCEbA910E45e911b7c508af1fbDbEC",
+    Act1Sidequests: "0xb02A4F1d6128cB80a80681D05dddCFa475A770eF"    
 };
 
 // Purr Ownership 0x83D1EE256345B48327dcAc1D93B65bC179d456Ad
@@ -75,8 +75,9 @@ let NONCE = 0;
 (async () => {
     console.log("....................................");
     
-    const wallet = "0x8229d792c1BCCdb9Cc336821502aC906005317a6";
-    const privateKey = "93fc8fe13e93f6fde887374afee9a5ee456b963d90278d1d88f3a2592586984c";
+    const myconf = JSON.parse(await remix.call('fileManager', 'getFile', "browser/scripts/config.json"));
+    const wallet = myconf.wallet.address;
+    const privateKey = myconf.wallet.privateKey;
     
     if (privateKey === "")
     {

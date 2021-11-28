@@ -46,13 +46,6 @@ contract EquipmentContract is BaseContract, IEquipmentContract, ERC721Enumerable
     mapping(uint => ItemType) _itemTypes;
     mapping(uint => uint) _itemToType;
     
-    modifier existingToken(uint tokenId)
-    {
-        require(_exists(tokenId), "Token doesn't exist");
-        
-        _;
-    }
-    
     constructor(address authContractAddress) BaseContract(authContractAddress) ERC721("Equipment", "EQPMT")
     {
         _itemTypes[0] = ItemType({ id: 0, name: "Empty", slot: ItemSlot.Any, bonusStats: ComputedStats.zeroStats() });
@@ -92,7 +85,7 @@ contract EquipmentContract is BaseContract, IEquipmentContract, ERC721Enumerable
         _accumulateBonus(bonusStats, equipment.shieldId);
     }
     
-    function _accumulateBonus(ComputedStats.Stats memory bonusStats, uint itemId) private view existingToken(itemId)
+    function _accumulateBonus(ComputedStats.Stats memory bonusStats, uint itemId) private view
     {
         uint typeId = _itemToType[itemId];
         
@@ -101,15 +94,15 @@ contract EquipmentContract is BaseContract, IEquipmentContract, ERC721Enumerable
         bonusStats.add(itemType.bonusStats);
     }
     
-    function getItem(uint tokenId) public view existingToken(tokenId) returns(ItemType memory itemType)
+    function getItem(uint tokenId) public view returns(ItemType memory itemType)
     {
         itemType = _itemTypes[_itemToType[tokenId]];
     }
     
     function forcedTransfer(address from, address to, uint itemId) public onlyGame(msg.sender)
     {
-        require(itemId != 0, "Invalid item id");
-        require(ownerOf(itemId) == address(from), "Invalid owner");
+        require(itemId > 0, "Invalid item id");
+        require(ownerOf(itemId) == from, "Invalid owner");
         
         _transfer(from, to, itemId);
     }

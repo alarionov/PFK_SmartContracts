@@ -3,3 +3,5 @@ ganache/*
 .deps/*
 build/*
 **/artifacts/*
+
+config.json

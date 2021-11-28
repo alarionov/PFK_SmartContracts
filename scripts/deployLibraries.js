@@ -46,8 +46,9 @@ let NONCE = 0;
     try {
         console.log("....................................");
         
-        const wallet = "0x8229d792c1BCCdb9Cc336821502aC906005317a6";
-        const privateKey = "93fc8fe13e93f6fde887374afee9a5ee456b963d90278d1d88f3a2592586984c";
+        const myconf = JSON.parse(await remix.call('fileManager', 'getFile', "browser/scripts/config.json"));
+        const wallet = myconf.wallet.address;
+        const privateKey = myconf.wallet.privateKey;
         
         if (privateKey === "")
         {
