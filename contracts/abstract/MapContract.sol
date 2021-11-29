@@ -10,6 +10,7 @@ import { Character } from "../002_CharacterContract.sol";
 interface IMapContract
 {
     function getProgress(Character memory character) external view returns(uint);
+    function resetProgress(Character memory character) external;
     function hasAccess(Character memory character, uint index) external view returns(bool);
     function getEnemies(uint index) external view returns (Enemy[] memory enemies);
     function update(Character memory character, uint index, bool victory) external;
@@ -32,4 +33,7 @@ abstract contract MapContract is IMapContract, BaseContract
     {
         MAX_LEVEL_INDEX = maxLeveIndex;
     }
+
+    function resetProgress(Character memory character) public virtual override
+    {} 
 }

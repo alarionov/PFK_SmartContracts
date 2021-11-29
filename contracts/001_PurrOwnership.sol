@@ -10,8 +10,6 @@ contract PurrOwnership is IExternalCharacterContract
     
     constructor()
     {
-        _owners[3029] = msg.sender;
-        _owners[3031] = msg.sender;
     }
     
     function ownerOf(uint tokenId) public view returns(address owner)

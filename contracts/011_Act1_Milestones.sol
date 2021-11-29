@@ -27,7 +27,15 @@ contract Act1Milestones is MapContract
         uint hash = Utils.getHash(character);
         return _progressions[hash];
     }
-    
+
+    function resetProgress(Character memory character) public override(MapContract)
+    {
+        _authContract.validate(msg.sender, character.contractAddress, character.tokenId);
+        
+        uint hash = Utils.getHash(character);
+        _progressions[hash] = 0;
+    }
+
     function hasAccess(Character memory character, uint index) public view override(IMapContract) returns(bool)
     {
         return _getProgress(character) == index;

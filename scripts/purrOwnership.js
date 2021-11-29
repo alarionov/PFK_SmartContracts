@@ -42,8 +42,8 @@ async function loadContract(contractName, contractAddress)
 
 async function deployContract(wallet, privateKey, artifactsPath, args) 
 {
-    const metadataJson = JSON.parse(await remix.call('fileManager', 'getFile', artifactsPath));
-    const metadata = linkLibraries(metadataJson, LIBRARIES);
+    const metadata = JSON.parse(await remix.call('fileManager', 'getFile', artifactsPath));
+    //const metadata = linkLibraries(metadataJson, LIBRARIES);
     const contract = new web3.eth.Contract(metadata.abi);
     const params = {data: "0x" + metadata.data.bytecode.object};
     
@@ -100,6 +100,40 @@ let NONCE = 0;
         throw "invalid config";
     }
     
+    let contracts = {
+        "AuthContract": null,
+        "RandomContract": null,
+        "CharacterContract": null,
+        "FightContract": null,
+        "FightManagerContract": null,
+        "EquipmentContract": null,
+        "EquipmentManagerContract": null,
+        "Act1Milestones": null,
+        "Act1Sidequests": null
+    };
+				
+    for (let contractName in CONTRACT_ADDRESSES)
+    {
+        const contractAddress = CONTRACT_ADDRESSES[contractName];
+        contracts[contractName] = await loadContract(contractName, contractAddress);
+    }
+
     NONCE = await web3.eth.getTransactionCount(wallet);
-    console.log(`NONCE: ${NONCE}`);
+    
+    console.log("Deploy PurrOwnership contract");
+    const artifactsPath = `browser/contracts/artifacts/PurrOwnership.json`;
+    const purrOwnershipContract = await deployContract(wallet, privateKey, artifactsPath);
+    NONCE += 1;
+
+    await callsToContract(wallet, privateKey, contracts["AuthContract"], [
+        { method: "setRole", args: [purrOwnershipContract.options.address, /* Character Contract role */ 1] },
+    ]);
+
+    await callsToContract(wallet, privateKey, purrOwnershipContract, [
+        { method: "setOwner", args: ["0x367043feEDd3C23920157B95f3553f5Edab0ea8F", 3029] },
+        { method: "setOwner", args: ["0x367043feEDd3C23920157B95f3553f5Edab0ea8F", 3031] },
+    ]);
+
+    console.log(`PurrOwnership: ${purrOwnershipContract.options.address}`);
+    // 0x531cF4ff21a8d0C3baD6Cb8Ec30061b2269D04fA
 })();

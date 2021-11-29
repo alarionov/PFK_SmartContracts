@@ -69,7 +69,7 @@ const CONTRACT_ADDRESSES = {
     Act1Sidequests: "0xb02A4F1d6128cB80a80681D05dddCFa475A770eF"    
 };
 
-// Purr Ownership 0x83D1EE256345B48327dcAc1D93B65bC179d456Ad
+// Purr Ownership 0x531cF4ff21a8d0C3baD6Cb8Ec30061b2269D04fA
 
 let NONCE = 0;
 (async () => {
