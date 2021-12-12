@@ -113,7 +113,7 @@ let NONCE = 0;
         
         for (let contractName in contracts)
         {
-            console.log(`${contractName} ${contracts[contractName].options.address}`);
+            console.log(`${contractName}: "${contracts[contractName].options.address}"`);
         }
     }
     catch(e)

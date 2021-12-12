@@ -58,18 +58,16 @@ async function callsToContract(wallet, privateKey, contract, calls)
 }
 
 const CONTRACT_ADDRESSES = {
-    AuthContract: "0xCc372fD17eFCd99C85bBf26969F774bB6b27dfeC",
-    RandomContract: "0xBeB8d5b198c6FFbd3027dd126883db390c9d226B",
-    CharacterContract: "0x86c82ad509236b39651d229D306951E97733F5F3",
-    FightContract: "0x541468E2Bcfb987E5F2b09e1503f4365a360790a",
-    FightManagerContract: "0x301fb5F54f9b508e6E5609eF1dDAD7D2C774bc8b",
-    EquipmentContract: "0x2FD1EA8099573DDb6cB331f789EE39062e431f21",
-    EquipmentManagerContract: "0x151a64275c8910F7FC6855d86C16c17943E1811F",
-    Act1Milestones: "0xf7509aF5A7cCEbA910E45e911b7c508af1fbDbEC",
-    Act1Sidequests: "0xb02A4F1d6128cB80a80681D05dddCFa475A770eF"    
+    RandomContract: "0xBE4Ae8549376Da17f279e1fEE15E3Bff10351530",
+    CharacterContract: "0xFAA7E295919ca7B198F962dd77F67DDf7A6A1840",
+    FightContract: "0xa16C473DF6873f8AEB562DE52Aa15451F9186fF2",
+    FightManagerContract: "0x6256f79a9d115165713244c59be412C61149A9f5",
+    EquipmentContract: "0x50C4b0C28B5bc768414e75EC7FDCa6Ab02C4396A",
+    EquipmentManagerContract: "0xa96B98DfAAe337923c89F16824049bc75080d999",
+    Act1Milestones: "0x24d1407f640f94d29BD985c567920a8581A526Fe",
+    Act1Sidequests: "0x32A6adac9baB58a759AD563664Fd3770d6AF59Ee",
+    AuthContract: "0x138753D3127C3c0d83a200DE732a753885cca4E2",
 };
-
-// Purr Ownership 0x531cF4ff21a8d0C3baD6Cb8Ec30061b2269D04fA
 
 let NONCE = 0;
 (async () => {
