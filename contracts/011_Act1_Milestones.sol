@@ -8,6 +8,8 @@ import "./libraries/Utils.sol";
 
 contract Act1Milestones is MapContract
 {
+    using ComputedStats for ComputedStats.Stats;
+
     mapping(uint => uint) private _progressions;
     
     constructor(address authContractAddress) MapContract(authContractAddress, 6)
@@ -66,7 +68,7 @@ contract Act1Milestones is MapContract
             enemies[0] = Enemy({ 
                 id: 1, 
                 present: true, 
-                stats: ComputedStats.newStats(1, 1, 1, 0, 0) 
+                stats: ComputedStats.newStats(1, 1, 1) 
             });
         }
         else if (levelIndex == 1)
@@ -76,17 +78,17 @@ contract Act1Milestones is MapContract
             enemies[0] = Enemy({ 
                 id: 1, 
                 present: true, 
-                stats: ComputedStats.newStats(1, 1, 1, 0, 0) 
+                stats: ComputedStats.newStats(1, 1, 1) 
             });
             enemies[1] = Enemy({ 
                 id: 2, 
                 present: true, 
-                stats: ComputedStats.newStats(1, 1, 1, 0, 0) 
+                stats: ComputedStats.newStats(1, 1, 1) 
             });
             enemies[2] = Enemy({ 
                 id: 3, 
                 present: true, 
-                stats: ComputedStats.newStats(1, 1, 1, 0, 0) 
+                stats: ComputedStats.newStats(1, 1, 1) 
             });
         }
         else if (levelIndex == 2)
@@ -96,17 +98,17 @@ contract Act1Milestones is MapContract
             enemies[0] = Enemy({ 
                 id: 1, 
                 present: true, 
-                stats: ComputedStats.newStats(1, 1, 1, 0, 0) 
+                stats: ComputedStats.newStats(1, 1, 1) 
             });
             enemies[1] = Enemy({ 
                 id: 2, 
                 present: true, 
-                stats: ComputedStats.newStats(2, 1, 3, 0, 1) 
+                stats: ComputedStats.Stats(2, 1, 3, 0, 1, 0, 0, 0).init() 
             });
             enemies[2] = Enemy({ 
                 id: 3, 
                 present: true, 
-                stats: ComputedStats.newStats(1, 1, 1, 0, 0) 
+                stats: ComputedStats.newStats(1, 1, 1) 
             });
         }
         else if (levelIndex == 3)
@@ -116,17 +118,17 @@ contract Act1Milestones is MapContract
             enemies[0] = Enemy({ 
                 id: 1, 
                 present: true, 
-                stats: ComputedStats.newStats(5, 1, 5, 0, 1) 
+                stats: ComputedStats.Stats(5, 1, 5, 0, 1, 0, 0, 0).init() 
             });
             enemies[1] = Enemy({ 
                 id: 2, 
                 present: true, 
-                stats: ComputedStats.newStats(5, 1, 5, 0, 1) 
+                stats: ComputedStats.Stats(5, 1, 5, 0, 1, 0, 0, 0).init() 
             });
             enemies[2] = Enemy({ 
                 id: 3, 
                 present: true, 
-                stats: ComputedStats.newStats(5, 1, 5, 0, 1) 
+                stats: ComputedStats.Stats(5, 1, 5, 0, 1, 0, 0, 0).init() 
             });
         }
         else if (levelIndex == 4)
@@ -136,17 +138,17 @@ contract Act1Milestones is MapContract
             enemies[0] = Enemy({ 
                 id: 1, 
                 present: true, 
-                stats: ComputedStats.newStats(8, 1, 12, 0, 0) 
+                stats: ComputedStats.newStats(8, 1, 12) 
             });
             enemies[1] = Enemy({ 
                 id: 2, 
                 present: true, 
-                stats: ComputedStats.newStats(8, 1, 12, 0, 0) 
+                stats: ComputedStats.newStats(8, 1, 12) 
             });
             enemies[2] = Enemy({ 
                 id: 3, 
                 present: true, 
-                stats: ComputedStats.newStats(8, 1, 12, 0, 0) 
+                stats: ComputedStats.newStats(8, 1, 12) 
             });
         }
         else if (levelIndex == 5)
@@ -156,12 +158,12 @@ contract Act1Milestones is MapContract
             enemies[0] = Enemy({ 
                 id: 1, 
                 present: true, 
-                stats: ComputedStats.newStats(18, 1, 12, 0, 2) 
+                stats: ComputedStats.Stats(18, 1, 12, 0, 2, 0, 0, 0).init() 
             });
             enemies[1] = Enemy({ 
                 id: 2, 
                 present: true, 
-                stats: ComputedStats.newStats(15, 1, 15, 0, 5) 
+                stats: ComputedStats.Stats(15, 1, 15, 0, 5, 0, 0, 0).init() 
             });
         }
         else if (levelIndex == 6)
@@ -171,7 +173,7 @@ contract Act1Milestones is MapContract
             enemies[0] = Enemy({ 
                 id: 1, 
                 present: true, 
-                stats: ComputedStats.newStats(35, 1, 50, 0, 10) 
+                stats: ComputedStats.Stats(35, 1, 50, 0, 10, 0, 0, 0).init() 
             });
         }
     }

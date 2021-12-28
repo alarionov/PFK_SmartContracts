@@ -20,9 +20,9 @@ library Experience
             72, 72, 72, 72, 72, 72, 72, 72, 72, 72, 72, 72, 80 ];
     }
 
-    function addExp(Character memory character, uint exp) public pure 
+    function addExp(Character memory character, uint exp) public pure returns (Character memory)
     {
-        if (exp == 0) return;
+        if (exp == 0) return character;
         
         character.exp += exp;
         
@@ -32,6 +32,8 @@ library Experience
             character.level += 1;
             character.upgrades += 1;
         }
+
+        return character;
     }
     
     function toNextLevel(Character memory character) public pure returns(uint amount)

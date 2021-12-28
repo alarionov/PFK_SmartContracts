@@ -78,7 +78,7 @@ contract FightManagerContract is BaseContract, IFightManagerContract
     
         Fight memory fight = _fightContract.conductFight(character, enemies);
     
-        character.addExp(fight.exp);
+        character = character.addExp(fight.exp);
         
         _characterContract.save(character);
         mapContract.update(character, index, fight.victory);
@@ -90,6 +90,6 @@ contract FightManagerContract is BaseContract, IFightManagerContract
         
         ComputedStats.Stats memory bonusStats = _equipmentContract.getInventory(character.equipment);
         
-        character.stats.add(bonusStats);
+        character.stats = character.stats.add(bonusStats);
     }
 }

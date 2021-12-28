@@ -10,6 +10,8 @@ import "./libraries/Utils.sol";
 
 contract Act1Sidequests is MapContract
 {
+    using ComputedStats for ComputedStats.Stats;
+
     enum Events
     {
         SHIELD_REWARD
@@ -104,17 +106,17 @@ contract Act1Sidequests is MapContract
             enemies[0] = Enemy({ 
                 id: 1, 
                 present: true, 
-                stats: ComputedStats.newStats(1, 1, 1, 0, 0) 
+                stats: ComputedStats.newStats(1, 1, 1) 
             });
             enemies[1] = Enemy({ 
                 id: 2, 
                 present: true, 
-                stats: ComputedStats.newStats(1, 1, 1, 0, 0) 
+                stats: ComputedStats.newStats(1, 1, 1) 
             });
             enemies[2] = Enemy({ 
                 id: 3, 
                 present: true, 
-                stats: ComputedStats.newStats(1, 1, 1, 0, 0) 
+                stats: ComputedStats.newStats(1, 1, 1) 
             });
         }
         else if (levelIndex == 1)
@@ -126,17 +128,17 @@ contract Act1Sidequests is MapContract
             enemies[0] = Enemy({ 
                 id: 1, 
                 present: true, 
-                stats: ComputedStats.newStats(2, 1, 1, 0, 0) 
+                stats: ComputedStats.newStats(2, 1, 1) 
             });
             enemies[1] = Enemy({ 
                 id: 2, 
                 present: true, 
-                stats: ComputedStats.newStats(2, 1, 1, 0, 0) 
+                stats: ComputedStats.newStats(2, 1, 1) 
             });
             enemies[2] = Enemy({ 
                 id: 3, 
                 present: true, 
-                stats: ComputedStats.newStats(2, 1, 1, 0, 0) 
+                stats: ComputedStats.newStats(2, 1, 1) 
             });
         }
         else if (levelIndex == 2)
@@ -147,17 +149,17 @@ contract Act1Sidequests is MapContract
             enemies[0] = Enemy({ 
                 id: 1, 
                 present: true, 
-                stats: ComputedStats.newStats(2, 1, 3, 0, 1) 
+                stats: ComputedStats.Stats(2, 1, 3, 0, 1, 0, 0, 0).init() 
             });
             enemies[1] = Enemy({ 
                 id: 2, 
                 present: true, 
-                stats: ComputedStats.newStats(2, 1, 3, 0, 1) 
+                stats: ComputedStats.Stats(2, 1, 3, 0, 1, 0, 0, 0).init() 
             });
             enemies[2] = Enemy({ 
                 id: 3, 
                 present: true, 
-                stats: ComputedStats.newStats(2, 1, 3, 0, 1) 
+                stats: ComputedStats.Stats(2, 1, 3, 0, 1, 0, 0, 0).init() 
             });
         }
         else if (levelIndex == 3)
@@ -168,17 +170,17 @@ contract Act1Sidequests is MapContract
             enemies[0] = Enemy({ 
                 id: 1, 
                 present: true, 
-                stats: ComputedStats.newStats(3, 1, 7, 0, 0) 
+                stats: ComputedStats.newStats(3, 1, 7) 
             });
             enemies[1] = Enemy({ 
                 id: 2, 
                 present: true, 
-                stats: ComputedStats.newStats(3, 1, 7, 0, 0) 
+                stats: ComputedStats.newStats(3, 1, 7) 
             });
             enemies[2] = Enemy({ 
                 id: 3, 
                 present: true, 
-                stats: ComputedStats.newStats(3, 1, 7, 0, 0) 
+                stats: ComputedStats.newStats(3, 1, 7) 
             });
         }
         else if (levelIndex == 4)
@@ -189,17 +191,17 @@ contract Act1Sidequests is MapContract
             enemies[0] = Enemy({ 
                 id: 1, 
                 present: true, 
-                stats: ComputedStats.newStats(12, 1, 8, 0, 1) 
+                stats: ComputedStats.Stats(12, 1, 8, 0, 1, 0, 0, 0).init() 
             });
             enemies[1] = Enemy({ 
                 id: 2, 
                 present: true, 
-                stats: ComputedStats.newStats(12, 1, 8, 0, 1) 
+                stats: ComputedStats.Stats(12, 1, 8, 0, 1, 0, 0, 0).init() 
             });
             enemies[2] = Enemy({ 
                 id: 3, 
                 present: true, 
-                stats: ComputedStats.newStats(12, 1, 8, 0, 1) 
+                stats: ComputedStats.Stats(12, 1, 8, 0, 1, 0, 0, 0).init() 
             });
         }
         else if (levelIndex == 5)
@@ -210,17 +212,17 @@ contract Act1Sidequests is MapContract
             enemies[0] = Enemy({ 
                 id: 1, 
                 present: true, 
-                stats: ComputedStats.newStats(10, 1, 15, 0, 8) 
+                stats: ComputedStats.Stats(10, 1, 15, 0, 8, 0, 0, 0).init() 
             });
             enemies[1] = Enemy({ 
                 id: 2, 
                 present: true, 
-                stats: ComputedStats.newStats(10, 1, 15, 0, 8) 
+                stats: ComputedStats.Stats(10, 1, 15, 0, 8, 0, 0, 0).init() 
             });
             enemies[2] = Enemy({ 
                 id: 3, 
                 present: true, 
-                stats: ComputedStats.newStats(10, 1, 15, 0, 8) 
+                stats: ComputedStats.Stats(10, 1, 15, 0, 8, 0, 0, 0).init() 
             });
         }
     }

@@ -63,7 +63,17 @@ contract EquipmentContract is BaseContract, IEquipmentContract, ERC721Enumerable
         uint armor
     ) public onlyGame(msg.sender)
     {
-        ComputedStats.Stats memory stats = ComputedStats.newStats(strength, dexterity, constitution, luck, armor);
+        ComputedStats.Stats memory stats = ComputedStats.Stats({
+            strength: strength,
+            dexterity: dexterity,
+            constitution: constitution,
+            luck: luck,
+            armor: armor,
+            attack: 0,
+            health: 0,
+            takenDamage: 0
+        });
+
         _itemTypes[id] = ItemType({ id: id, name: name, slot: slot, bonusStats: stats });
     }
     
@@ -80,18 +90,21 @@ contract EquipmentContract is BaseContract, IEquipmentContract, ERC721Enumerable
     {
         bonusStats = ComputedStats.zeroStats();
         
-        _accumulateBonus(bonusStats, equipment.armorSetId);
-        _accumulateBonus(bonusStats, equipment.weaponSetId);
-        _accumulateBonus(bonusStats, equipment.shieldId);
+        bonusStats = _accumulateBonus(bonusStats, equipment.armorSetId);
+        bonusStats = _accumulateBonus(bonusStats, equipment.weaponSetId);
+        bonusStats = _accumulateBonus(bonusStats, equipment.shieldId);
     }
     
-    function _accumulateBonus(ComputedStats.Stats memory bonusStats, uint itemId) private view
+    function _accumulateBonus(ComputedStats.Stats memory bonusStats, uint itemId) 
+        private 
+        view 
+        returns(ComputedStats.Stats memory)
     {
         uint typeId = _itemToType[itemId];
         
         ItemType memory itemType = _itemTypes[typeId];
         
-        bonusStats.add(itemType.bonusStats);
+        return bonusStats.add(itemType.bonusStats);
     }
     
     function getItem(uint tokenId) public view returns(ItemType memory itemType)

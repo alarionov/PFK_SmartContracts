@@ -76,15 +76,15 @@ async function callsToContract(wallet, privateKey, contract, calls)
 }
 
 const CONTRACT_ADDRESSES = {
-    RandomContract: "0xBE4Ae8549376Da17f279e1fEE15E3Bff10351530",
-    CharacterContract: "0xFAA7E295919ca7B198F962dd77F67DDf7A6A1840",
-    FightContract: "0xa16C473DF6873f8AEB562DE52Aa15451F9186fF2",
-    FightManagerContract: "0x6256f79a9d115165713244c59be412C61149A9f5",
-    EquipmentContract: "0x50C4b0C28B5bc768414e75EC7FDCa6Ab02C4396A",
-    EquipmentManagerContract: "0xa96B98DfAAe337923c89F16824049bc75080d999",
-    Act1Milestones: "0x24d1407f640f94d29BD985c567920a8581A526Fe",
-    Act1Sidequests: "0x32A6adac9baB58a759AD563664Fd3770d6AF59Ee",
-    AuthContract: "0x138753D3127C3c0d83a200DE732a753885cca4E2",
+    RandomContract: "0xcb9E02B3a5E65f8E26fD99F4c941f147B7562EcD",
+    CharacterContract: "0x4D43fd57Be372979B78Ac546a8f1ce0E24234427",
+    FightContract: "0x60DCBBA0592a9E4E272dB2C12F6c689A51a2844f",
+    FightManagerContract: "0xfB0DDA770D1026Fde58B582dEE8EA3C6fC5daC8B",
+    EquipmentContract: "0xD30930E0e39CdBCD2eC18A0E720c023B88055bF7",
+    EquipmentManagerContract: "0x0dB31e7b58BbE84a69826491c1Aa3dC4d17c5c0E",
+    Act1Milestones: "0xEd62739aCaAB6b21E9D3335Eb256f7Df6f0BBF36",
+    Act1Sidequests: "0x57F4F49780c4613995F7872e457157FA0bCdD609",
+    AuthContract: "0x1aF5F8DEA3FC1CcBDE371B2989C84B4DAc1C90D3"
 };
 
 let NONCE = 0;
@@ -135,5 +135,5 @@ let NONCE = 0;
     ]);
 
     console.log(`PurrOwnership: ${purrOwnershipContract.options.address}`);
-    // 0xE77601fAbEEfc36607EB5bC29e2E586E2640f44A 
+    // 0x0f0f9537ab6f1a230854e5CB654736C4DC979bE6 
 })();

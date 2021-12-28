@@ -42,8 +42,7 @@ contract FightContract is BaseContract, IFightContract
         onlyGame(msg.sender) 
         returns(Fight memory fight) 
     {
-        SeedReader.Seed memory seed;
-        seed.init([random(), random(), random(), random()]);
+        SeedReader.Seed memory seed = SeedReader.init([random(), random(), random(), random()]);
         
         fight = Fight({
             id: 0,
@@ -62,23 +61,16 @@ contract FightContract is BaseContract, IFightContract
         
         return fight;
     }
-
     
     function _fight(SeedReader.Seed memory seed, Character memory character, Enemy[] memory enemies) 
         private view returns(bool victory, uint exp)
     {
         exp = 0;
-     
-        character.stats.init();
-        
-        for (uint i = 0; i < enemies.length; ++i)
-        {
-            enemies[i].stats.init();
-        }
         
         for (uint step = 0; step < MAX_FIGHT_ACTIONS; ++step)
         {
-            uint8 index = seed.read(uint8(enemies.length));
+            uint8 index;
+            (seed.index, index) = seed.read(uint8(enemies.length));
             
             require(index < enemies.length, "Invalid target selected");
             
@@ -111,14 +103,20 @@ contract FightContract is BaseContract, IFightContract
     {
         exp = 0;
         
-        bool hit;
-        bool crit;
+        uint8 hitChance;
+        uint8 critChance;
         
-        hit = seed.read(128) < target.hitChance(attacker);
-        crit = seed.read(128) < target.critChance(attacker);
+        (seed.index, hitChance) = seed.read(128);
+        (seed.index, critChance) = seed.read(128);
+
+        bool hit = hitChance < target.hitChance(attacker);
+        bool crit = critChance < target.critChance(attacker);
         
-        if (hit) target.applyDamage(attacker.attack, crit);
-        if (!target.alive()) exp += target.health;
+        if (hit) 
+            target.takenDamage += target.applyDamage(attacker.attack, crit);
+        
+        if (!target.alive()) 
+            exp += target.health;
     }
     
     function _recountEnemies(Enemy[] memory enemies) private pure returns (Enemy[] memory newEnemies)
