@@ -135,5 +135,5 @@ let NONCE = 0;
     ]);
 
     console.log(`PurrOwnership: ${purrOwnershipContract.options.address}`);
-    // 0x0f0f9537ab6f1a230854e5CB654736C4DC979bE6 
+    // 0x1ffFAd214Cba79488ED7E4ACb17De99794607959  
 })();
