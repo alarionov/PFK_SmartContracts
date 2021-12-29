@@ -1,4 +1,20 @@
 (async () => {
     console.log("Start Deployment");
-    console.log(`type of: ${typeof(remix)}`);
+    
+    const scripts = [
+        "000_deployLibraries.js",
+        "010_deployContracts.js",
+        "020_configureContracts",
+        "030_extractAbi.js",
+        "100_purrOwnership.js"
+    ];
+
+    for (const script of scripts)
+    {
+        console.log(`=== EXECUTING ${script} ===`);
+        await eval(
+            await remix.call(
+                'fileManager', 'getFile', `browser/scripts/${script}`));
+    }
+    console.log("done");
 })();
