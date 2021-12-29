@@ -72,10 +72,17 @@ contract FightManagerContract is BaseContract, IFightManagerContract
         Character memory character = _getCharacterWithInventoryStats(characterContractAddress, characterId);
         character.owner = msg.sender;
 
+        require(character.stats.alive(), "Character should be alive");
+
         require(mapContract.hasAccess(character, index));
     
         Enemy[] memory enemies = mapContract.getEnemies(index);
-    
+
+        for (uint i = 0; i < enemies.length; ++i)
+        {
+            require(enemies[i].stats.alive(), "Enemy should be alive");
+        }
+
         Fight memory fight = _fightContract.conductFight(character, enemies);
     
         character = character.addExp(fight.exp);

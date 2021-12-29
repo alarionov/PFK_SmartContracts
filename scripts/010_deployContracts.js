@@ -1,4 +1,4 @@
-async function getRawTx (wallet, data, to, value) 
+async function getRawTx (wallet, data, to, value)
 {
     const gasPrice = web3.utils.toWei('1', 'gwei');
     const gasAmount = 10000000;
@@ -31,10 +31,10 @@ async function sendTransaction(rawTx, privateKey)
     return response;
 }
 
-async function deployContract(wallet, privateKey, artifactsPath, args) 
+async function deployContract(wallet, privateKey, libraries, artifactsPath, args) 
 {
     const metadataJson = JSON.parse(await remix.call('fileManager', 'getFile', artifactsPath));
-    const metadata = linkLibraries(metadataJson, LIBRARIES);
+    const metadata = linkLibraries(metadataJson, libraries);
     const contract = new web3.eth.Contract(metadata.abi);
     const params = {data: "0x" + metadata.data.bytecode.object};
     
@@ -60,16 +60,11 @@ const linkLibraries = (metadata, libraries) => {
     return metadata;
 };
 
-const LIBRARIES = {
-    "ComputedStats": "0x10E321047C41bE4d51d0E583319509CA73b53159",
-    "Experience": "0x5f0F5E8f025BE7fEFC91176E05eEB1e94996a4e4",
-    "GameMath": "0x04fE69D712Ef2d4645F21de71018E76710574312",
-    "SeedReader": "0xf4C440B804F30D04dEc72fA8f17302417251D40D",
-    "Utils": "0xD267DbDdB7B7Ce7612bA572ff0094d9E4706Ea50"
-};
-
 let NONCE = 0;
 (async () => {
+
+    const libraries = JSON.parse(await remix.call('fileManager', 'getFile', "browser/deployed/libraries.json"));
+
     try {
         console.log("....................................");
         
@@ -85,7 +80,7 @@ let NONCE = 0;
         NONCE = await web3.eth.getTransactionCount(wallet);
         
         const artifactsPath = `browser/contracts/artifacts/AuthContract.json`;
-        const authContract = await deployContract(wallet, privateKey, artifactsPath);
+        const authContract = await deployContract(wallet, privateKey, libraries, artifactsPath);
         NONCE += 1;
         
         const contracts = {
@@ -103,7 +98,8 @@ let NONCE = 0;
         {
             console.log(`Deploying ${contractName}`);
             const artifactsPath = `browser/contracts/artifacts/${contractName}.json`;
-            contracts[contractName] = await deployContract(wallet, privateKey, artifactsPath, [authContract.options.address]);
+            contracts[contractName] = await deployContract(
+                wallet, privateKey, libraries, artifactsPath, [authContract.options.address]);
             NONCE += 1;
         }
         
@@ -111,13 +107,19 @@ let NONCE = 0;
         
         console.log("Contracts:");
         
+        const contractsJson = {};
+
         for (let contractName in contracts)
         {
+            contractsJson[contractName] = contracts[contractName].options.address;
             console.log(`${contractName}: "${contracts[contractName].options.address}"`);
         }
+
+        await remix.call("fileManager", "setFile", `browser/deployed/contracts.json`, JSON.stringify(contractsJson));
+        console.log("Done");
     }
     catch(e)
     {
         console.log(e);
     }
-})()
+})();

@@ -75,6 +75,8 @@ let NONCE = 0;
         
         console.log("Libraries:");
         
+        await remix.call("fileManager", "setFile", `browser/deployed/libraries.json`, JSON.stringify(libraries));
+
         for (let libraryName in libraries)
         {
             console.log(`${libraryName} ${libraries[libraryName]}`);

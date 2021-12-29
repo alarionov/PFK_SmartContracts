@@ -57,22 +57,11 @@ async function callsToContract(wallet, privateKey, contract, calls)
     }
 }
 
-const CONTRACT_ADDRESSES = {
-    RandomContract: "0xcb9E02B3a5E65f8E26fD99F4c941f147B7562EcD",
-    CharacterContract: "0x4D43fd57Be372979B78Ac546a8f1ce0E24234427",
-    FightContract: "0x60DCBBA0592a9E4E272dB2C12F6c689A51a2844f",
-    FightManagerContract: "0xfB0DDA770D1026Fde58B582dEE8EA3C6fC5daC8B",
-    EquipmentContract: "0xD30930E0e39CdBCD2eC18A0E720c023B88055bF7",
-    EquipmentManagerContract: "0x0dB31e7b58BbE84a69826491c1Aa3dC4d17c5c0E",
-    Act1Milestones: "0xEd62739aCaAB6b21E9D3335Eb256f7Df6f0BBF36",
-    Act1Sidequests: "0x57F4F49780c4613995F7872e457157FA0bCdD609",
-    AuthContract: "0x1aF5F8DEA3FC1CcBDE371B2989C84B4DAc1C90D3"
-};
-
 let NONCE = 0;
 (async () => {
     console.log("....................................");
     
+    const CONTRACT_ADDRESSES = JSON.parse(await remix.call('fileManager', 'getFile', "browser/deployed/contracts.json")); 
     const myconf = JSON.parse(await remix.call('fileManager', 'getFile', "browser/scripts/config.json"));
     const wallet = myconf.wallet.address;
     const privateKey = myconf.wallet.privateKey;
