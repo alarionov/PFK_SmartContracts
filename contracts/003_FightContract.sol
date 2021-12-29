@@ -72,11 +72,7 @@ contract FightContract is BaseContract, IFightContract
             uint8 index;
             (seed.index, index) = seed.read(uint8(enemies.length));
             
-            require(index < enemies.length, "Invalid target selected");
-            
             Enemy memory target = enemies[index];
-            
-            require(target.stats.alive(), "Target should be alive");
             
             exp += _processAttack(seed, character.stats, target.stats);
             
