@@ -87,8 +87,13 @@ contract Act1Sidequests is MapContract
     function hasAccess(Character memory character, uint index) public view override(IMapContract) returns(bool)
     {
         uint hash = Utils.getHash(character);
+        
         bool unlocked = _mainMap.getProgress(character) > index;
+        require(unlocked, "The quest is not unlocked yet");
+        
         bool active = _activeAfter[hash][index] < block.number;
+        require(active, "The quest is on cooldown, try later");
+
         return unlocked && active;
     }
     

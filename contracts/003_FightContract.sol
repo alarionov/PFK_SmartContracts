@@ -31,6 +31,8 @@ contract FightContract is BaseContract, IFightContract
     using SeedReader for SeedReader.Seed;
     using ComputedStats for ComputedStats.Stats;
     
+    event FightDetails(Fight fight);
+
     uint8 private MAX_FIGHT_ACTIONS = 10;
     
     constructor(address authContractAddress) BaseContract(authContractAddress)
@@ -59,6 +61,8 @@ contract FightContract is BaseContract, IFightContract
             fight.exp = fight.exp >> 2;
         }
         
+        emit FightDetails(fight);
+
         return fight;
     }
     

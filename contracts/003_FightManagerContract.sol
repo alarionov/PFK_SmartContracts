@@ -26,7 +26,7 @@ contract FightManagerContract is BaseContract, IFightManagerContract
     using EnumerableSet for EnumerableSet.UintSet;
     using ComputedStats for ComputedStats.Stats;
     using Experience for Character;
-    
+
     address public CHARACTER_CONTRACT_ADDRESS;
     address public FIGHT_CONTRACT_ADDRESS;
     address public EQUIPMENT_CONTRACT_ADDRESS;
@@ -74,7 +74,7 @@ contract FightManagerContract is BaseContract, IFightManagerContract
 
         require(character.stats.alive(), "Character should be alive");
 
-        require(mapContract.hasAccess(character, index));
+        require(mapContract.hasAccess(character, index), "Character doesn't have the access");
     
         Enemy[] memory enemies = mapContract.getEnemies(index);
 
@@ -84,7 +84,7 @@ contract FightManagerContract is BaseContract, IFightManagerContract
         }
 
         Fight memory fight = _fightContract.conductFight(character, enemies);
-    
+
         character = character.addExp(fight.exp);
         
         _characterContract.save(character);

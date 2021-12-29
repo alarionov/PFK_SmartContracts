@@ -4,7 +4,7 @@
     const scripts = [
         "000_deployLibraries.js",
         "010_deployContracts.js",
-        "020_configureContracts",
+        "020_configureContracts.js",
         "030_extractAbi.js",
         "100_purrOwnership.js"
     ];
