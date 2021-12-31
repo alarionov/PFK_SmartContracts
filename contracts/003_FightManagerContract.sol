@@ -5,7 +5,6 @@ pragma solidity ^0.8.10;
 import "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 
-import "./abstract/Enemy.sol";
 import "./abstract/BaseContract.sol";
 
 import { ICharacterContract } from "./002_CharacterContract.sol";
@@ -74,13 +73,13 @@ contract FightManagerContract is BaseContract, IFightManagerContract
 
         require(character.stats.alive(), "Character should be alive");
 
-        require(mapContract.hasAccess(character, index), "Character doesn't have the access");
+        require(mapContract.hasAccess(character, index), "Character doesn't have the access to this level");
     
-        Enemy[] memory enemies = mapContract.getEnemies(index);
+        ComputedStats.Stats[] memory enemies = mapContract.getEnemies(index);
 
         for (uint i = 0; i < enemies.length; ++i)
         {
-            require(enemies[i].stats.alive(), "Enemy should be alive");
+            require(enemies[i].alive(), "Enemy should be alive");
         }
 
         Fight memory fight = _fightContract.conductFight(character, enemies);

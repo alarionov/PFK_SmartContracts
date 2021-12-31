@@ -30,6 +30,20 @@ library ComputedStats
         uint takenDamage;
     }
    
+    function copy(Stats memory stats) public pure returns (Stats memory)
+    {
+        return Stats({
+            strength: stats.strength,
+            dexterity: stats.dexterity,
+            constitution: stats.constitution,
+            luck: stats.luck,
+            armor: stats.armor,
+            attack: stats.attack,
+            health: stats.health,
+            takenDamage: stats.takenDamage
+        });
+    }
+
     function newStats(uint strength, uint dexterity, uint constitution) 
         public 
         pure 

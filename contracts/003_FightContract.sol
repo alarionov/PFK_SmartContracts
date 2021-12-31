@@ -2,7 +2,6 @@
 
 pragma solidity ^0.8.10;
 
-import "./abstract/Enemy.sol";
 import "./abstract/BaseContract.sol";
 
 import "./libraries/SeedReader.sol";
@@ -14,16 +13,16 @@ struct Fight
 {
     uint id;
     bytes seed;
-    
-    ComputedStats.Stats stats;
-    
     bool victory;
     uint exp;
+
+    ComputedStats.Stats character;
+    ComputedStats.Stats[] enemies;
 }
 
 interface IFightContract
 {
-    function conductFight(Character memory character, Enemy[] memory enemies) external returns (Fight memory); 
+    function conductFight(Character memory character, ComputedStats.Stats[] memory enemies) external returns (Fight memory); 
 }
 
 contract FightContract is BaseContract, IFightContract
@@ -38,7 +37,7 @@ contract FightContract is BaseContract, IFightContract
     constructor(address authContractAddress) BaseContract(authContractAddress)
     {}
     
-    function conductFight(Character memory character, Enemy[] memory enemies) 
+    function conductFight(Character memory character, ComputedStats.Stats[] memory enemies) 
         external 
         override(IFightContract) 
         onlyGame(msg.sender) 
@@ -46,12 +45,19 @@ contract FightContract is BaseContract, IFightContract
     {
         SeedReader.Seed memory seed = SeedReader.init([random(), random(), random(), random()]);
         
+        ComputedStats.Stats[] memory enemiesCopy = new ComputedStats.Stats[](enemies.length);
+        for(uint i=0; i < enemies.length; ++i)
+        {
+            enemiesCopy[i] = ComputedStats.copy(enemies[i]);
+        }
+
         fight = Fight({
             id: 0,
             seed: seed.raw,
-            stats: character.stats,
             victory: false,
-            exp: 0
+            exp: 0,
+            character: ComputedStats.copy(character.stats),
+            enemies: enemiesCopy    
         });
         
         (fight.victory, fight.exp) = _fight(seed, character, enemies);
@@ -66,7 +72,7 @@ contract FightContract is BaseContract, IFightContract
         return fight;
     }
     
-    function _fight(SeedReader.Seed memory seed, Character memory character, Enemy[] memory enemies) 
+    function _fight(SeedReader.Seed memory seed, Character memory character, ComputedStats.Stats[] memory enemies) 
         private view returns(bool victory, uint exp)
     {
         exp = 0;
@@ -76,9 +82,9 @@ contract FightContract is BaseContract, IFightContract
             uint8 index;
             (seed.index, index) = seed.read(uint8(enemies.length));
             
-            Enemy memory target = enemies[index];
+            ComputedStats.Stats memory target = enemies[index];
             
-            exp += _processAttack(seed, character.stats, target.stats);
+            exp += _processAttack(seed, character.stats, target);
             
             enemies = _recountEnemies(enemies);
             
@@ -86,7 +92,7 @@ contract FightContract is BaseContract, IFightContract
             
             for (uint i = 0; i < enemies.length; ++i)
             {
-                _processAttack(seed, enemies[i].stats, character.stats);
+                _processAttack(seed, enemies[i], character.stats);
                 
                 if (!character.stats.alive()) return (false, 0);
             }
@@ -119,23 +125,23 @@ contract FightContract is BaseContract, IFightContract
             exp += target.health;
     }
     
-    function _recountEnemies(Enemy[] memory enemies) private pure returns (Enemy[] memory newEnemies)
+    function _recountEnemies(ComputedStats.Stats[] memory enemies) private pure returns (ComputedStats.Stats[] memory newEnemies)
     {
         uint aliveCount = 0;
         
         for (uint i = 0; i < enemies.length; ++i)
         {
-            if (enemies[i].stats.alive()) aliveCount += 1;
+            if (enemies[i].alive()) aliveCount += 1;
         }
         
-        newEnemies = new Enemy[](aliveCount);
+        newEnemies = new ComputedStats.Stats[](aliveCount);
         
         uint index = 0;
         for (uint i = 0; i < enemies.length; ++i)
         {
             require(i < enemies.length, "Index is out of scope: enemies");
             
-            if (enemies[i].stats.alive())
+            if (enemies[i].alive())
             {
                 require(index < newEnemies.length, "Index is out of scope: new enemies");
                 newEnemies[index] = enemies[i];
