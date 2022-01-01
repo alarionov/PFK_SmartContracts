@@ -10,6 +10,8 @@ contract Act1Milestones is MapContract
 {
     using ComputedStats for ComputedStats.Stats;
 
+    event Milestone(uint index);
+
     mapping(uint => uint) private _progressions;
     
     constructor(address authContractAddress) MapContract(authContractAddress, 6)
@@ -45,10 +47,11 @@ contract Act1Milestones is MapContract
     
     function update(Character memory character, uint index, bool victory) public onlyGame(msg.sender) override(IMapContract)
     {
-        if (victory)
+        if (victory && index <= MAX_LEVEL_INDEX)
         {
             uint hash = Utils.getHash(character);
             _progressions[hash] = index + 1;
+            emit Milestone(_progressions[hash]);
         }
     }
     

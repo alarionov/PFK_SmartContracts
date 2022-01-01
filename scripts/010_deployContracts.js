@@ -121,5 +121,6 @@ let NONCE = 0;
     catch(e)
     {
         console.log(e);
+        throw e;
     }
 })();

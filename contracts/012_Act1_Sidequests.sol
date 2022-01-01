@@ -12,6 +12,8 @@ contract Act1Sidequests is MapContract
 {
     using ComputedStats for ComputedStats.Stats;
 
+    event Cooldown(uint activeAfter);
+
     uint private constant _NUMBER_OF_LEVELS = 6;
 
     address public EQUIPMENT_CONTRACT_ADDRESS;
@@ -75,6 +77,8 @@ contract Act1Sidequests is MapContract
         uint hash = Utils.getHash(character);
         _activeAfter[hash][index] = block.number + _cooldowns[index];
         
+        emit Cooldown(_activeAfter[hash][index]);
+
         if (index == LUMBERYARD_QUEST_INDEX && !_woodenShieldClaimed[hash] && victory && WOODEN_SHIELD_ID > 0)
         {
             _woodenShieldClaimed[hash] = true;
