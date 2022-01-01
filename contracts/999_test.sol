@@ -2,17 +2,15 @@
 
 pragma solidity ^0.8.10;
 
-import "./abstract/Enemy.sol";
-//import "./abstract/BaseContract.sol";
-
-//import { ICharacterContract } from "./002_CharacterContract.sol";
-//import { Fight, IFightContract } from "./003_FightContract.sol";
-//import { IEquipmentContract } from "./005_EquipmentContract.sol";
-
 import { IMapContract } from "./abstract/MapContract.sol";
+import { Character, ICharacterContract } from "./002_CharacterContract.sol";
 
-//import "./libraries/Experience.sol";
 import "./libraries/ComputedStats.sol";
+
+interface ISideQuest
+{
+     function getCooldowns(Character memory character) external view returns(uint[6] memory cooldowns);
+}
 
 contract Test
 {
@@ -21,16 +19,13 @@ contract Test
     constructor()
     {}
 
-    function check(address mapAddress, uint index) public view returns(Enemy[] memory)
+    function check() public view returns(uint cooldown)
     {
-        IMapContract map = IMapContract(mapAddress);
-        Enemy[] memory enemies = map.getEnemies(index);       
+        ICharacterContract characterContract = ICharacterContract(0x3fe426a48FA4Fb7Ca7c650A64dC8F6405448BcD7);
+        Character memory character = characterContract.getCharacter(0x5cAa53913fC48aCdbD2825CA06Ed8C9A16EbBaFe, 3031);
 
-        for (uint i = 0; i < enemies.length; ++i)
-        {
-            require(enemies[i].stats.alive(), "Enemy should be alive");
-        }
-
-        return enemies;
+        ISideQuest map = ISideQuest(0x638F92422bad6Bb3F7561fc632Bb13339e870094);
+               
+        cooldown = map.getCooldowns(character)[0];
     }
 }

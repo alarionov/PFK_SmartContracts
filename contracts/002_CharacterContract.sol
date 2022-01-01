@@ -27,7 +27,7 @@ struct Character
 
 interface ICharacterContract
 {
-    function getCharacter(address contractaddress, uint tokenId) external returns (Character memory character);
+    function getCharacter(address contractaddress, uint tokenId) external view returns (Character memory character);
     function save(Character memory character) external;
 }
 

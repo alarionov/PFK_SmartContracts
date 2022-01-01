@@ -11,7 +11,9 @@ import "./libraries/Utils.sol";
 contract Act1Sidequests is MapContract
 {
     using ComputedStats for ComputedStats.Stats;
-    
+
+    uint private constant _NUMBER_OF_LEVELS = 6;
+
     address public EQUIPMENT_CONTRACT_ADDRESS;
     address public ACT1_MILESTONES_CONTACT_ADDRESS;
     
@@ -22,10 +24,10 @@ contract Act1Sidequests is MapContract
     uint public WOODEN_SHIELD_ID;
     mapping(uint => bool) _woodenShieldClaimed;
     
-    uint[] private _cooldowns = [1,2,3,4,5,6];
-    mapping(uint => uint[]) private _activeAfter;
+    uint[_NUMBER_OF_LEVELS] private _cooldowns = [1,2,3,4,5,6];
+    mapping(uint => uint[_NUMBER_OF_LEVELS]) private _activeAfter;
     
-    constructor(address authContractAddress) MapContract(authContractAddress, 5)
+    constructor(address authContractAddress) MapContract(authContractAddress, _NUMBER_OF_LEVELS - 1)
     {}
     
     function setEquipmentContractAddress(address newAddress) public onlyGM(msg.sender)
@@ -40,7 +42,7 @@ contract Act1Sidequests is MapContract
         _mainMap = IMapContract(ACT1_MILESTONES_CONTACT_ADDRESS);
     }
     
-    function setCooldowns(uint[] memory newCooldowns) public onlyGM(msg.sender)
+    function setCooldowns(uint[_NUMBER_OF_LEVELS] memory newCooldowns) public onlyGM(msg.sender)
     {
         _cooldowns = newCooldowns;
     }
@@ -60,7 +62,7 @@ contract Act1Sidequests is MapContract
         return 0;
     }
     
-    function getCooldowns(Character memory character) public view returns(uint[] memory cooldowns)
+    function getCooldowns(Character memory character) public view returns(uint[_NUMBER_OF_LEVELS] memory cooldowns)
     {
         uint hash = Utils.getHash(character);
         cooldowns = _activeAfter[hash];
