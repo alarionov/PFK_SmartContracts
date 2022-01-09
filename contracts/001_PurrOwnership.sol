@@ -8,6 +8,8 @@ import { IExternalCharacterContract } from "./001_AuthContract.sol";
 
 contract PurrOwnership is IExternalCharacterContract, Ownable
 {
+    event Ownership(address owner, uint token);
+
     mapping(uint => address) private _owners;
     
     address public Authority;
@@ -28,7 +30,14 @@ contract PurrOwnership is IExternalCharacterContract, Ownable
 
     function setOwner(address owner, uint token) public onlyOwner
     {
-        _owners[token] = owner; 
+         _setOwner(owner, token);
+    }
+
+    function _setOwner(address owner, uint token) private
+    {
+        _owners[token] = owner;
+
+        emit Ownership(owner, token);
     }
 
     function verify(address owner, uint token, bytes memory signature) public
@@ -40,7 +49,7 @@ contract PurrOwnership is IExternalCharacterContract, Ownable
 
         require(verified, "Unauthorized signer");
 
-        _owners[token] = owner;
+        _setOwner(owner, token);
     }
 
     function getMessageHash(address owner, uint token) public pure returns (bytes32) 
