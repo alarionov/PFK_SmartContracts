@@ -50,7 +50,7 @@ contract PurrOwnership is IExternalCharacterContract, Ownable
     
     function getEthSignedMessageHash(bytes32 messageHash) public pure returns (bytes32 signedMessage)
     {
-        signedMessage = keccak256(abi.encodePacked(messageHash));
+        signedMessage = keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", messageHash));
     }
         
     function recoverSigner(bytes32 ethSignedMessageHash, bytes memory signature) public pure returns (address signer)
