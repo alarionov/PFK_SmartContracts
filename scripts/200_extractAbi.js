@@ -20,7 +20,8 @@ async function extractABI(contractName)
         "EquipmentContract",
         "EquipmentManagerContract",
         "Act1Milestones",
-        "Act1Sidequests"
+        "Act1Sidequests",
+        "PurrOwnership",
     ];
     
     for (let i = 0; i < contracts.length; ++i)
