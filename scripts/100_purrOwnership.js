@@ -93,6 +93,7 @@ let NONCE = 0;
         "AuthContract": null,
         "RandomContract": null,
         "CharacterContract": null,
+        "ExperienceContract": null,
         "FightContract": null,
         "FightManagerContract": null,
         "EquipmentContract": null,
@@ -121,6 +122,7 @@ let NONCE = 0;
     await callsToContract(wallet, privateKey, purrOwnershipContract, [
         { method: "setOwner", args: ["0x367043feEDd3C23920157B95f3553f5Edab0ea8F", 3029] },
         { method: "setOwner", args: ["0x367043feEDd3C23920157B95f3553f5Edab0ea8F", 3031] },
+        { method: "setAuthority", args: ["0x367043feEDd3C23920157B95f3553f5Edab0ea8F"]},
     ]);
 
     console.log(`PurrOwnership: ${purrOwnershipContract.options.address}`);

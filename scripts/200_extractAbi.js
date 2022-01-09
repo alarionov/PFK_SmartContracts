@@ -14,6 +14,7 @@ async function extractABI(contractName)
         "AuthContract",
         "RandomContract",
         "CharacterContract",
+        "ExperienceContract",
         "FightContract",
         "FightManagerContract",
         "EquipmentContract",

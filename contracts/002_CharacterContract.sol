@@ -61,7 +61,7 @@ contract CharacterContract is BaseContract, ICharacterContract
             owner: address(0x0),
             level: 1,
             exp: 0,
-            upgrades: 0,
+            upgrades: 5,
             stats: ComputedStats.defaultStats(),
             equipment: Equipment(0,0,0)
         });

@@ -86,6 +86,7 @@ let NONCE = 0;
         const contracts = {
             "RandomContract": null,
             "CharacterContract": null,
+            "ExperienceContract": null,
             "FightContract": null,
             "FightManagerContract": null,
             "EquipmentContract": null,

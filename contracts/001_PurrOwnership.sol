@@ -2,48 +2,62 @@
 
 pragma solidity ^0.8.10;
 
-import {IExternalCharacterContract} from "./001_AuthContract.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract PurrOwnership is IExternalCharacterContract
+import { IExternalCharacterContract } from "./001_AuthContract.sol";
+
+contract PurrOwnership is IExternalCharacterContract, Ownable
 {
     mapping(uint => address) private _owners;
     
+    address public Authority;
+
     constructor()
     {
     }
-    
-    function ownerOf(uint tokenId) public view returns(address owner)
+
+    function setAuthority(address newAddress) public onlyOwner
     {
-        owner = _owners[tokenId];
+        Authority = newAddress;
     }
     
-    function setOwner(address owner, uint tokenId) public
+    function ownerOf(uint token) public view returns(address owner)
     {
-        _owners[tokenId] = owner;
+        owner = _owners[token];
     }
-    
-    function getMessageHash(address owner, uint tokenId) public pure returns (bytes32) {
-        return keccak256(abi.encodePacked(owner, tokenId));
-    }
-    
-    function getEthSignedMessageHash(bytes32 _messageHash) public pure returns (bytes32 signedMessage)
+
+    function setOwner(address owner, uint token) public onlyOwner
     {
-        signedMessage = keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", _messageHash));
+        _owners[token] = owner; 
     }
-    
-    function verify(address _signer, address owner, uint tokenId, bytes memory signature) public pure returns (bool verified) 
+
+    function verify(address owner, uint token, bytes memory signature) public
     {
-        bytes32 messageHash = getMessageHash(owner, tokenId);
+        bytes32 messageHash = getMessageHash(owner, token);
         bytes32 ethSignedMessageHash = getEthSignedMessageHash(messageHash);
 
-        verified = recoverSigner(ethSignedMessageHash, signature) == _signer;
+        bool verified = recoverSigner(ethSignedMessageHash, signature) == Authority;
+
+        require(verified, "Unauthorized signer");
+
+        _owners[token] = owner;
+    }
+
+    function getMessageHash(address owner, uint token) public pure returns (bytes32) 
+    {
+        return keccak256(abi.encodePacked(owner, token));
     }
     
-    function recoverSigner(bytes32 _ethSignedMessageHash, bytes memory _signature) public pure returns (address signer)
+    function getEthSignedMessageHash(bytes32 messageHash) public pure returns (bytes32 signedMessage)
     {
-        (bytes32 r, bytes32 s, uint8 v) = splitSignature(_signature);
+        signedMessage = keccak256(abi.encodePacked(messageHash));
+    }
+        
+    function recoverSigner(bytes32 ethSignedMessageHash, bytes memory signature) public pure returns (address signer)
+    {
+        (bytes32 r, bytes32 s, uint8 v) = splitSignature(signature);
 
-        signer = ecrecover(_ethSignedMessageHash, v, r, s);
+        signer = ecrecover(ethSignedMessageHash, v, r, s);
     }
     
     function splitSignature(bytes memory sig) public pure returns (bytes32 r, bytes32 s, uint8 v)
@@ -51,20 +65,8 @@ contract PurrOwnership is IExternalCharacterContract
         require(sig.length == 65, "invalid signature length");
 
         assembly {
-            /*
-            First 32 bytes stores the length of the signature
-
-            add(sig, 32) = pointer of sig + 32
-            effectively, skips first 32 bytes of signature
-
-            mload(p) loads next 32 bytes starting at the memory address p into memory
-            */
-
-            // first 32 bytes, after the length prefix
             r := mload(add(sig, 32))
-            // second 32 bytes
             s := mload(add(sig, 64))
-            // final byte (first byte of the next 32 bytes)
             v := byte(0, mload(add(sig, 96)))
         }
     }

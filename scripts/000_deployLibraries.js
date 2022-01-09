@@ -59,7 +59,6 @@ let NONCE = 0;
         
         const libraries = {
             ComputedStats: null,
-            Experience: null,
             GameMath: null,
             SeedReader: null,
             Utils: null

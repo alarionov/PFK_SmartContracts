@@ -111,12 +111,11 @@ contract Act1Sidequests is MapContract
     {
         if (levelIndex == 0)
         {
-            // Skeletons
-            enemies = new ComputedStats.Stats[](3);
+            // Goblins
+            enemies = new ComputedStats.Stats[](2);
             
             enemies[0] = ComputedStats.newStats(1, 1, 1);
             enemies[1] = ComputedStats.newStats(1, 1, 1);
-            enemies[2] = ComputedStats.newStats(1, 1, 1);
         }
         else if (levelIndex == 1)
         {

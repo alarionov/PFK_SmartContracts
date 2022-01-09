@@ -7,12 +7,12 @@ import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 
 import "./abstract/BaseContract.sol";
 
-import { ICharacterContract } from "./002_CharacterContract.sol";
+import { Character, ICharacterContract } from "./002_CharacterContract.sol";
 import { Fight, IFightContract } from "./003_FightContract.sol";
 import { IEquipmentContract } from "./005_EquipmentContract.sol";
 import { IMapContract } from "./abstract/MapContract.sol";
+import { IExperience } from "./002_Experience.sol";
 
-import "./libraries/Experience.sol";
 import "./libraries/ComputedStats.sol";
 
 interface IFightManagerContract
@@ -24,15 +24,16 @@ contract FightManagerContract is BaseContract, IFightManagerContract
 {
     using EnumerableSet for EnumerableSet.UintSet;
     using ComputedStats for ComputedStats.Stats;
-    using Experience for Character;
 
     address public CHARACTER_CONTRACT_ADDRESS;
     address public FIGHT_CONTRACT_ADDRESS;
     address public EQUIPMENT_CONTRACT_ADDRESS;
+    address public EXPERIENCE_CONTRACT_ADDRESS;
     
     ICharacterContract private _characterContract;
     IFightContract private _fightContract;
     IEquipmentContract private _equipmentContract;
+    IExperience private _experienceContract;
     
     modifier auth(address player, address contractAddress, uint tokenId)
     {
@@ -60,6 +61,12 @@ contract FightManagerContract is BaseContract, IFightManagerContract
         EQUIPMENT_CONTRACT_ADDRESS = newAddress;
         _equipmentContract = IEquipmentContract(EQUIPMENT_CONTRACT_ADDRESS);
     }
+
+    function setExperienceContractAddress(address newAddress) public onlyGM(msg.sender)
+    {
+        EXPERIENCE_CONTRACT_ADDRESS = newAddress;
+        _experienceContract = IExperience(EXPERIENCE_CONTRACT_ADDRESS);
+    }
     
     function conductFight(address mapContractAddress, uint index, address characterContractAddress, uint characterId) 
         public
@@ -84,13 +91,17 @@ contract FightManagerContract is BaseContract, IFightManagerContract
 
         Fight memory fight = _fightContract.conductFight(character, enemies);
 
-        character = character.addExp(fight.exp);
+        character = _experienceContract.addExp(character, fight.exp);
         
         _characterContract.save(character);
         mapContract.update(character, index, fight.victory);
     }
     
-    function _getCharacterWithInventoryStats(address characterContractAddress, uint characterId) private returns(Character memory character)
+    
+    function _getCharacterWithInventoryStats(address characterContractAddress, uint characterId) 
+        private 
+        view 
+        returns(Character memory character)
     {
         character = _characterContract.getCharacter(characterContractAddress, characterId);
         
