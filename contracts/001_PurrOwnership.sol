@@ -8,11 +8,22 @@ import { IExternalCharacterContract } from "./001_AuthContract.sol";
 
 contract PurrOwnership is IExternalCharacterContract, Ownable
 {
-    event Ownership(address owner, uint token);
+    event OwnershipChange(address owner, uint token, uint timestamp);
 
-    mapping(uint => address) private _owners;
+    struct Ownership
+    {
+        address owner;
+        uint timestamp;
+    }
+
+    mapping(uint => Ownership) private _owners;
     
     address public Authority;
+
+    address public DefaultOwner = address(0x0);
+
+    uint public SignatureTTL = 15 * 60; // 15 minutes
+    uint public OwnershipTLL = 24 * 60 * 60; // 24 hours
 
     constructor()
     {
@@ -22,10 +33,27 @@ contract PurrOwnership is IExternalCharacterContract, Ownable
     {
         Authority = newAddress;
     }
+
+    function setTLL(uint signatureTLL, uint ownershipTLL) public onlyOwner
+    {
+        SignatureTTL = signatureTLL;
+        OwnershipTLL = ownershipTLL;
+    }
     
     function ownerOf(uint token) public view returns(address owner)
     {
-        owner = _owners[token];
+        Ownership memory ownership = _owners[token];
+        
+        owner = 
+            block.timestamp < ownership.timestamp + OwnershipTLL ? 
+                ownership.owner : DefaultOwner;
+    }
+
+    function ownershipOf(uint token) public view returns(address owner, uint timestamp)
+    {
+        Ownership memory ownership = _owners[token];
+        owner = ownership.owner;
+        timestamp = ownership.timestamp; 
     }
 
     function setOwner(address owner, uint token) public onlyOwner
@@ -35,14 +63,16 @@ contract PurrOwnership is IExternalCharacterContract, Ownable
 
     function _setOwner(address owner, uint token) private
     {
-        _owners[token] = owner;
+        _owners[token] = Ownership({owner: owner, timestamp: block.timestamp});
 
-        emit Ownership(owner, token);
+        emit OwnershipChange(owner, token, block.timestamp);
     }
 
-    function verify(address owner, uint token, bytes memory signature) public
+    function verify(address owner, uint token, uint timestamp, bytes memory signature) public
     {
-        bytes32 messageHash = getMessageHash(owner, token);
+        require(block.timestamp < timestamp + SignatureTTL, "Signature expired");
+
+        bytes32 messageHash = getMessageHash(owner, token, timestamp);
         bytes32 ethSignedMessageHash = getEthSignedMessageHash(messageHash);
 
         bool verified = recoverSigner(ethSignedMessageHash, signature) == Authority;
@@ -52,9 +82,9 @@ contract PurrOwnership is IExternalCharacterContract, Ownable
         _setOwner(owner, token);
     }
 
-    function getMessageHash(address owner, uint token) public pure returns (bytes32) 
+    function getMessageHash(address owner, uint token, uint timestamp) public pure returns (bytes32) 
     {
-        return keccak256(abi.encodePacked(owner, token));
+        return keccak256(abi.encodePacked(owner, token, timestamp));
     }
     
     function getEthSignedMessageHash(bytes32 messageHash) public pure returns (bytes32 signedMessage)

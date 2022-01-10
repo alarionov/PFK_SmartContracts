@@ -28,4 +28,9 @@ contract Test
                
         cooldown = map.getCooldowns(character)[0];
     }
+
+    function timestamp() public view returns(uint ts)
+    {
+        ts = block.timestamp;
+    }
 }
