@@ -23,7 +23,7 @@ contract PurrOwnership is IExternalCharacterContract, Ownable
     address public DefaultOwner = address(0x0);
 
     uint public SignatureTTL = 15 * 60; // 15 minutes
-    uint public OwnershipTLL = 24 * 60 * 60; // 24 hours
+    uint public OwnershipTTL = 24 * 60 * 60; // 24 hours
 
     constructor()
     {
@@ -34,10 +34,10 @@ contract PurrOwnership is IExternalCharacterContract, Ownable
         Authority = newAddress;
     }
 
-    function setTLL(uint signatureTLL, uint ownershipTLL) public onlyOwner
+    function setTLL(uint signatureTTL, uint ownershipTTL) public onlyOwner
     {
-        SignatureTTL = signatureTLL;
-        OwnershipTLL = ownershipTLL;
+        SignatureTTL = signatureTTL;
+        OwnershipTTL = ownershipTTL;
     }
     
     function ownerOf(uint token) public view returns(address owner)
@@ -45,7 +45,7 @@ contract PurrOwnership is IExternalCharacterContract, Ownable
         Ownership memory ownership = _owners[token];
         
         owner = 
-            block.timestamp < ownership.timestamp + OwnershipTLL ? 
+            block.timestamp < ownership.timestamp + OwnershipTTL ? 
                 ownership.owner : DefaultOwner;
     }
 
