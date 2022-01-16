@@ -94,6 +94,7 @@ let NONCE = 0;
         "RandomContract": null,
         "CharacterContract": null,
         "ExperienceContract": null,
+        "UpgradeContract": null,
         "FightContract": null,
         "FightManagerContract": null,
         "EquipmentContract": null,

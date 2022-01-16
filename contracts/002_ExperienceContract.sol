@@ -13,9 +13,17 @@ interface IExperienceContract
 
 contract ExperienceContract is BaseContract
 {
+    event LevelUp(
+        address contractAddress, 
+        uint tokenId, 
+        uint level, 
+        uint exp, 
+        uint tnl, 
+        uint upgradesGiven, 
+        uint upgradesTotal);
+
     uint8[] private _tnl;
-    uint8 private _updatesPerLevel = 5;
-    uint8 private _lateProgressMultiplier = 1;
+    uint8 private _upgradesPerLevel = 5;
     uint8 private _lateProgressModifier = 10;
 
     constructor(address authContractAddress) BaseContract(authContractAddress)
@@ -44,14 +52,13 @@ contract ExperienceContract is BaseContract
         _tnl[index] = amount;
     }
 
-    function setUpdatesPerLevel(uint8 amount) public onlyGM(msg.sender)
+    function setUpgradesPerLevel(uint8 amount) public onlyGM(msg.sender)
     {
-        _updatesPerLevel = amount;
+        _upgradesPerLevel = amount;
     }
 
-    function setLateProgress(uint8 multiplier, uint8 _modifier) public onlyGM(msg.sender)
+    function setLateProgress(uint8 _modifier) public onlyGM(msg.sender)
     {
-        _lateProgressMultiplier = multiplier;
         _lateProgressModifier = _modifier;
     }
 
@@ -60,7 +67,7 @@ contract ExperienceContract is BaseContract
         return _tnl;
     }
 
-    function addExp(Character memory character, uint exp) public view returns (Character memory)
+    function addExp(Character memory character, uint exp) public onlyGame(msg.sender) returns (Character memory)
     {
         if (exp == 0) return character;
         
@@ -70,7 +77,16 @@ contract ExperienceContract is BaseContract
         {
             character.exp -= toNextLevel(character);
             character.level += 1;
-            character.upgrades += _updatesPerLevel;
+            character.upgrades += _upgradesPerLevel;
+
+            emit LevelUp(
+                character.contractAddress, 
+                character.tokenId, 
+                character.level, 
+                character.exp, 
+                toNextLevel(character), 
+                _upgradesPerLevel, 
+                character.upgrades);
         }
 
         return character;
@@ -87,7 +103,7 @@ contract ExperienceContract is BaseContract
             uint baseAmount = _tnl[_tnl.length - 1];
             uint levelDiff = (character.level - _tnl.length);
             amount = 
-                baseAmount * _lateProgressMultiplier  + _lateProgressModifier * levelDiff;
+                baseAmount + _lateProgressModifier * levelDiff;
         }
     }
 }

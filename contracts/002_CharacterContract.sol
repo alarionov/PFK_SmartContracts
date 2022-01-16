@@ -34,19 +34,8 @@ interface ICharacterContract
 contract CharacterContract is BaseContract, ICharacterContract
 {
     event NewCharacter(Character newCharacter);
-    event NewStats(ComputedStats.Stats newStats, uint remainigUpgrades);
-    event LevelUp(uint level, uint exp, uint tnl, uint upgradesGiven, uint upgradesTotal);
     
     mapping(address => mapping(uint => Character)) private _characters;
-    
-    modifier upgradable(address player, address contractAddress, uint tokenId)
-    {
-        Character memory character = _characters[contractAddress][tokenId];
-        
-        require(character.upgrades > 0, "No upgrades available");
-        
-        _;
-    }
     
     constructor(address authContractAddress) BaseContract(authContractAddress)
     {
@@ -82,79 +71,6 @@ contract CharacterContract is BaseContract, ICharacterContract
     function getCharacter(address contractAddress, uint tokenId) public view override(ICharacterContract) returns (Character memory character)
     {
         character = _getStoredOrDefaultCharacter(contractAddress, tokenId);
-    }
-    
-    /* Upgrades */
-    function upgrade(address contractAddress, uint tokenId, ComputedStats.StatType stat) external 
-        onlyGame(msg.sender)
-        upgradable(msg.sender, contractAddress, tokenId)
-    {
-        require(stat >= ComputedStats.StatType.Strength && stat <= ComputedStats.StatType.Constitution, "Invalid stat type");
-        
-        Character memory character = _characters[contractAddress][tokenId];
-        
-        _upgrade(character, stat, 1);
-        
-        emit NewStats(character.stats, character.upgrades);
-    }
-    
-    function modifyStats(address contractAddress, uint tokenId, ComputedStats.StatType stat, uint value) external onlyGame(msg.sender) 
-    {
-        Character memory character = _characters[contractAddress][tokenId];
-        
-        _upgrade(character, stat, value);
-        
-        emit NewStats(character.stats, character.upgrades);
-    }
-    
-    function _upgrade(Character memory character, ComputedStats.StatType stat, uint value) private pure
-    {
-        character.upgrades -= value;
-        
-        if (stat == ComputedStats.StatType.Strength)
-        {
-            character.stats.strength += value;    
-        }
-        else if (stat == ComputedStats.StatType.Dexterity)
-        {
-            character.stats.dexterity += value;
-        }
-        else if (stat == ComputedStats.StatType.Constitution)
-        {
-            character.stats.dexterity += value;
-        }
-        else if (stat == ComputedStats.StatType.Luck)
-        {
-            character.stats.dexterity += value;
-        }
-        else if (stat == ComputedStats.StatType.Armor)
-        {
-            character.stats.dexterity += value;
-        }
-    }
-    
-    function _modify(Character memory character, ComputedStats.StatType stat, uint value, int8 sign) private pure
-    {
-        if (stat == ComputedStats.StatType.Strength)
-        {
-            character.stats.strength = GameMath.modify(character.stats.strength, value, sign);
-        }
-        else if (stat == ComputedStats.StatType.Dexterity)
-        {
-            character.stats.dexterity = GameMath.modify(character.stats.dexterity, value, sign);
-        }
-        else if (stat == ComputedStats.StatType.Constitution)
-        {
-            character.stats.constitution = GameMath.modify(character.stats.constitution, value, sign);
-        }
-        else if (stat == ComputedStats.StatType.Luck)
-        {
-            character.stats.luck = GameMath.modify(character.stats.luck, value, sign);
-        }
-        else if (stat == ComputedStats.StatType.Armor)
-        {
-            character.stats.armor = GameMath.modify(character.stats.armor, value, sign);
-        }
     }
     
     function save(Character memory character) public override(ICharacterContract) onlyGame(msg.sender)

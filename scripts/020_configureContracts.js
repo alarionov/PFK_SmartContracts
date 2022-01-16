@@ -78,6 +78,7 @@ let NONCE = 0;
         "RandomContract": null,
         "CharacterContract": null,
         "ExperienceContract": null,
+        "UpgradeContract": null,
         "FightContract": null,
         "FightManagerContract": null,
         "EquipmentContract": null,
@@ -102,6 +103,7 @@ let NONCE = 0;
     await callsToContract(wallet, privateKey, contracts["AuthContract"], [
         { method: "setRole", args: [contracts["CharacterContract"].options.address, /* Game Contract role */ 2] },
         { method: "setRole", args: [contracts["ExperienceContract"].options.address, /* Game Contract role */ 2] },
+        { method: "setRole", args: [contracts["UpgradeContract"].options.address, /* Game Contract role */ 2] },
         { method: "setRole", args: [contracts["FightContract"].options.address, /* Game Contract role */ 2] },
         { method: "setRole", args: [contracts["FightManagerContract"].options.address, /* Game Contract role */ 2] },
         { method: "setRole", args: [contracts["EquipmentContract"].options.address, /* Game Contract role */ 2] },
@@ -110,6 +112,10 @@ let NONCE = 0;
         { method: "setRole", args: [contracts["Act1Sidequests"].options.address, /* Game Contract role */ 2] },
     ]);
     
+    await callsToContract(wallet, privateKey, contracts["UpgradeContract"], [
+        { method: "setCharacterContractAddress", args: [contracts["CharacterContract"].options.address] },
+    ]);
+
     await callsToContract(wallet, privateKey, contracts["FightContract"], [
         { method: "setRandomContractAddress", args: [contracts["RandomContract"].options.address] },
     ]);

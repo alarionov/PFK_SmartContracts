@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.10;
+pragma solidity ^0.8.11;
 
 import "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
@@ -11,7 +11,7 @@ import { Character, ICharacterContract } from "./002_CharacterContract.sol";
 import { Fight, IFightContract } from "./003_FightContract.sol";
 import { IEquipmentContract } from "./005_EquipmentContract.sol";
 import { IMapContract } from "./abstract/MapContract.sol";
-import { IExperience } from "./002_Experience.sol";
+import { IExperienceContract } from "./002_ExperienceContract.sol";
 
 import "./libraries/ComputedStats.sol";
 
@@ -33,13 +33,7 @@ contract FightManagerContract is BaseContract, IFightManagerContract
     ICharacterContract private _characterContract;
     IFightContract private _fightContract;
     IEquipmentContract private _equipmentContract;
-    IExperience private _experienceContract;
-    
-    modifier auth(address player, address contractAddress, uint tokenId)
-    {
-        _authContract.validate(player, contractAddress, tokenId);
-        _;
-    }
+    IExperienceContract private _experienceContract;
     
     constructor(address authContractAddress) BaseContract(authContractAddress)
     {}
@@ -65,7 +59,7 @@ contract FightManagerContract is BaseContract, IFightManagerContract
     function setExperienceContractAddress(address newAddress) public onlyGM(msg.sender)
     {
         EXPERIENCE_CONTRACT_ADDRESS = newAddress;
-        _experienceContract = IExperience(EXPERIENCE_CONTRACT_ADDRESS);
+        _experienceContract = IExperienceContract(EXPERIENCE_CONTRACT_ADDRESS);
     }
     
     function conductFight(address mapContractAddress, uint index, address characterContractAddress, uint characterId) 

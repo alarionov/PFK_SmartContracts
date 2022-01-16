@@ -29,6 +29,12 @@ contract Permissions
             "Only Game Master can call this method");
         _;
     }
+
+    modifier auth(address player, address contractAddress, uint tokenId)
+    {
+        _authContract.validate(player, contractAddress, tokenId);
+        _;
+    }
     
     constructor(address authContractAddress)
     {
