@@ -24,12 +24,14 @@ contract UpgradeContract is BaseContract
         _characterContract = ICharacterContract(CharacterContractAddress);
     }
 
-    function upgrade(Character memory character, ComputedStats.Stats memory addedStats) 
+    function upgrade(address contractAddress, uint token, ComputedStats.Stats memory addedStats) 
         public
-        auth(msg.sender, character.contractAddress, character.tokenId)
+        auth(msg.sender, contractAddress, token)
     {
         require(addedStats.armor == 0, "Can't increase armor");
         require(addedStats.luck == 0, "Can't increase luck");
+
+        Character memory character = _characterContract.getCharacter(contractAddress, token);
 
         uint upgrades = addedStats.strength + addedStats.dexterity + addedStats.constitution;
         require(character.upgrades >= upgrades, "Not enough upgrades");
