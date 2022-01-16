@@ -10,6 +10,8 @@ contract UpgradeContract is BaseContract
 {
     using ComputedStats for ComputedStats.Stats;
 
+    event Upgrade(Character character);
+
     address public CharacterContractAddress;
     ICharacterContract private _characterContract;
 
@@ -36,5 +38,7 @@ contract UpgradeContract is BaseContract
         character.stats = character.stats.add(addedStats);
         
         _characterContract.save(character);
+
+        emit Upgrade(character);
     }
 }
