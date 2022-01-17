@@ -33,6 +33,8 @@ interface ICharacterContract
 
 contract CharacterContract is BaseContract, ICharacterContract
 {
+    using ComputedStats for ComputedStats.Stats;
+    
     event NewCharacter(Character newCharacter);
     
     mapping(address => mapping(uint => Character)) private _characters;
@@ -71,6 +73,7 @@ contract CharacterContract is BaseContract, ICharacterContract
     function getCharacter(address contractAddress, uint tokenId) public view override(ICharacterContract) returns (Character memory character)
     {
         character = _getStoredOrDefaultCharacter(contractAddress, tokenId);
+        character.stats.init();
     }
     
     function save(Character memory character) public override(ICharacterContract) onlyGame(msg.sender)
