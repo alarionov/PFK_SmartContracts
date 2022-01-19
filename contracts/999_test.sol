@@ -19,18 +19,26 @@ contract Test
     constructor()
     {}
 
-    function check() public view returns(uint cooldown)
+    function check() public pure returns(uint attack, uint health)
     {
-        ICharacterContract characterContract = ICharacterContract(0x3fe426a48FA4Fb7Ca7c650A64dC8F6405448BcD7);
-        Character memory character = characterContract.getCharacter(0x5cAa53913fC48aCdbD2825CA06Ed8C9A16EbBaFe, 3031);
+        uint strength = 2;
+        uint dexterity = 3; 
+        uint constitution = 4;
+        
+        ComputedStats.Stats memory stats = ComputedStats.newStats(strength, dexterity, constitution);
 
-        ISideQuest map = ISideQuest(0x638F92422bad6Bb3F7561fc632Bb13339e870094);
-               
-        cooldown = map.getCooldowns(character)[0];
+        attack = stats.attack;
+        health = stats.health;
     }
 
-    function timestamp() public view returns(uint ts)
+    function checkChar(uint token) public view returns(uint con, uint hp)
     {
-        ts = block.timestamp;
+        ICharacterContract charContract = ICharacterContract(0x0D374dd4C9D2b6b2046698f0E82Af45230E4703a);
+        Character memory character = charContract.getCharacter(0x59d05A0857bc55Eafe8BC49228b681025ffaC2E2, token);
+
+        character.stats = character.stats.init();
+
+        con = character.stats.constitution;
+        hp = character.stats.health;
     }
 }

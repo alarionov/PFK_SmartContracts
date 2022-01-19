@@ -73,7 +73,7 @@ contract CharacterContract is BaseContract, ICharacterContract
     function getCharacter(address contractAddress, uint tokenId) public view override(ICharacterContract) returns (Character memory character)
     {
         character = _getStoredOrDefaultCharacter(contractAddress, tokenId);
-        character.stats.init();
+        character.stats = character.stats.init();
     }
     
     function save(Character memory character) public override(ICharacterContract) onlyGame(msg.sender)
