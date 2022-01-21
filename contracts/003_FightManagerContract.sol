@@ -70,7 +70,6 @@ contract FightManagerContract is BaseContract, IFightManagerContract
         IMapContract mapContract = IMapContract(mapContractAddress);
         
         Character memory character = _getCharacterWithInventoryStats(characterContractAddress, characterId);
-        character.owner = msg.sender;
 
         require(character.stats.alive(), "Character should be alive");
 

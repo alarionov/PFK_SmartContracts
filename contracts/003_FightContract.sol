@@ -64,7 +64,7 @@ contract FightContract is BaseContract, IFightContract
         
         if (!character.stats.alive())
         {
-            fight.exp = fight.exp >> 2;
+            fight.exp = fight.exp / 2;
         }
         
         emit FightDetails(fight);

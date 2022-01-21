@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.10;
+pragma solidity ^0.8.11;
 
 import { AuthRoles, IAuthContract } from "../001_AuthContract.sol";
 
@@ -12,7 +12,7 @@ contract Permissions
     
     modifier onlyGame(address _address)
     {
-        AuthRoles role = _authContract.role(_address);
+        AuthRoles role = _authContract.getRole(_address);
         
         require(
             role >= AuthRoles.GameContract,
@@ -22,7 +22,7 @@ contract Permissions
     
     modifier onlyGM(address _address)
     {
-        AuthRoles role = _authContract.role(_address);
+        AuthRoles role = _authContract.getRole(_address);
         
         require(
             role == AuthRoles.GameMaster,

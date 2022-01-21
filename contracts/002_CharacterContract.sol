@@ -7,6 +7,7 @@ import "./abstract/BaseContract.sol";
 import "./libraries/GameMath.sol";
 import "./libraries/ComputedStats.sol";
 
+import { IExternalCharacterContract } from "./001_AuthContract.sol";
 import { Equipment } from "./005_EquipmentContract.sol";
 
 struct Character
@@ -63,6 +64,7 @@ contract CharacterContract is BaseContract, ICharacterContract
         Character memory storedCharacter = _characters[contractAddress][tokenId];
         
         character = storedCharacter.exists ? storedCharacter : _defaultCharacter(contractAddress, tokenId);
+        character.owner = IExternalCharacterContract(contractAddress).ownerOf(tokenId);
     }
     
     function _saveCharacter(Character memory character) private

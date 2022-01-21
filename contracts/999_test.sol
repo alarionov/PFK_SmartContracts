@@ -31,6 +31,11 @@ contract Test
         health = stats.health;
     }
 
+    function moveZero(uint from, uint step) public pure returns(uint asnwer)
+    {
+        asnwer = from >> step;
+    }
+
     function checkChar(uint token) public view returns(uint con, uint hp)
     {
         ICharacterContract charContract = ICharacterContract(0x0D374dd4C9D2b6b2046698f0E82Af45230E4703a);
