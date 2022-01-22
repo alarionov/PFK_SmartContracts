@@ -6,6 +6,8 @@ import "./abstract/BaseContract.sol";
 
 import { Character } from "./002_CharacterContract.sol";
 
+import "./libraries/GameMath.sol";
+
 interface IExperienceContract
 {
     function addExp(Character memory character, uint exp) external view returns (Character memory);
@@ -75,9 +77,16 @@ contract ExperienceContract is BaseContract
         
         while (character.exp >= toNextLevel(character))
         {
+            GameMath.one();
+
             character.exp -= toNextLevel(character);
+            GameMath.one();
+
             character.level += 1;
+            GameMath.one();
+            
             character.upgrades += _upgradesPerLevel;
+            GameMath.one();
 
             emit LevelUp(
                 character.contractAddress, 
@@ -87,7 +96,11 @@ contract ExperienceContract is BaseContract
                 toNextLevel(character), 
                 _upgradesPerLevel, 
                 character.upgrades);
+
+            GameMath.one();
         }
+
+        GameMath.one();
 
         return character;
     }
@@ -95,15 +108,15 @@ contract ExperienceContract is BaseContract
     function toNextLevel(Character memory character) public view returns(uint amount)
     {
         if (character.level < _tnl.length)
-        { 
+        {
             amount = _tnl[character.level - 1];
         }
         else
         {
             uint baseAmount = _tnl[_tnl.length - 1];
             uint levelDiff = (character.level - _tnl.length);
-            amount = 
-                baseAmount + _lateProgressModifier * levelDiff;
+
+            amount = baseAmount + _lateProgressModifier * levelDiff;
         }
     }
 }
