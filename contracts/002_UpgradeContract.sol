@@ -37,7 +37,7 @@ contract UpgradeContract is BaseContract
         require(character.upgrades >= upgrades, "Not enough upgrades");
 
         character.upgrades -= upgrades;
-        character.stats = character.stats.add(addedStats);
+        character.stats = character.stats.add(addedStats).init();
         
         _characterContract.save(character);
 
