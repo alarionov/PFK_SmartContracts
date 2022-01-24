@@ -77,6 +77,7 @@ contract ExperienceContract is BaseContract, IExperienceContract
         
         character.exp += exp;
         
+        /*
         while (character.exp >= toNextLevel(character))
         {
             character.exp -= toNextLevel(character);
@@ -92,6 +93,7 @@ contract ExperienceContract is BaseContract, IExperienceContract
                 _upgradesPerLevel, 
                 character.upgrades);
         }
+        */
 
         return character;
     }
