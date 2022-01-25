@@ -1,6 +1,6 @@
 async function getRawTx (wallet, data, to, value)
 {
-    const gasPrice = web3.utils.toWei('1', 'gwei');
+    const gasPrice = web3.utils.toWei('2', 'gwei');
     const gasAmount = 10000000;
     
     const tx = {

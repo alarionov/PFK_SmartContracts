@@ -69,7 +69,7 @@ contract ExperienceContract is BaseContract, IExperienceContract
 
     function addExp(Character memory character, uint exp) 
         public 
-        onlyGame(msg.sender) 
+        //onlyGame(msg.sender) 
         override(IExperienceContract)
         returns (Character memory)
     {
@@ -77,10 +77,9 @@ contract ExperienceContract is BaseContract, IExperienceContract
         
         character.exp += exp;
         
-        /*
-        while (character.exp >= toNextLevel(character))
+        while (character.exp >= toNextLevel(character.level))
         {
-            character.exp -= toNextLevel(character);
+            character.exp -= toNextLevel(character.level);
             character.level += 1;
             character.upgrades += _upgradesPerLevel;
 
@@ -89,25 +88,24 @@ contract ExperienceContract is BaseContract, IExperienceContract
                 character.tokenId, 
                 character.level, 
                 character.exp, 
-                toNextLevel(character), 
+                toNextLevel(character.level), 
                 _upgradesPerLevel, 
                 character.upgrades);
         }
-        */
 
         return character;
     }
     
-    function toNextLevel(Character memory character) public view returns(uint amount)
+    function toNextLevel(uint level) public view returns(uint amount)
     {
-        if (character.level < _tnl.length)
+        if (level < _tnl.length)
         {
-            amount = _tnl[character.level - 1];
+            amount = _tnl[level - 1];
         }
         else
         {
             uint baseAmount = _tnl[_tnl.length - 1];
-            uint levelDiff = (character.level - _tnl.length);
+            uint levelDiff = (level - _tnl.length);
 
             amount = baseAmount + _lateProgressModifier * levelDiff;
         }

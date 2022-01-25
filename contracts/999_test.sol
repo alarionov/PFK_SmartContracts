@@ -2,8 +2,12 @@
 
 pragma solidity ^0.8.10;
 
+import "hardhat/console.sol";
+
 import { IMapContract } from "./abstract/MapContract.sol";
 import { Character, ICharacterContract } from "./002_CharacterContract.sol";
+import { IExperienceContract } from "./002_ExperienceContract.sol";
+import { Equipment } from "./005_EquipmentContract.sol";
 
 import "./libraries/ComputedStats.sol";
 
@@ -36,14 +40,32 @@ contract Test
         asnwer = from >> step;
     }
 
-    function checkChar(uint token) public view returns(uint con, uint hp)
+    function checkChar() public returns(uint level, uint exp)
     {
-        ICharacterContract charContract = ICharacterContract(0x0D374dd4C9D2b6b2046698f0E82Af45230E4703a);
-        Character memory character = charContract.getCharacter(0x59d05A0857bc55Eafe8BC49228b681025ffaC2E2, token);
+        Character memory character = Character({
+            exists: true,
+            contractAddress: address(0x0),
+            tokenId: 1,
+            owner: address(0x0),
+            level: 1,
+            exp: 0,
+            upgrades: 5,
+            stats: ComputedStats.defaultStats(),
+            equipment: Equipment(0,0,0)
+        });
 
         character.stats = character.stats.init();
 
-        con = character.stats.constitution;
-        hp = character.stats.health;
+        console.log("level: ", character.level);
+        console.log("exp: ", character.exp);
+
+        IExperienceContract expContract = IExperienceContract(0xd8b934580fcE35a11B58C6D73aDeE468a2833fa8);
+        character = expContract.addExp(character, 10);
+
+        console.log("level: ", character.level);
+        console.log("exp: ", character.exp);
+
+        level = character.level;
+        exp = character.exp;
     }
 }
